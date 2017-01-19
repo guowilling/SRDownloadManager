@@ -6,6 +6,17 @@
 //  Copyright © 2017年 SR. All rights reserved.
 //
 
+/**
+ *  If you have any question, please issue or contact me.
+ *  QQ: 1990991510
+ *  Email: guowilling@qq.com
+ *
+ *  If you like it, please star it, thanks a lot.
+ *  Github: https://github.com/guowilling/SRDownloadManager
+ *
+ *  Have Fun.
+ */
+
 #import <Foundation/Foundation.h>
 #import "SRDownloadModel.h"
 
