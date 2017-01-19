@@ -9,7 +9,19 @@
 #import "ViewController.h"
 #import "SRDownloadManager.h"
 
+NSString * const downloadURLString1 = @"http://baobab.wdjcdn.com/14564977406580.mp4";
+NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/1442142801331138639111.mp4";
+
+#define kDownloadURL1 [NSURL URLWithString:downloadURLString1]
+#define kDownloadURL2 [NSURL URLWithString:downloadURLString2]
+
 @interface ViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *downloadButton1;
+@property (weak, nonatomic) IBOutlet UIButton *downloadButton2;
+
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView1;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView2;
 
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel1;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel2;
@@ -20,19 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentSizeLabel1;
 @property (weak, nonatomic) IBOutlet UILabel *currentSizeLabel2;
 
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView1;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView2;
-
-@property (weak, nonatomic) IBOutlet UIButton *downloadButton1;
-@property (weak, nonatomic) IBOutlet UIButton *downloadButton2;
-
 @end
-
-NSString * const downloadURLString1 = @"http://baobab.wdjcdn.com/1442142801331138639111.mp4";
-NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/14564977406580.mp4";
-
-#define kDownloadURL1 [NSURL URLWithString:downloadURLString1]
-#define kDownloadURL2 [NSURL URLWithString:downloadURLString2]
 
 @implementation ViewController
 
@@ -42,16 +42,23 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/14564977406580.
     
     CGFloat progress1 = [[SRDownloadManager sharedManager] progress:kDownloadURL1];
     CGFloat progress2 = [[SRDownloadManager sharedManager] progress:kDownloadURL2];
-    NSLog(@"progressOfResource downloadURLString1: %f", progress1);
-    NSLog(@"progressOfResource downloadURLString2: %f", progress2);
+    NSLog(@"progress of downloadURL1: %.2f", progress1);
+    NSLog(@"progress of downloadURL2: %.2f", progress2);
+    
     self.progressView1.progress = progress1;
     self.progressLabel1.text = [NSString stringWithFormat:@"%.f%%", progress1 * 100];
     [self.downloadButton1 setTitle:[self titleWithDownloadState:[self stateWithProgress:progress1]]
                           forState:UIControlStateNormal];
+    
     self.progressView2.progress = progress2;
     self.progressLabel2.text = [NSString stringWithFormat:@"%.f%%", progress2 * 100];
     [self.downloadButton2 setTitle:[self titleWithDownloadState:[self stateWithProgress:progress2]]
                           forState:UIControlStateNormal];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
     
     if ([[SRDownloadManager sharedManager] isCompleted:kDownloadURL1]) {
         NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPath:kDownloadURL1]);
@@ -94,16 +101,16 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/14564977406580.
     
     [[SRDownloadManager sharedManager] deleteAllFiles];
     
-    [self.downloadButton1 setTitle:@"Start" forState:UIControlStateNormal];
-    [self.downloadButton2 setTitle:@"Start" forState:UIControlStateNormal];
-    self.progressLabel1.text = @"0%";
-    self.progressLabel2.text = @"0%";
     self.progressView1.progress = 0.0;
     self.progressView2.progress = 0.0;
     self.currentSizeLabel1.text = @"0";
     self.currentSizeLabel2.text = @"0";
     self.totalSizeLabel1.text = @"0";
     self.totalSizeLabel2.text = @"0";
+    self.progressLabel1.text = @"0%";
+    self.progressLabel2.text = @"0%";
+    [self.downloadButton1 setTitle:@"Start" forState:UIControlStateNormal];
+    [self.downloadButton2 setTitle:@"Start" forState:UIControlStateNormal];
 }
 
 - (IBAction)downloadFile1:(UIButton *)sender {
@@ -149,22 +156,22 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/14564977406580.
     
     [[SRDownloadManager sharedManager] deleteFile:kDownloadURL1];
     
-    [self.downloadButton1 setTitle:@"Start" forState:UIControlStateNormal];
-    self.progressLabel1.text    = @"0%";
     self.progressView1.progress = 0.0;
     self.currentSizeLabel1.text = @"0";
     self.totalSizeLabel1.text   = @"0";
+    self.progressLabel1.text    = @"0%";
+    [self.downloadButton1 setTitle:@"Start" forState:UIControlStateNormal];
 }
 
 - (IBAction)deleteFile2:(UIButton *)sender {
     
     [[SRDownloadManager sharedManager] deleteFile:kDownloadURL2];
     
-    [self.downloadButton2 setTitle:@"Start" forState:UIControlStateNormal];
-    self.progressLabel2.text    = @"0%";
     self.progressView2.progress = 0.0;
     self.currentSizeLabel2.text = @"0";
     self.totalSizeLabel2.text   = @"0";
+    self.progressLabel2.text    = @"0%";
+    [self.downloadButton2 setTitle:@"Start" forState:UIControlStateNormal];
 }
 
 @end
