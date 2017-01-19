@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wZD-jN-skQ">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--SRDownloadManager-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kC0-Fn-HxU">
+                                <rect key="frame" x="10" y="305.66666666666669" width="60" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="RiI-6M-o4Y"/>
+                                    <constraint firstAttribute="width" constant="60" id="t7d-Ys-PBS"/>
+                                </constraints>
+                                <state key="normal" title="Start"/>
+                                <state key="selected" title="暂停">
+                                    <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="downloadFile1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CfE-lF-6hx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYZ-XL-8Pj">
+                                <rect key="frame" x="10" y="405.66666666666669" width="60" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="sFS-c5-oru"/>
+                                    <constraint firstAttribute="width" constant="60" id="wxT-R9-pld"/>
+                                </constraints>
+                                <state key="normal" title="Start"/>
+                                <state key="selected" title="暂停">
+                                    <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="downloadFile2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="STm-aU-DOv"/>
+                                </connections>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MBt-MJ-NHI">
+                                <rect key="frame" x="80" y="317" width="219" height="2"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ptw-5h-bof">
+                                <rect key="frame" x="309" y="307.66666666666669" width="40" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="MWk-U7-g02"/>
+                                    <constraint firstAttribute="height" constant="20" id="tkX-lT-e9N"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNi-EI-opQ">
+                                <rect key="frame" x="359" y="302.66666666666669" width="45" height="30"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" title="暂停">
+                                    <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteFile1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hJI-N0-UA0"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ze4-DS-WXd">
+                                <rect key="frame" x="184.66666666666663" y="286" width="10.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfW-aC-BmE">
+                                <rect key="frame" x="184.66666666666663" y="329" width="10.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ADQ-Nc-VAF">
+                                <rect key="frame" x="80" y="417" width="219" height="2"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3d-FM-yIE">
+                                <rect key="frame" x="309" y="408" width="40" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="K7X-ev-eOH"/>
+                                    <constraint firstAttribute="width" constant="40" id="eox-65-TMt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljj-zj-xYo">
+                                <rect key="frame" x="359" y="403" width="45" height="30"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" title="暂停">
+                                    <color key="titleColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteFile2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k9J-vq-9Or"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLI-7b-U1j">
+                                <rect key="frame" x="184.66666666666663" y="429" width="10.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CV7-Cj-4F9">
+                                <rect key="frame" x="184.66666666666663" y="386" width="10.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MBt-MJ-NHI" firstAttribute="leading" secondItem="kC0-Fn-HxU" secondAttribute="trailing" constant="10" id="0nl-32-N25"/>
+                            <constraint firstItem="MBt-MJ-NHI" firstAttribute="top" secondItem="Ze4-DS-WXd" secondAttribute="bottom" constant="10" id="4sa-Zo-dUr"/>
+                            <constraint firstItem="zNi-EI-opQ" firstAttribute="leading" secondItem="Ptw-5h-bof" secondAttribute="trailing" constant="10" id="8Qw-gw-cLc"/>
+                            <constraint firstItem="KfW-aC-BmE" firstAttribute="centerX" secondItem="MBt-MJ-NHI" secondAttribute="centerX" id="9Z4-ze-gWU"/>
+                            <constraint firstItem="iYZ-XL-8Pj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="50" id="C0Y-2n-7lQ"/>
+                            <constraint firstAttribute="trailing" secondItem="zNi-EI-opQ" secondAttribute="trailing" constant="10" id="F0L-7a-leK"/>
+                            <constraint firstItem="ADQ-Nc-VAF" firstAttribute="leading" secondItem="iYZ-XL-8Pj" secondAttribute="trailing" constant="10" id="Hm1-Jr-auM"/>
+                            <constraint firstItem="ADQ-Nc-VAF" firstAttribute="top" secondItem="CV7-Cj-4F9" secondAttribute="bottom" constant="10" id="KST-uI-xhc"/>
+                            <constraint firstItem="rLI-7b-U1j" firstAttribute="centerX" secondItem="ADQ-Nc-VAF" secondAttribute="centerX" id="Lt0-Xb-tM6"/>
+                            <constraint firstItem="ljj-zj-xYo" firstAttribute="leading" secondItem="Y3d-FM-yIE" secondAttribute="trailing" constant="10" id="Mtf-Ko-wEA"/>
+                            <constraint firstItem="MBt-MJ-NHI" firstAttribute="centerY" secondItem="kC0-Fn-HxU" secondAttribute="centerY" id="OJ3-tY-zaE"/>
+                            <constraint firstItem="KfW-aC-BmE" firstAttribute="top" secondItem="MBt-MJ-NHI" secondAttribute="bottom" constant="10" id="VZC-vY-Bdt"/>
+                            <constraint firstItem="Ze4-DS-WXd" firstAttribute="centerX" secondItem="MBt-MJ-NHI" secondAttribute="centerX" id="Ypb-kL-pDO"/>
+                            <constraint firstItem="Y3d-FM-yIE" firstAttribute="centerY" secondItem="ljj-zj-xYo" secondAttribute="centerY" id="ZWS-R7-pPG"/>
+                            <constraint firstAttribute="trailing" secondItem="ljj-zj-xYo" secondAttribute="trailing" constant="10" id="a3Q-mp-qL7"/>
+                            <constraint firstItem="zNi-EI-opQ" firstAttribute="centerY" secondItem="kC0-Fn-HxU" secondAttribute="centerY" id="b9Q-pp-fXz"/>
+                            <constraint firstItem="kC0-Fn-HxU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="d0a-HY-3Eu"/>
+                            <constraint firstItem="ljj-zj-xYo" firstAttribute="centerY" secondItem="iYZ-XL-8Pj" secondAttribute="centerY" id="duC-Te-l3M"/>
+                            <constraint firstItem="rLI-7b-U1j" firstAttribute="top" secondItem="ADQ-Nc-VAF" secondAttribute="bottom" constant="10" id="fnz-W7-wPA"/>
+                            <constraint firstItem="Ptw-5h-bof" firstAttribute="centerY" secondItem="zNi-EI-opQ" secondAttribute="centerY" id="g20-0N-rWx"/>
+                            <constraint firstItem="iYZ-XL-8Pj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="gLp-rt-xHl"/>
+                            <constraint firstItem="Y3d-FM-yIE" firstAttribute="leading" secondItem="ADQ-Nc-VAF" secondAttribute="trailing" constant="10" id="hdL-u4-1JJ"/>
+                            <constraint firstItem="ADQ-Nc-VAF" firstAttribute="centerY" secondItem="iYZ-XL-8Pj" secondAttribute="centerY" id="kJZ-hS-AUl"/>
+                            <constraint firstItem="CV7-Cj-4F9" firstAttribute="centerX" secondItem="ADQ-Nc-VAF" secondAttribute="centerX" id="mnG-A5-hGu"/>
+                            <constraint firstItem="kC0-Fn-HxU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-50" id="yZ2-S3-YOw"/>
+                            <constraint firstItem="Ptw-5h-bof" firstAttribute="leading" secondItem="MBt-MJ-NHI" secondAttribute="trailing" constant="10" id="z4e-Xr-c6d"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="SRDownloadManager" id="bha-oK-46f">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="k45-XG-0b6">
+                            <connections>
+                                <action selector="clearAllFiles:" destination="BYZ-38-t0r" id="khH-Pn-9Up"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="currentSizeLabel1" destination="Ze4-DS-WXd" id="Peh-qt-jPn"/>
+                        <outlet property="currentSizeLabel2" destination="CV7-Cj-4F9" id="6kb-cN-jGR"/>
+                        <outlet property="downloadButton1" destination="kC0-Fn-HxU" id="x96-Pw-5DH"/>
+                        <outlet property="downloadButton2" destination="iYZ-XL-8Pj" id="iKf-aK-6LO"/>
+                        <outlet property="progressLabel1" destination="Ptw-5h-bof" id="Hit-do-5h8"/>
+                        <outlet property="progressLabel2" destination="Y3d-FM-yIE" id="KE9-yf-fMj"/>
+                        <outlet property="progressView1" destination="MBt-MJ-NHI" id="6ZN-RV-ME6"/>
+                        <outlet property="progressView2" destination="ADQ-Nc-VAF" id="HUT-Sx-ew6"/>
+                        <outlet property="totalSizeLabel1" destination="KfW-aC-BmE" id="KSn-8F-DIO"/>
+                        <outlet property="totalSizeLabel2" destination="rLI-7b-U1j" id="qZz-gT-lJg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="720.79999999999995" y="132.68365817091455"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="l1i-h2-efh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZD-jN-skQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPv-KJ-WXb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="7DH-QG-DXh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tEG-cn-o6n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-218.40000000000001" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+</document>

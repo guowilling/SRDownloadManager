@@ -1,0 +1,560 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		68E1AE0A1E24808400404611 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE091E24808400404611 /* main.m */; };
+		68E1AE0D1E24808400404611 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE0C1E24808400404611 /* AppDelegate.m */; };
+		68E1AE101E24808400404611 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE0F1E24808400404611 /* ViewController.m */; };
+		68E1AE131E24808400404611 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE111E24808400404611 /* Main.storyboard */; };
+		68E1AE151E24808400404611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE141E24808400404611 /* Assets.xcassets */; };
+		68E1AE181E24808400404611 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE161E24808400404611 /* LaunchScreen.storyboard */; };
+		68E1AE231E24808500404611 /* SRDownloadManagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE221E24808500404611 /* SRDownloadManagerDemoTests.m */; };
+		68E1AE2E1E24808500404611 /* SRDownloadManagerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE2D1E24808500404611 /* SRDownloadManagerDemoUITests.m */; };
+		68E1AE3E1E2480A800404611 /* SRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE3D1E2480A800404611 /* SRDownloadManager.m */; };
+		68E1AE411E2480B500404611 /* SRDownloadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE401E2480B500404611 /* SRDownloadModel.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		68E1AE1F1E24808500404611 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68E1ADFD1E24808400404611 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68E1AE041E24808400404611;
+			remoteInfo = SRDownloadManagerDemo;
+		};
+		68E1AE2A1E24808500404611 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68E1ADFD1E24808400404611 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68E1AE041E24808400404611;
+			remoteInfo = SRDownloadManagerDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRDownloadManagerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68E1AE091E24808400404611 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		68E1AE0B1E24808400404611 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		68E1AE0C1E24808400404611 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		68E1AE0E1E24808400404611 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		68E1AE0F1E24808400404611 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		68E1AE121E24808400404611 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		68E1AE141E24808400404611 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		68E1AE171E24808400404611 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		68E1AE191E24808400404611 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68E1AE1E1E24808500404611 /* SRDownloadManagerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SRDownloadManagerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68E1AE221E24808500404611 /* SRDownloadManagerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManagerDemoTests.m; sourceTree = "<group>"; };
+		68E1AE241E24808500404611 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68E1AE291E24808500404611 /* SRDownloadManagerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SRDownloadManagerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68E1AE2D1E24808500404611 /* SRDownloadManagerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManagerDemoUITests.m; sourceTree = "<group>"; };
+		68E1AE2F1E24808500404611 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68E1AE3C1E2480A800404611 /* SRDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDownloadManager.h; sourceTree = "<group>"; };
+		68E1AE3D1E2480A800404611 /* SRDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManager.m; sourceTree = "<group>"; };
+		68E1AE3F1E2480B500404611 /* SRDownloadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDownloadModel.h; sourceTree = "<group>"; };
+		68E1AE401E2480B500404611 /* SRDownloadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRDownloadModel.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		68E1AE021E24808400404611 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68E1AE1B1E24808500404611 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68E1AE261E24808500404611 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		68E1ADFC1E24808400404611 = {
+			isa = PBXGroup;
+			children = (
+				68E1AE3B1E24809B00404611 /* SRDownloadManager */,
+				68E1AE071E24808400404611 /* SRDownloadManagerDemo */,
+				68E1AE211E24808500404611 /* SRDownloadManagerDemoTests */,
+				68E1AE2C1E24808500404611 /* SRDownloadManagerDemoUITests */,
+				68E1AE061E24808400404611 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		68E1AE061E24808400404611 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */,
+				68E1AE1E1E24808500404611 /* SRDownloadManagerDemoTests.xctest */,
+				68E1AE291E24808500404611 /* SRDownloadManagerDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		68E1AE071E24808400404611 /* SRDownloadManagerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				68E1AE0E1E24808400404611 /* ViewController.h */,
+				68E1AE0F1E24808400404611 /* ViewController.m */,
+				68E1AE081E24808400404611 /* Supporting Files */,
+			);
+			path = SRDownloadManagerDemo;
+			sourceTree = "<group>";
+		};
+		68E1AE081E24808400404611 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				68E1AE091E24808400404611 /* main.m */,
+				68E1AE0B1E24808400404611 /* AppDelegate.h */,
+				68E1AE0C1E24808400404611 /* AppDelegate.m */,
+				68E1AE111E24808400404611 /* Main.storyboard */,
+				68E1AE161E24808400404611 /* LaunchScreen.storyboard */,
+				68E1AE141E24808400404611 /* Assets.xcassets */,
+				68E1AE191E24808400404611 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		68E1AE211E24808500404611 /* SRDownloadManagerDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				68E1AE221E24808500404611 /* SRDownloadManagerDemoTests.m */,
+				68E1AE241E24808500404611 /* Info.plist */,
+			);
+			path = SRDownloadManagerDemoTests;
+			sourceTree = "<group>";
+		};
+		68E1AE2C1E24808500404611 /* SRDownloadManagerDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				68E1AE2D1E24808500404611 /* SRDownloadManagerDemoUITests.m */,
+				68E1AE2F1E24808500404611 /* Info.plist */,
+			);
+			path = SRDownloadManagerDemoUITests;
+			sourceTree = "<group>";
+		};
+		68E1AE3B1E24809B00404611 /* SRDownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				68E1AE3C1E2480A800404611 /* SRDownloadManager.h */,
+				68E1AE3D1E2480A800404611 /* SRDownloadManager.m */,
+				68E1AE3F1E2480B500404611 /* SRDownloadModel.h */,
+				68E1AE401E2480B500404611 /* SRDownloadModel.m */,
+			);
+			path = SRDownloadManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		68E1AE041E24808400404611 /* SRDownloadManagerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68E1AE321E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemo" */;
+			buildPhases = (
+				68E1AE011E24808400404611 /* Sources */,
+				68E1AE021E24808400404611 /* Frameworks */,
+				68E1AE031E24808400404611 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SRDownloadManagerDemo;
+			productName = SRDownloadManagerDemo;
+			productReference = 68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		68E1AE1D1E24808500404611 /* SRDownloadManagerDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68E1AE351E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoTests" */;
+			buildPhases = (
+				68E1AE1A1E24808500404611 /* Sources */,
+				68E1AE1B1E24808500404611 /* Frameworks */,
+				68E1AE1C1E24808500404611 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68E1AE201E24808500404611 /* PBXTargetDependency */,
+			);
+			name = SRDownloadManagerDemoTests;
+			productName = SRDownloadManagerDemoTests;
+			productReference = 68E1AE1E1E24808500404611 /* SRDownloadManagerDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		68E1AE281E24808500404611 /* SRDownloadManagerDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68E1AE381E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoUITests" */;
+			buildPhases = (
+				68E1AE251E24808500404611 /* Sources */,
+				68E1AE261E24808500404611 /* Frameworks */,
+				68E1AE271E24808500404611 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68E1AE2B1E24808500404611 /* PBXTargetDependency */,
+			);
+			name = SRDownloadManagerDemoUITests;
+			productName = SRDownloadManagerDemoUITests;
+			productReference = 68E1AE291E24808500404611 /* SRDownloadManagerDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		68E1ADFD1E24808400404611 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = SR;
+				TargetAttributes = {
+					68E1AE041E24808400404611 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = Y4FK8UXDXW;
+						ProvisioningStyle = Manual;
+					};
+					68E1AE1D1E24808500404611 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 68E1AE041E24808400404611;
+					};
+					68E1AE281E24808500404611 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 68E1AE041E24808400404611;
+					};
+				};
+			};
+			buildConfigurationList = 68E1AE001E24808400404611 /* Build configuration list for PBXProject "SRDownloadManagerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 68E1ADFC1E24808400404611;
+			productRefGroup = 68E1AE061E24808400404611 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				68E1AE041E24808400404611 /* SRDownloadManagerDemo */,
+				68E1AE1D1E24808500404611 /* SRDownloadManagerDemoTests */,
+				68E1AE281E24808500404611 /* SRDownloadManagerDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		68E1AE031E24808400404611 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68E1AE181E24808400404611 /* LaunchScreen.storyboard in Resources */,
+				68E1AE151E24808400404611 /* Assets.xcassets in Resources */,
+				68E1AE131E24808400404611 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68E1AE1C1E24808500404611 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68E1AE271E24808500404611 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		68E1AE011E24808400404611 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68E1AE101E24808400404611 /* ViewController.m in Sources */,
+				68E1AE0D1E24808400404611 /* AppDelegate.m in Sources */,
+				68E1AE411E2480B500404611 /* SRDownloadModel.m in Sources */,
+				68E1AE3E1E2480A800404611 /* SRDownloadManager.m in Sources */,
+				68E1AE0A1E24808400404611 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68E1AE1A1E24808500404611 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68E1AE231E24808500404611 /* SRDownloadManagerDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68E1AE251E24808500404611 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68E1AE2E1E24808500404611 /* SRDownloadManagerDemoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		68E1AE201E24808500404611 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68E1AE041E24808400404611 /* SRDownloadManagerDemo */;
+			targetProxy = 68E1AE1F1E24808500404611 /* PBXContainerItemProxy */;
+		};
+		68E1AE2B1E24808500404611 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68E1AE041E24808400404611 /* SRDownloadManagerDemo */;
+			targetProxy = 68E1AE2A1E24808500404611 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		68E1AE111E24808400404611 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68E1AE121E24808400404611 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		68E1AE161E24808400404611 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68E1AE171E24808400404611 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		68E1AE301E24808500404611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		68E1AE311E24808500404611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		68E1AE331E24808500404611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y4FK8UXDXW;
+				INFOPLIST_FILE = SRDownloadManagerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b37cda96-8f5e-4e66-b454-438b5140edb4";
+				PROVISIONING_PROFILE_SPECIFIER = PPForAll;
+			};
+			name = Debug;
+		};
+		68E1AE341E24808500404611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y4FK8UXDXW;
+				INFOPLIST_FILE = SRDownloadManagerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b37cda96-8f5e-4e66-b454-438b5140edb4";
+				PROVISIONING_PROFILE_SPECIFIER = PPForAll;
+			};
+			name = Release;
+		};
+		68E1AE361E24808500404611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SRDownloadManagerDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SRDownloadManagerDemo.app/SRDownloadManagerDemo";
+			};
+			name = Debug;
+		};
+		68E1AE371E24808500404611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SRDownloadManagerDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SRDownloadManagerDemo.app/SRDownloadManagerDemo";
+			};
+			name = Release;
+		};
+		68E1AE391E24808500404611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SRDownloadManagerDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SRDownloadManagerDemo;
+			};
+			name = Debug;
+		};
+		68E1AE3A1E24808500404611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SRDownloadManagerDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SRDownloadManagerDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68E1AE001E24808400404611 /* Build configuration list for PBXProject "SRDownloadManagerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68E1AE301E24808500404611 /* Debug */,
+				68E1AE311E24808500404611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68E1AE321E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68E1AE331E24808500404611 /* Debug */,
+				68E1AE341E24808500404611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68E1AE351E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68E1AE361E24808500404611 /* Debug */,
+				68E1AE371E24808500404611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68E1AE381E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68E1AE391E24808500404611 /* Debug */,
+				68E1AE3A1E24808500404611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 68E1ADFD1E24808400404611 /* Project object */;
+}
