@@ -5,14 +5,24 @@
 * Provides download status callback, download progress callback, download complete callback.
 * Support multi-task at the same time to download.
 * Support breakpoint to continue to download, even exit the App.
-* Support to delete the specified file or all files that have been downloaded.
+* Support to delete the specified file by URL and clear all files that have been downloaded.
 * More please see the demo...
+
+***
+
+* 提供下载状态回调, 下载进度回调, 下载完成回调.
+* 支持多任务同时下载.
+* 支持断点下载, 即使退出重启 App.
+* 支持通过 URL 删除指定文件和清除所有已下载的文件.
+* 更多请看 demo...
 
 ## Show Pictures
 
-![image](./show1.jpg) ![image](./show2.jpg)
+![image](./show.gif)
+
 ***
-![image](./show3.jpg) ![image](./show4.jpg)
+
+![image](./show.jpg)
 
 ## APIs
 
