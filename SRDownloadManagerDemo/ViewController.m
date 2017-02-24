@@ -40,20 +40,18 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
     
     [super viewDidLoad];
     
-    CGFloat progress1 = [[SRDownloadManager sharedManager] progress:kDownloadURL1];
-    CGFloat progress2 = [[SRDownloadManager sharedManager] progress:kDownloadURL2];
+    CGFloat progress1 = [[SRDownloadManager sharedManager] fileProgress:kDownloadURL1];
+    CGFloat progress2 = [[SRDownloadManager sharedManager] fileProgress:kDownloadURL2];
     NSLog(@"progress of downloadURL1: %.2f", progress1);
     NSLog(@"progress of downloadURL2: %.2f", progress2);
     
     self.progressView1.progress = progress1;
     self.progressLabel1.text = [NSString stringWithFormat:@"%.f%%", progress1 * 100];
-    [self.downloadButton1 setTitle:[self titleWithDownloadState:[self stateWithProgress:progress1]]
-                          forState:UIControlStateNormal];
+    [self.downloadButton1 setTitle:[self titleWithDownloadState:[self stateWithProgress:progress1]] forState:UIControlStateNormal];
     
     self.progressView2.progress = progress2;
     self.progressLabel2.text = [NSString stringWithFormat:@"%.f%%", progress2 * 100];
-    [self.downloadButton2 setTitle:[self titleWithDownloadState:[self stateWithProgress:progress2]]
-                          forState:UIControlStateNormal];
+    [self.downloadButton2 setTitle:[self titleWithDownloadState:[self stateWithProgress:progress2]] forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -80,6 +78,19 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
         case SRDownloadStateFailed:
             return @"Start";
     }
+}
+
+- (NSString *)titleWithProgress:(CGFloat)progress {
+    
+    SRDownloadState state;
+    if (progress == 1.0) {
+        state = SRDownloadStateCompleted;
+    } else if (progress > 0) {
+        state = SRDownloadStateSuspended;
+    } else {
+        state = SRDownloadStateFailed;
+    }
+    return [self titleWithDownloadState:state];
 }
 
 - (SRDownloadState)stateWithProgress:(CGFloat)progress {
@@ -116,38 +127,40 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
 - (IBAction)downloadFile1:(UIButton *)sender {
     
     [self download:kDownloadURL1
-    totalSizeLabel:self.totalSizeLabel1 currentSizeLabel:self.currentSizeLabel1
-     progressLabel:self.progressLabel1 progressView:self.progressView1
+    totalSizeLabel:self.totalSizeLabel1
+  currentSizeLabel:self.currentSizeLabel1
+     progressLabel:self.progressLabel1
+      progressView:self.progressView1
             button:sender];
 }
 
 - (IBAction)downloadFile2:(UIButton *)sender {
     
     [self download:kDownloadURL2
-    totalSizeLabel:self.totalSizeLabel2 currentSizeLabel:self.currentSizeLabel2
-     progressLabel:self.progressLabel2 progressView:self.progressView2
+    totalSizeLabel:self.totalSizeLabel2
+  currentSizeLabel:self.currentSizeLabel2
+     progressLabel:self.progressLabel2
+      progressView:self.progressView2
             button:sender];
 }
 
-- (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel
-   progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView
-          button:(UIButton *)button
-{
+- (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
+    
     [[SRDownloadManager sharedManager] download:URL
                                           state:^(SRDownloadState state) {
                                               [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
                                           }
                                        progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
-                                           totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
                                            currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
+                                           totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
                                            progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
                                            progressView.progress = progress;
                                        }
                                      completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
                                          if (isSuccess) {
-                                             NSLog(@"%@", filePath);
+                                             NSLog(@"filePath: %@", filePath);
                                          } else {
-                                             NSLog(@"%@", error);
+                                             NSLog(@"error: %@", error);
                                          }
                                      }];
 }

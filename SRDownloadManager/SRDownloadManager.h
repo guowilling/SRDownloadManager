@@ -1,13 +1,12 @@
 //
 //  SRDownloadManager.h
-//  SRDownloadManagerDemo
 //
 //  Created by 郭伟林 on 17/1/10.
 //  Copyright © 2017年 SR. All rights reserved.
 //
 
 /**
- *  If you have any question, please issue or contact me.
+ *  If you have any question, submit an issue or contact me.
  *  QQ: 1990991510
  *  Email: guowilling@qq.com
  *
@@ -33,7 +32,7 @@
 
 - (NSString *)fileFullPath:(NSURL *)URL;
 
-- (CGFloat)progress:(NSURL *)URL;
+- (CGFloat)fileProgress:(NSURL *)URL;
 
 - (void)deleteFile:(NSURL *)URL;
 
