@@ -2,10 +2,11 @@
 
 ## Features
 
-* Provides download status callback, download progress callback, download complete callback.
+* Provide download status callback, download progress callback, download complete callback.
 * Support multi-task at the same time to download.
 * Support breakpoint download even exit the App.
 * Support to delete the specified file by URL and clear all files that have been downloaded.
+* Support customize the directory where the downloaded files are saved.
 
 ***
 
@@ -13,6 +14,7 @@
 * 支持多任务同时下载.
 * 支持断点下载, 即使退出重启 App.
 * 支持通过 URL 删除指定文件和清除所有已下载的文件.
+* 支持自定义保存下载文件的目录.
 
 ## Show
 
