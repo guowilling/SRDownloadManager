@@ -21,12 +21,17 @@
 
 @interface SRDownloadManager : NSObject
 
+/**
+ The directory where the downloaded files are saved, default is Library/Caches/SRDownloadManager if not setted.
+ */
+@property (nonatomic, copy) NSString *downloadDirectory;
+
 + (instancetype)sharedManager;
 
 - (void)download:(NSURL *)URL
-           state:(void(^)(SRDownloadState state))state
-        progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-      completion:(void(^)(BOOL isSuccess, NSString *filePath, NSError *error))completion;
+           state:(void (^)(SRDownloadState state))state
+        progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+      completion:(void (^)(BOOL isSuccess, NSString *filePath, NSError *error))completion;
 
 - (BOOL)isCompleted:(NSURL *)URL;
 

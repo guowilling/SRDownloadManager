@@ -40,6 +40,10 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
     
     [super viewDidLoad];
     
+    // Uncomment the following line to customize the directory where the downloaded files are saved.
+//    [SRDownloadManager sharedManager].downloadDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
+//                                                            stringByAppendingPathComponent:@"CustomDownloadDirectory"];
+    
     CGFloat progress1 = [[SRDownloadManager sharedManager] fileProgress:kDownloadURL1];
     CGFloat progress2 = [[SRDownloadManager sharedManager] fileProgress:kDownloadURL2];
     NSLog(@"progress of downloadURL1: %.2f", progress1);
@@ -149,20 +153,18 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
     [[SRDownloadManager sharedManager] download:URL
                                           state:^(SRDownloadState state) {
                                               [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
-                                          }
-                                       progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
-                                           currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
-                                           totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
-                                           progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
-                                           progressView.progress = progress;
-                                       }
-                                     completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
-                                         if (isSuccess) {
-                                             NSLog(@"filePath: %@", filePath);
-                                         } else {
-                                             NSLog(@"error: %@", error);
-                                         }
-                                     }];
+                                          } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
+                                              currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
+                                              totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
+                                              progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
+                                              progressView.progress = progress;
+                                          } completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
+                                           if (isSuccess) {
+                                               NSLog(@"filePath: %@", filePath);
+                                           } else {
+                                               NSLog(@"error: %@", error);
+                                           }
+                                       }];
 }
 
 - (IBAction)deleteFile1:(UIButton *)sender {

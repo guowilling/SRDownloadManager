@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
 
 @interface SRDownloadModel : NSObject
 
-@property (nonatomic, strong) NSOutputStream *outputStream;
+@property (nonatomic, strong) NSOutputStream *outputStream; // For write datas to file.
 
 @property (nonatomic, strong) NSURL *URL;
 
@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
 
 @property (nonatomic, copy) void (^completion)(BOOL isSuccess, NSString *filePath, NSError *error);
 
+- (void)openOutputStream;
 - (void)closeOutputStream;
 
 @end
