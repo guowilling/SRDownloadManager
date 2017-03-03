@@ -5,6 +5,7 @@
 //  Copyright © 2017年 SR. All rights reserved.
 //
 
+
 /**
  *  If you have any question, submit an issue or contact me.
  *  QQ: 1990991510
@@ -22,25 +23,33 @@
 @interface SRDownloadManager : NSObject
 
 /**
- The directory where the downloaded files are saved, default is Library/Caches/SRDownloadManager if not setted.
+ The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
  */
-@property (nonatomic, copy) NSString *downloadDirectory;
+@property (nonatomic, copy) NSString *downloadedFilesDirectory;
 
 + (instancetype)sharedManager;
 
-- (void)download:(NSURL *)URL
-           state:(void (^)(SRDownloadState state))state
-        progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-      completion:(void (^)(BOOL isSuccess, NSString *filePath, NSError *error))completion;
+- (void)downloadFile:(NSURL *)URL
+               state:(void (^)(SRDownloadState state))state
+            progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+          completion:(void (^)(BOOL isSuccess, NSString *filePath, NSError *error))completion;
 
-- (BOOL)isCompleted:(NSURL *)URL;
+- (BOOL)isDownloadFileCompleted:(NSURL *)URL;
 
 - (NSString *)fileFullPath:(NSURL *)URL;
 
-- (CGFloat)fileProgress:(NSURL *)URL;
+- (CGFloat)fileDownloadedProgress:(NSURL *)URL;
 
 - (void)deleteFile:(NSURL *)URL;
-
 - (void)deleteAllFiles;
+
+- (void)suspendDownloadURL:(NSURL *)URL;
+- (void)suspendAllDownloads;
+
+- (void)resumeDownloadURL:(NSURL *)URL;
+- (void)resumeAllDownloads;
+
+- (void)cancelDownloadURL:(NSURL *)URL;
+- (void)cancelAllDownloads;
 
 @end

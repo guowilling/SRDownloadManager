@@ -44,8 +44,8 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
 //    [SRDownloadManager sharedManager].downloadDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
 //                                                            stringByAppendingPathComponent:@"CustomDownloadDirectory"];
     
-    CGFloat progress1 = [[SRDownloadManager sharedManager] fileProgress:kDownloadURL1];
-    CGFloat progress2 = [[SRDownloadManager sharedManager] fileProgress:kDownloadURL2];
+    CGFloat progress1 = [[SRDownloadManager sharedManager] fileDownloadedProgress:kDownloadURL1];
+    CGFloat progress2 = [[SRDownloadManager sharedManager] fileDownloadedProgress:kDownloadURL2];
     NSLog(@"progress of downloadURL1: %.2f", progress1);
     NSLog(@"progress of downloadURL2: %.2f", progress2);
     
@@ -62,10 +62,10 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
     
     [super viewDidAppear:animated];
     
-    if ([[SRDownloadManager sharedManager] isCompleted:kDownloadURL1]) {
+    if ([[SRDownloadManager sharedManager] isDownloadFileCompleted:kDownloadURL1]) {
         NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPath:kDownloadURL1]);
     }
-    if ([[SRDownloadManager sharedManager] isCompleted:kDownloadURL2]) {
+    if ([[SRDownloadManager sharedManager] isDownloadFileCompleted:kDownloadURL2]) {
         NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPath:kDownloadURL2]);
     }
 }
@@ -112,7 +112,7 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
 
 #pragma mark - Actions
 
-- (IBAction)clearAllFiles:(id)sender {
+- (IBAction)deleteAllFiles:(UIBarButtonItem *)sender {
     
     [[SRDownloadManager sharedManager] deleteAllFiles];
     
@@ -150,21 +150,21 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
 
 - (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
     
-    [[SRDownloadManager sharedManager] download:URL
-                                          state:^(SRDownloadState state) {
-                                              [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
-                                          } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
-                                              currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
-                                              totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
-                                              progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
-                                              progressView.progress = progress;
-                                          } completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
-                                           if (isSuccess) {
-                                               NSLog(@"filePath: %@", filePath);
-                                           } else {
-                                               NSLog(@"error: %@", error);
-                                           }
-                                       }];
+    [[SRDownloadManager sharedManager] downloadFile:URL
+                                              state:^(SRDownloadState state) {
+                                                  [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
+                                              } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
+                                                  currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
+                                                  totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
+                                                  progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
+                                                  progressView.progress = progress;
+                                              } completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
+                                                  if (isSuccess) {
+                                                      NSLog(@"FilePath: %@", filePath);
+                                                  } else {
+                                                      NSLog(@"Error: %@", error);
+                                                  }
+                                              }];
 }
 
 - (IBAction)deleteFile1:(UIButton *)sender {
@@ -187,6 +187,16 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
     self.totalSizeLabel2.text   = @"0";
     self.progressLabel2.text    = @"0%";
     [self.downloadButton2 setTitle:@"Start" forState:UIControlStateNormal];
+}
+
+- (IBAction)suspendAllDownloads:(UIButton *)sender {
+    
+    [[SRDownloadManager sharedManager] suspendAllDownloads];
+}
+
+- (IBAction)resumeAllDownloads:(UIButton *)sender {
+    
+    [[SRDownloadManager sharedManager] resumeAllDownloads];
 }
 
 @end

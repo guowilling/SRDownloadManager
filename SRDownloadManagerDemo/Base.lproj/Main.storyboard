@@ -123,11 +123,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exu-jB-PwM">
+                                <rect key="frame" x="50" y="519" width="82" height="30"/>
+                                <state key="normal" title="Suspend All">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="suspendAllDownloads:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pBn-aY-3I7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kv1-oV-RSU">
+                                <rect key="frame" x="288" y="519" width="76" height="30"/>
+                                <state key="normal" title="Resume All">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resumeAllDownloads:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sum-Qo-DEW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="MBt-MJ-NHI" firstAttribute="leading" secondItem="kC0-Fn-HxU" secondAttribute="trailing" constant="10" id="0nl-32-N25"/>
+                            <constraint firstItem="exu-jB-PwM" firstAttribute="top" secondItem="ADQ-Nc-VAF" secondAttribute="bottom" constant="100" id="1tt-Oy-XbZ"/>
                             <constraint firstItem="MBt-MJ-NHI" firstAttribute="top" secondItem="Ze4-DS-WXd" secondAttribute="bottom" constant="10" id="4sa-Zo-dUr"/>
+                            <constraint firstAttribute="trailing" secondItem="Kv1-oV-RSU" secondAttribute="trailing" constant="50" id="5ub-tx-kNS"/>
                             <constraint firstItem="zNi-EI-opQ" firstAttribute="leading" secondItem="Ptw-5h-bof" secondAttribute="trailing" constant="10" id="8Qw-gw-cLc"/>
                             <constraint firstItem="KfW-aC-BmE" firstAttribute="centerX" secondItem="MBt-MJ-NHI" secondAttribute="centerX" id="9Z4-ze-gWU"/>
                             <constraint firstItem="iYZ-XL-8Pj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="50" id="C0Y-2n-7lQ"/>
@@ -137,6 +157,7 @@
                             <constraint firstItem="rLI-7b-U1j" firstAttribute="centerX" secondItem="ADQ-Nc-VAF" secondAttribute="centerX" id="Lt0-Xb-tM6"/>
                             <constraint firstItem="ljj-zj-xYo" firstAttribute="leading" secondItem="Y3d-FM-yIE" secondAttribute="trailing" constant="10" id="Mtf-Ko-wEA"/>
                             <constraint firstItem="MBt-MJ-NHI" firstAttribute="centerY" secondItem="kC0-Fn-HxU" secondAttribute="centerY" id="OJ3-tY-zaE"/>
+                            <constraint firstItem="exu-jB-PwM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="Umx-hd-7Tl"/>
                             <constraint firstItem="KfW-aC-BmE" firstAttribute="top" secondItem="MBt-MJ-NHI" secondAttribute="bottom" constant="10" id="VZC-vY-Bdt"/>
                             <constraint firstItem="Ze4-DS-WXd" firstAttribute="centerX" secondItem="MBt-MJ-NHI" secondAttribute="centerX" id="Ypb-kL-pDO"/>
                             <constraint firstItem="Y3d-FM-yIE" firstAttribute="centerY" secondItem="ljj-zj-xYo" secondAttribute="centerY" id="ZWS-R7-pPG"/>
@@ -150,6 +171,7 @@
                             <constraint firstItem="Y3d-FM-yIE" firstAttribute="leading" secondItem="ADQ-Nc-VAF" secondAttribute="trailing" constant="10" id="hdL-u4-1JJ"/>
                             <constraint firstItem="ADQ-Nc-VAF" firstAttribute="centerY" secondItem="iYZ-XL-8Pj" secondAttribute="centerY" id="kJZ-hS-AUl"/>
                             <constraint firstItem="CV7-Cj-4F9" firstAttribute="centerX" secondItem="ADQ-Nc-VAF" secondAttribute="centerX" id="mnG-A5-hGu"/>
+                            <constraint firstItem="Kv1-oV-RSU" firstAttribute="top" secondItem="ADQ-Nc-VAF" secondAttribute="bottom" constant="100" id="v1v-76-zba"/>
                             <constraint firstItem="kC0-Fn-HxU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-50" id="yZ2-S3-YOw"/>
                             <constraint firstItem="Ptw-5h-bof" firstAttribute="leading" secondItem="MBt-MJ-NHI" secondAttribute="trailing" constant="10" id="z4e-Xr-c6d"/>
                         </constraints>
@@ -157,7 +179,7 @@
                     <navigationItem key="navigationItem" title="SRDownloadManager" id="bha-oK-46f">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="k45-XG-0b6">
                             <connections>
-                                <action selector="clearAllFiles:" destination="BYZ-38-t0r" id="khH-Pn-9Up"/>
+                                <action selector="deleteAllFiles:" destination="BYZ-38-t0r" id="bjh-Rf-MKF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
