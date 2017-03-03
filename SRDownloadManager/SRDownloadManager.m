@@ -73,6 +73,9 @@
         if (state) {
             state(SRDownloadStateCompleted);
         }
+        if (completion) {
+            completion(YES, [self fileFullPath:URL], nil);
+        }
         return;
     }
     
@@ -96,7 +99,7 @@
     
     downloadModel = [[SRDownloadModel alloc] init];
     downloadModel.dataTask = dataTask;
-    downloadModel.outputStream = [NSOutputStream outputStreamToFileAtPath:SRFilePath(URL) append:YES];
+    downloadModel.outputStream = [NSOutputStream outputStreamToFileAtPath:[self fileFullPath:URL] append:YES];
     downloadModel.URL = URL;
     downloadModel.state = state;
     downloadModel.progress = progress;
@@ -255,19 +258,19 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([self isDownloadFileCompleted:downloadModel.URL]) {
-            if (downloadModel.completion) {
-                downloadModel.completion(YES, SRFilePath(downloadModel.URL), error);
-            }
             if (downloadModel.state) {
                 downloadModel.state(SRDownloadStateCompleted);
             }
+            if (downloadModel.completion) {
+                downloadModel.completion(YES, [self fileFullPath:downloadModel.URL], error);
+            }
             return;
-        }
-        if (downloadModel.completion) {
-            downloadModel.completion(NO, nil, error);
         }
         if (downloadModel.state) {
             downloadModel.state(SRDownloadStateFailed);
+        }
+        if (downloadModel.completion) {
+            downloadModel.completion(NO, nil, error);
         }
     });
 }
@@ -288,7 +291,7 @@
 
 - (NSInteger)hasDownloadedLength:(NSURL *)URL {
     
-    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:SRFilePath(URL) error:nil];
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[self fileFullPath:URL] error:nil];
     return [fileAttributes[NSFileSize] integerValue];
 }
 
@@ -340,11 +343,11 @@
     [self cancelDownloadURL:URL];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:SRFilePath(URL)]) {
+    if (![fileManager fileExistsAtPath:[self fileFullPath:URL]]) {
         return;
     }
     
-    BOOL flag = [fileManager removeItemAtPath:SRFilePath(URL) error:nil];
+    BOOL flag = [fileManager removeItemAtPath:[self fileFullPath:URL] error:nil];
     if (!flag) {
         NSLog(@"removeItemAtPath Failed!");
     }
