@@ -150,21 +150,29 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
 
 - (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
     
-    [[SRDownloadManager sharedManager] downloadFile:URL
-                                              state:^(SRDownloadState state) {
-                                                  [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
-                                              } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
-                                                  currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
-                                                  totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
-                                                  progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
-                                                  progressView.progress = progress;
-                                              } completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
-                                                  if (isSuccess) {
-                                                      NSLog(@"FilePath: %@", filePath);
-                                                  } else {
-                                                      NSLog(@"Error: %@", error);
-                                                  }
-                                              }];
+    if ([button.currentTitle isEqualToString:@"Start"]) {
+        [[SRDownloadManager sharedManager] downloadFile:URL
+                                                  state:^(SRDownloadState state) {
+                                                      [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
+                                                  } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
+                                                      currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
+                                                      totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
+                                                      progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
+                                                      progressView.progress = progress;
+                                                  } completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
+                                                      if (isSuccess) {
+                                                          NSLog(@"FilePath: %@", filePath);
+                                                      } else {
+                                                          NSLog(@"Error: %@", error);
+                                                      }
+                                                  }];
+    } else if ([button.currentTitle isEqualToString:@"Pause"]) {
+        [[SRDownloadManager sharedManager] suspendDownloadURL:URL];
+    } else if ([button.currentTitle isEqualToString:@"Resume"]) {
+        [[SRDownloadManager sharedManager] resumeDownloadURL:URL];
+    } else if ([button.currentTitle isEqualToString:@"Finish"]) {
+        NSLog(@"File has been downloaded! File path: %@", [[SRDownloadManager sharedManager] fileFullPath:URL]);
+    }
 }
 
 - (IBAction)deleteFile1:(UIButton *)sender {
