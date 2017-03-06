@@ -104,8 +104,7 @@
     downloadModel.state = state;
     downloadModel.progress = progress;
     downloadModel.completion = completion;
-    downloadModel.identifier = SRFileName(URL);
-    self.downloadModels[downloadModel.identifier] = downloadModel;
+    self.downloadModels[dataTask.taskDescription] = downloadModel;
     
     [dataTask resume];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -117,7 +116,7 @@
 
 - (void)suspendDownloadURL:(NSURL *)URL {
     
-    SRDownloadModel *downloadModel = self.downloadModels[downloadModel.identifier];
+    SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (!downloadModel) {
         return;
     }
@@ -153,7 +152,7 @@
 
 - (void)resumeDownloadURL:(NSURL *)URL {
     
-    SRDownloadModel *downloadModel = self.downloadModels[downloadModel.identifier];
+    SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (!downloadModel) {
         return;
     }
@@ -189,13 +188,13 @@
 
 - (void)cancelDownloadURL:(NSURL *)URL {
     
-    SRDownloadModel *downloadModel = self.downloadModels[downloadModel.identifier];
+    SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (!downloadModel) {
         return;
     }
     [downloadModel closeOutputStream];
     [downloadModel.dataTask cancel];
-    [self.downloadModels removeObjectForKey:downloadModel.identifier];
+    [self.downloadModels removeObjectForKey:SRFileName(URL)];
 }
 
 - (void)cancelAllDownloads {
@@ -329,6 +328,38 @@
     return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
 }
 
+- (void)deleteFile:(NSURL *)URL {
+    
+    [self cancelDownloadURL:URL];
+    
+    NSMutableDictionary *filesTotalLenth = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
+    [filesTotalLenth removeObjectForKey:SRFileName(URL)];
+    [filesTotalLenth writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:[self fileFullPath:URL]]) {
+        return;
+    }
+    if ([fileManager removeItemAtPath:[self fileFullPath:URL] error:nil]) {
+        return;
+    }
+    NSLog(@"removeItemAtPath Failed!");
+}
+
+- (void)deleteAllFiles {
+    
+    [self cancelAllDownloads];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
+    for (NSString *fileName in fileNames) {
+        if ([fileManager removeItemAtPath:[SRDownloadDirectory stringByAppendingPathComponent:fileName] error:nil]) {
+            continue;
+        }
+        NSLog(@"removeItemAtPath Failed!");
+    }
+}
+
 - (void)setDownloadedFilesDirectory:(NSString *)downloadedFilesDirectory {
     
     _downloadedFilesDirectory = downloadedFilesDirectory;
@@ -341,39 +372,6 @@
     BOOL isExists = [fileManager fileExistsAtPath:downloadedFilesDirectory isDirectory:&isDirectory];
     if (!isExists || !isDirectory) {
         [fileManager createDirectoryAtPath:downloadedFilesDirectory withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-}
-
-- (void)deleteFile:(NSURL *)URL {
-    
-    [self cancelDownloadURL:URL];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:[self fileFullPath:URL]]) {
-        return;
-    }
-    
-    BOOL flag = [fileManager removeItemAtPath:[self fileFullPath:URL] error:nil];
-    if (!flag) {
-        NSLog(@"removeItemAtPath Failed!");
-    }
-    
-    NSMutableDictionary *filesTotalLenthDic = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
-    [filesTotalLenthDic removeObjectForKey:SRFileName(URL)];
-    [filesTotalLenthDic writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
-}
-
-- (void)deleteAllFiles {
-    
-    [self cancelAllDownloads];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
-    for (NSString *fileName in fileNames) {
-        BOOL flag = [fileManager removeItemAtPath:[SRDownloadDirectory stringByAppendingPathComponent:fileName] error:nil];
-        if (!flag) {
-            NSLog(@"removeItemAtPath Failed!");
-        }
     }
 }
 

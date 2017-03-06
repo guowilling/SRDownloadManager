@@ -32,9 +32,8 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
 
 @property (nonatomic, copy) void (^completion)(BOOL isSuccess, NSString *filePath, NSError *error);
 
-@property (nonatomic, copy) NSString *identifier;
-
 - (void)openOutputStream;
+
 - (void)closeOutputStream;
 
 @end

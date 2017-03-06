@@ -18,7 +18,7 @@
 
 ## Show
 
-![image](./show.gif)
+![image](./show.png)
 
 ## Installation
 
@@ -27,7 +27,7 @@
 ## Usage
 
 ````objc
-[[SRDownloadManager sharedManager] download:fileURL state:^(SRDownloadState state) {
+[[SRDownloadManager sharedManager] downloadFile:fileURL state:^(SRDownloadState state) {
     // Called when download state changed.
 } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
     // Called when download receive data every time.
@@ -36,25 +36,38 @@
 }];
 ````
 
-## API
+## APIs
 
 ````objc
+/**
+ The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
+ */
+@property (nonatomic, copy) NSString *downloadedFilesDirectory;
+
 + (instancetype)sharedManager;
 
-- (void)download:(NSURL *)URL
-           state:(void(^)(SRDownloadState state))state
-        progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-      completion:(void(^)(BOOL isSuccess, NSString *filePath, NSError *error))completion;
+- (void)downloadFile:(NSURL *)URL
+               state:(void (^)(SRDownloadState state))state
+            progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+          completion:(void (^)(BOOL isSuccess, NSString *filePath, NSError *error))completion;
 
-- (BOOL)isCompleted:(NSURL *)URL;
+- (BOOL)isDownloadFileCompleted:(NSURL *)URL;
 
 - (NSString *)fileFullPath:(NSURL *)URL;
 
-- (CGFloat)fileProgress:(NSURL *)URL;
+- (CGFloat)fileDownloadedProgress:(NSURL *)URL;
 
 - (void)deleteFile:(NSURL *)URL;
-
 - (void)deleteAllFiles;
+
+- (void)suspendDownloadURL:(NSURL *)URL;
+- (void)suspendAllDownloads;
+
+- (void)resumeDownloadURL:(NSURL *)URL;
+- (void)resumeAllDownloads;
+
+- (void)cancelDownloadURL:(NSURL *)URL;
+- (void)cancelAllDownloads;
 ````
 
 **If you have any question, submit an issue or contact me.**   
