@@ -104,7 +104,8 @@
     downloadModel.state = state;
     downloadModel.progress = progress;
     downloadModel.completion = completion;
-    self.downloadModels[SRFileName(URL)] = downloadModel;
+    downloadModel.identifier = SRFileName(URL);
+    self.downloadModels[downloadModel.identifier] = downloadModel;
     
     [dataTask resume];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -116,7 +117,7 @@
 
 - (void)suspendDownloadURL:(NSURL *)URL {
     
-    SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
+    SRDownloadModel *downloadModel = self.downloadModels[downloadModel.identifier];
     if (!downloadModel) {
         return;
     }
@@ -152,7 +153,7 @@
 
 - (void)resumeDownloadURL:(NSURL *)URL {
     
-    SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
+    SRDownloadModel *downloadModel = self.downloadModels[downloadModel.identifier];
     if (!downloadModel) {
         return;
     }
@@ -188,13 +189,13 @@
 
 - (void)cancelDownloadURL:(NSURL *)URL {
     
-    SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
+    SRDownloadModel *downloadModel = self.downloadModels[downloadModel.identifier];
     if (!downloadModel) {
         return;
     }
     [downloadModel closeOutputStream];
     [downloadModel.dataTask cancel];
-    [self.downloadModels removeObjectForKey:SRFileName(URL)];
+    [self.downloadModels removeObjectForKey:downloadModel.identifier];
 }
 
 - (void)cancelAllDownloads {
@@ -204,6 +205,11 @@
         for (SRDownloadModel *downloadModel in downloadModels) {
             [downloadModel closeOutputStream];
             [downloadModel.dataTask cancel];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (downloadModel.state) {
+                    downloadModel.state(SRDownloadStateCanceled);
+                }
+            });
         }
         [self.downloadModels removeAllObjects];
     }

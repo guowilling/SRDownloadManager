@@ -11,6 +11,7 @@
 typedef NS_ENUM(NSInteger, SRDownloadState) {
     SRDownloadStateRunning = 0,
     SRDownloadStateSuspended,
+    SRDownloadStateCanceled,
     SRDownloadStateCompleted,
     SRDownloadStateFailed
 };
@@ -30,6 +31,8 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
 @property (nonatomic, copy) void (^progress)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress);
 
 @property (nonatomic, copy) void (^completion)(BOOL isSuccess, NSString *filePath, NSError *error);
+
+@property (nonatomic, copy) NSString *identifier;
 
 - (void)openOutputStream;
 - (void)closeOutputStream;

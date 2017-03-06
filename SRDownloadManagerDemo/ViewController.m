@@ -51,11 +51,11 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
     
     self.progressView1.progress = progress1;
     self.progressLabel1.text = [NSString stringWithFormat:@"%.f%%", progress1 * 100];
-    [self.downloadButton1 setTitle:[self titleWithDownloadState:[self stateWithProgress:progress1]] forState:UIControlStateNormal];
+    [self.downloadButton1 setTitle:@"Start" forState:UIControlStateNormal];
     
     self.progressView2.progress = progress2;
     self.progressLabel2.text = [NSString stringWithFormat:@"%.f%%", progress2 * 100];
-    [self.downloadButton2 setTitle:[self titleWithDownloadState:[self stateWithProgress:progress2]] forState:UIControlStateNormal];
+    [self.downloadButton2 setTitle:@"Start" forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -77,37 +77,13 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
             return @"Pause";
         case SRDownloadStateSuspended:
             return @"Resume";
+        case SRDownloadStateCanceled:
+            return @"Start";
         case SRDownloadStateCompleted:
             return @"Finish";
         case SRDownloadStateFailed:
             return @"Start";
     }
-}
-
-- (NSString *)titleWithProgress:(CGFloat)progress {
-    
-    SRDownloadState state;
-    if (progress == 1.0) {
-        state = SRDownloadStateCompleted;
-    } else if (progress > 0) {
-        state = SRDownloadStateSuspended;
-    } else {
-        state = SRDownloadStateFailed;
-    }
-    return [self titleWithDownloadState:state];
-}
-
-- (SRDownloadState)stateWithProgress:(CGFloat)progress {
-    
-    SRDownloadState state;
-    if (progress == 1.0) {
-        state = SRDownloadStateCompleted;
-    } else if (progress > 0) {
-        state = SRDownloadStateSuspended;
-    } else {
-        state = SRDownloadStateFailed;
-    }
-    return state;
 }
 
 #pragma mark - Actions
@@ -205,6 +181,11 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
 - (IBAction)resumeAllDownloads:(UIButton *)sender {
     
     [[SRDownloadManager sharedManager] resumeAllDownloads];
+}
+
+- (IBAction)cancelAllDownloads:(UIBarButtonItem *)sender {
+    
+    [[SRDownloadManager sharedManager] cancelAllDownloads];
 }
 
 @end

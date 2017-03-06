@@ -177,6 +177,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SRDownloadManager" id="bha-oK-46f">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="RKC-6k-Dat">
+                            <connections>
+                                <action selector="cancelAllDownloads:" destination="BYZ-38-t0r" id="0O6-Ab-zQm"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="k45-XG-0b6">
                             <connections>
                                 <action selector="deleteAllFiles:" destination="BYZ-38-t0r" id="bjh-Rf-MKF"/>
