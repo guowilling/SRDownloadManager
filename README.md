@@ -18,7 +18,7 @@
 
 ## Show
 
-![image](./show.png)
+![image](./show1.png) ![image](./show2.png)
 
 ## Installation
 
