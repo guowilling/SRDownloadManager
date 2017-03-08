@@ -10,7 +10,7 @@
  *  QQ: 1990991510
  *  Email: guowilling@qq.com
  *
- *  If you like it, please star it, thanks a lot.
+ *  If this repo helps you, please give it a star.
  *  Github: https://github.com/guowilling/SRDownloadManager
  *
  *  Have Fun.
