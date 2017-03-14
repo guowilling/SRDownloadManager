@@ -337,13 +337,14 @@
     [filesTotalLenth writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:[self fileFullPath:URL]]) {
+    NSString *filePath = [self fileFullPath:URL];
+    if (![fileManager fileExistsAtPath:filePath]) {
         return;
     }
-    if ([fileManager removeItemAtPath:[self fileFullPath:URL] error:nil]) {
+    if ([fileManager removeItemAtPath:filePath error:nil]) {
         return;
     }
-    NSLog(@"removeItemAtPath Failed!");
+    NSLog(@"removeItemAtPath Failed: %@", filePath);
 }
 
 - (void)deleteAllFiles {
@@ -353,10 +354,11 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
     for (NSString *fileName in fileNames) {
-        if ([fileManager removeItemAtPath:[SRDownloadDirectory stringByAppendingPathComponent:fileName] error:nil]) {
+        NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:fileName];
+        if ([fileManager removeItemAtPath:filePath error:nil]) {
             continue;
         }
-        NSLog(@"removeItemAtPath Failed!");
+        NSLog(@"removeItemAtPath Failed: %@", filePath);
     }
 }
 
