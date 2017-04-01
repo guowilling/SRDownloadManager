@@ -18,6 +18,8 @@
 
 @interface SRDownloadManager() <NSURLSessionDelegate, NSURLSessionDataDelegate>
 
+@property (nonatomic, strong) NSURLSession *urlSession;
+
 @property (nonatomic, strong) NSMutableDictionary *downloadModels;
 
 @end
@@ -32,6 +34,16 @@
         downloadManager = [[self alloc] init];
     });
     return downloadManager;
+}
+
+- (NSURLSession *)urlSession {
+    
+    if (!_urlSession) {
+        _urlSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                    delegate:self
+                                               delegateQueue:[[NSOperationQueue alloc] init]];
+    }
+    return _urlSession;
 }
 
 - (instancetype)init {
@@ -60,21 +72,21 @@
 
 #pragma mark - Download Actions
 
-- (void)downloadFile:(NSURL *)URL
-               state:(void(^)(SRDownloadState state))state
-            progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-          completion:(void(^)(BOOL isSuccess, NSString *filePath, NSError *error))completion
+- (void)downloadFileOfURL:(NSURL *)URL
+                    state:(void(^)(SRDownloadState state))state
+                 progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+               completion:(void(^)(BOOL success, NSString *filePath, NSError *error))completion
 {
     if (!URL) {
         return;
     }
     
-    if ([self isDownloadFileCompleted:URL]) {
+    if ([self isDownloadCompletedOfURL:URL]) {
         if (state) {
             state(SRDownloadStateCompleted);
         }
         if (completion) {
-            completion(YES, [self fileFullPath:URL], nil);
+            completion(YES, [self fileFullPathOfURL:URL], nil);
         }
         return;
     }
@@ -82,24 +94,21 @@
     SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (downloadModel) {
         if (downloadModel.dataTask.state == NSURLSessionTaskStateRunning) {
-            [self suspendDownloadURL:URL];
+            [self suspendDownloadOfURL:URL];
         } else {
-            [self resumeDownloadURL:URL];
+            [self resumeDownloadOfURL:URL];
         }
         return;
     }
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                          delegate:self
-                                                     delegateQueue:[[NSOperationQueue alloc] init]];
     NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:URL];
-    [requestM setValue:[NSString stringWithFormat:@"bytes=%lld-", (long long)[self hasDownloadedLength:URL]] forHTTPHeaderField:@"Range"];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:requestM];
+    [requestM setValue:[NSString stringWithFormat:@"bytes=%lld-", (long long int)[self hasDownloadedLength:URL]] forHTTPHeaderField:@"Range"];
+    NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithRequest:requestM];
     dataTask.taskDescription = SRFileName(URL);
     
     downloadModel = [[SRDownloadModel alloc] init];
     downloadModel.dataTask = dataTask;
-    downloadModel.outputStream = [NSOutputStream outputStreamToFileAtPath:[self fileFullPath:URL] append:YES];
+    downloadModel.outputStream = [NSOutputStream outputStreamToFileAtPath:[self fileFullPathOfURL:URL] append:YES];
     downloadModel.URL = URL;
     downloadModel.state = state;
     downloadModel.progress = progress;
@@ -114,7 +123,7 @@
     });
 }
 
-- (void)suspendDownloadURL:(NSURL *)URL {
+- (void)suspendDownloadOfURL:(NSURL *)URL {
     
     SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (!downloadModel) {
@@ -139,7 +148,7 @@
     NSArray *downloadModels = self.downloadModels.allValues;
     for (SRDownloadModel *downloadModel in downloadModels) {
         if (downloadModel.dataTask.state != NSURLSessionTaskStateRunning) {
-            return;
+            continue;
         }
         [downloadModel.dataTask suspend];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -150,7 +159,7 @@
     }
 }
 
-- (void)resumeDownloadURL:(NSURL *)URL {
+- (void)resumeDownloadOfURL:(NSURL *)URL {
     
     SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (!downloadModel) {
@@ -175,7 +184,7 @@
     NSArray *downloadModels = self.downloadModels.allValues;
     for (SRDownloadModel *downloadModel in downloadModels) {
         if (downloadModel.dataTask.state != NSURLSessionTaskStateSuspended) {
-            return;
+            continue;
         }
         [downloadModel.dataTask resume];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -186,7 +195,7 @@
     }
 }
 
-- (void)cancelDownloadURL:(NSURL *)URL {
+- (void)cancelDownloadOfURL:(NSURL *)URL {
     
     SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (!downloadModel) {
@@ -199,19 +208,20 @@
 
 - (void)cancelAllDownloads {
     
-    if (self.downloadModels.count > 0) {
-        NSArray *downloadModels = self.downloadModels.allValues;
-        for (SRDownloadModel *downloadModel in downloadModels) {
-            [downloadModel closeOutputStream];
-            [downloadModel.dataTask cancel];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (downloadModel.state) {
-                    downloadModel.state(SRDownloadStateCanceled);
-                }
-            });
-        }
-        [self.downloadModels removeAllObjects];
+    if (self.downloadModels.count == 0) {
+        return;
     }
+    NSArray *downloadModels = self.downloadModels.allValues;
+    for (SRDownloadModel *downloadModel in downloadModels) {
+        [downloadModel closeOutputStream];
+        [downloadModel.dataTask cancel];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (downloadModel.state) {
+                downloadModel.state(SRDownloadStateCanceled);
+            }
+        });
+    }
+    [self.downloadModels removeAllObjects];
 }
 
 #pragma mark - NSURLSessionDataDelegate
@@ -222,6 +232,7 @@
     if (!downloadModel) {
         return;
     }
+    
     [downloadModel openOutputStream];
     
     NSInteger thisTotalLength = response.expectedContentLength; // [response.allHeaderFields[@"Content-Length"] integerValue]
@@ -240,6 +251,7 @@
     if (!downloadModel) {
         return;
     }
+    
     [downloadModel.outputStream write:data.bytes maxLength:data.length];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -258,16 +270,17 @@
     if (!downloadModel) {
         return;
     }
+    
     [downloadModel closeOutputStream];
     [self.downloadModels removeObjectForKey:task.taskDescription];
-
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([self isDownloadFileCompleted:downloadModel.URL]) {
+        if ([self isDownloadCompletedOfURL:downloadModel.URL]) {
             if (downloadModel.state) {
                 downloadModel.state(SRDownloadStateCompleted);
             }
             if (downloadModel.completion) {
-                downloadModel.completion(YES, [self fileFullPath:downloadModel.URL], error);
+                downloadModel.completion(YES, [self fileFullPathOfURL:downloadModel.URL], error);
             }
             return;
         }
@@ -296,30 +309,34 @@
 
 - (NSInteger)hasDownloadedLength:(NSURL *)URL {
     
-    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[self fileFullPath:URL] error:nil];
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[self fileFullPathOfURL:URL] error:nil];
+    if (!fileAttributes) {
+        return 0;
+    }
     return [fileAttributes[NSFileSize] integerValue];
 }
 
 #pragma mark - Public Methods
 
-- (BOOL)isDownloadFileCompleted:(NSURL *)URL {
+- (BOOL)isDownloadCompletedOfURL:(NSURL *)URL {
     
-    if ([self totalLength:URL] != 0) {
-        if ([self totalLength:URL] == [self hasDownloadedLength:URL]) {
+    NSInteger totalLength = [self totalLength:URL];
+    if (totalLength != 0) {
+        if (totalLength == [self hasDownloadedLength:URL]) {
             return YES;
         }
     }
     return NO;
 }
 
-- (NSString *)fileFullPath:(NSURL *)URL {
+- (NSString *)fileFullPathOfURL:(NSURL *)URL {
     
     return SRFilePath(URL);
 }
 
-- (CGFloat)fileDownloadedProgress:(NSURL *)URL {
+- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL {
     
-    if ([self isDownloadFileCompleted:URL]) {
+    if ([self isDownloadCompletedOfURL:URL]) {
         return 1.0;
     }
     if ([self totalLength:URL] == 0) {
@@ -328,16 +345,16 @@
     return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
 }
 
-- (void)deleteFile:(NSURL *)URL {
+- (void)deleteFileOfURL:(NSURL *)URL {
     
-    [self cancelDownloadURL:URL];
+    [self cancelDownloadOfURL:URL];
     
     NSMutableDictionary *filesTotalLenth = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
     [filesTotalLenth removeObjectForKey:SRFileName(URL)];
     [filesTotalLenth writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *filePath = [self fileFullPath:URL];
+    NSString *filePath = [self fileFullPathOfURL:URL];
     if (![fileManager fileExistsAtPath:filePath]) {
         return;
     }

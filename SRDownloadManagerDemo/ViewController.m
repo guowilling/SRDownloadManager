@@ -41,11 +41,11 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
     [super viewDidLoad];
     
     // Uncomment the following line to customize the directory where the downloaded files are saved.
-//    [SRDownloadManager sharedManager].downloadDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
-//                                                            stringByAppendingPathComponent:@"CustomDownloadDirectory"];
+    //    [SRDownloadManager sharedManager].downloadDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
+    //                                                            stringByAppendingPathComponent:@"CustomDownloadDirectory"];
     
-    CGFloat progress1 = [[SRDownloadManager sharedManager] fileDownloadedProgress:kDownloadURL1];
-    CGFloat progress2 = [[SRDownloadManager sharedManager] fileDownloadedProgress:kDownloadURL2];
+    CGFloat progress1 = [[SRDownloadManager sharedManager] fileHasDownloadedProgressOfURL:kDownloadURL1];
+    CGFloat progress2 = [[SRDownloadManager sharedManager] fileHasDownloadedProgressOfURL:kDownloadURL2];
     NSLog(@"progress of downloadURL1: %.2f", progress1);
     NSLog(@"progress of downloadURL2: %.2f", progress2);
     
@@ -62,11 +62,11 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
     
     [super viewDidAppear:animated];
     
-    if ([[SRDownloadManager sharedManager] isDownloadFileCompleted:kDownloadURL1]) {
-        NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPath:kDownloadURL1]);
+    if ([[SRDownloadManager sharedManager] isDownloadCompletedOfURL:kDownloadURL1]) {
+        NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPathOfURL:kDownloadURL1]);
     }
-    if ([[SRDownloadManager sharedManager] isDownloadFileCompleted:kDownloadURL2]) {
-        NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPath:kDownloadURL2]);
+    if ([[SRDownloadManager sharedManager] isDownloadCompletedOfURL:kDownloadURL2]) {
+        NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPathOfURL:kDownloadURL2]);
     }
 }
 
@@ -127,33 +127,33 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
 - (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
     
     if ([button.currentTitle isEqualToString:@"Start"]) {
-        [[SRDownloadManager sharedManager] downloadFile:URL
-                                                  state:^(SRDownloadState state) {
-                                                      [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
-                                                  } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
-                                                      currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
-                                                      totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
-                                                      progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
-                                                      progressView.progress = progress;
-                                                  } completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
-                                                      if (isSuccess) {
-                                                          NSLog(@"FilePath: %@", filePath);
-                                                      } else {
-                                                          NSLog(@"Error: %@", error);
-                                                      }
-                                                  }];
+        [[SRDownloadManager sharedManager] downloadFileOfURL:URL
+                                                       state:^(SRDownloadState state) {
+                                                           [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
+                                                       } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
+                                                           currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
+                                                           totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
+                                                           progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
+                                                           progressView.progress = progress;
+                                                       } completion:^(BOOL success, NSString *filePath, NSError *error) {
+                                                           if (success) {
+                                                               NSLog(@"FilePath: %@", filePath);
+                                                           } else {
+                                                               NSLog(@"Error: %@", error);
+                                                           }
+                                                       }];
     } else if ([button.currentTitle isEqualToString:@"Pause"]) {
-        [[SRDownloadManager sharedManager] suspendDownloadURL:URL];
+        [[SRDownloadManager sharedManager] suspendDownloadOfURL:URL];
     } else if ([button.currentTitle isEqualToString:@"Resume"]) {
-        [[SRDownloadManager sharedManager] resumeDownloadURL:URL];
+        [[SRDownloadManager sharedManager] resumeDownloadOfURL:URL];
     } else if ([button.currentTitle isEqualToString:@"Finish"]) {
-        NSLog(@"File has been downloaded! File path: %@", [[SRDownloadManager sharedManager] fileFullPath:URL]);
+        NSLog(@"File has been downloaded! File path: %@", [[SRDownloadManager sharedManager] fileFullPathOfURL:URL]);
     }
 }
 
 - (IBAction)deleteFile1:(UIButton *)sender {
     
-    [[SRDownloadManager sharedManager] deleteFile:kDownloadURL1];
+    [[SRDownloadManager sharedManager] deleteFileOfURL:kDownloadURL1];
     
     self.progressView1.progress = 0.0;
     self.currentSizeLabel1.text = @"0";
@@ -164,7 +164,7 @@ NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/144214280133113
 
 - (IBAction)deleteFile2:(UIButton *)sender {
     
-    [[SRDownloadManager sharedManager] deleteFile:kDownloadURL2];
+    [[SRDownloadManager sharedManager] deleteFileOfURL:kDownloadURL2];
     
     self.progressView2.progress = 0.0;
     self.currentSizeLabel2.text = @"0";

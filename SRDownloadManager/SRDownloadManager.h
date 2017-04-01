@@ -28,27 +28,27 @@
 
 + (instancetype)sharedManager;
 
-- (void)downloadFile:(NSURL *)URL
-               state:(void (^)(SRDownloadState state))state
-            progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-          completion:(void (^)(BOOL isSuccess, NSString *filePath, NSError *error))completion;
+- (void)downloadFileOfURL:(NSURL *)URL
+                    state:(void (^)(SRDownloadState state))state
+                 progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+               completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
 
-- (BOOL)isDownloadFileCompleted:(NSURL *)URL;
+- (BOOL)isDownloadCompletedOfURL:(NSURL *)URL;
 
-- (NSString *)fileFullPath:(NSURL *)URL;
+- (NSString *)fileFullPathOfURL:(NSURL *)URL;
 
-- (CGFloat)fileDownloadedProgress:(NSURL *)URL;
+- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
 
-- (void)deleteFile:(NSURL *)URL;
+- (void)deleteFileOfURL:(NSURL *)URL;
 - (void)deleteAllFiles;
 
-- (void)suspendDownloadURL:(NSURL *)URL;
+- (void)suspendDownloadOfURL:(NSURL *)URL;
 - (void)suspendAllDownloads;
 
-- (void)resumeDownloadURL:(NSURL *)URL;
+- (void)resumeDownloadOfURL:(NSURL *)URL;
 - (void)resumeAllDownloads;
 
-- (void)cancelDownloadURL:(NSURL *)URL;
+- (void)cancelDownloadOfURL:(NSURL *)URL;
 - (void)cancelAllDownloads;
 
 @end
