@@ -19,12 +19,27 @@
 #import <Foundation/Foundation.h>
 #import "SRDownloadModel.h"
 
+typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
+    SRWaitingQueueFIFO,
+    SRWaitingQueueFILO
+};
+
 @interface SRDownloadManager : NSObject
 
 /**
  The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
  */
 @property (nonatomic, copy) NSString *downloadedFilesDirectory;
+
+/**
+ Maximum concurrent downloads, default is -1 which means no limit.
+ */
+@property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
+
+/**
+ Queue for waiting downloads, default is FIFO.
+ */
+@property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 
 + (instancetype)sharedManager;
 

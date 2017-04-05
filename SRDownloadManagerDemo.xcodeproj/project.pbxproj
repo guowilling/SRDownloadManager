@@ -110,6 +110,7 @@
 			children = (
 				68E1AE0E1E24808400404611 /* ViewController.h */,
 				68E1AE0F1E24808400404611 /* ViewController.m */,
+				68E1AE111E24808400404611 /* Main.storyboard */,
 				68E1AE081E24808400404611 /* Supporting Files */,
 			);
 			path = SRDownloadManagerDemo;
@@ -121,7 +122,6 @@
 				68E1AE091E24808400404611 /* main.m */,
 				68E1AE0B1E24808400404611 /* AppDelegate.h */,
 				68E1AE0C1E24808400404611 /* AppDelegate.m */,
-				68E1AE111E24808400404611 /* Main.storyboard */,
 				68E1AE161E24808400404611 /* LaunchScreen.storyboard */,
 				68E1AE141E24808400404611 /* Assets.xcassets */,
 				68E1AE191E24808400404611 /* Info.plist */,

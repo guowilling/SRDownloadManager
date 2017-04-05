@@ -19,7 +19,9 @@
 - (void)closeOutputStream {
     
     if (_outputStream) {
-        [_outputStream close];
+        if (_outputStream.streamStatus > NSStreamStatusNotOpen && _outputStream.streamStatus < NSStreamStatusClosed) {
+            [_outputStream close];
+        }
         _outputStream = nil;
     }
 }

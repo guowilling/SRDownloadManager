@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, SRDownloadState) {
-    SRDownloadStateRunning = 0,
+    SRDownloadStateWaiting,
+    SRDownloadStateRunning,
     SRDownloadStateSuspended,
     SRDownloadStateCanceled,
     SRDownloadStateCompleted,
