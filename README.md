@@ -7,6 +7,7 @@
 * Support breakpoint download even exit the App.
 * Support to delete the specified file by URL and clear all files that have been downloaded.
 * Support customize the directory where the downloaded files are saved.
+* Support set maximum concurrent downloads and waiting downloads queue mode.
 
 ***
 
@@ -15,6 +16,7 @@
 * 支持断点下载, 即使退出重启 App.
 * 支持通过 URL 删除指定文件和清除所有已下载的文件.
 * 支持自定义保存下载文件的目录.
+* 支持设置最大的并发下载数和等待下载队列的模式.
 
 ## Show
 
@@ -39,35 +41,49 @@
 ## APIs
 
 ````objc
++ (instancetype)sharedManager;
+
+- (void)downloadFileOfURL:(NSURL *)URL
+                    state:(void (^)(SRDownloadState state))state
+                 progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+               completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
+
+- (BOOL)isDownloadCompletedOfURL:(NSURL *)URL;
+
+- (NSString *)fileFullPathOfURL:(NSURL *)URL;
+
+- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
+
+- (void)deleteFileOfURL:(NSURL *)URL;
+- (void)deleteAllFiles;
+
+- (void)suspendDownloadOfURL:(NSURL *)URL;
+- (void)suspendAllDownloads;
+
+- (void)resumeDownloadOfURL:(NSURL *)URL;
+- (void)resumeAllDownloads;
+
+- (void)cancelDownloadOfURL:(NSURL *)URL;
+- (void)cancelAllDownloads;
+````
+
+## Custom
+
+````objc
 /**
- The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
+ Directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
  */
 @property (nonatomic, copy) NSString *downloadedFilesDirectory;
 
-+ (instancetype)sharedManager;
+/**
+ Count of max concurrent downloads, default is -1 which means no limit.
+ */
+@property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
 
-- (void)downloadFile:(NSURL *)URL
-               state:(void (^)(SRDownloadState state))state
-            progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-          completion:(void (^)(BOOL isSuccess, NSString *filePath, NSError *error))completion;
-
-- (BOOL)isDownloadFileCompleted:(NSURL *)URL;
-
-- (NSString *)fileFullPath:(NSURL *)URL;
-
-- (CGFloat)fileDownloadedProgress:(NSURL *)URL;
-
-- (void)deleteFile:(NSURL *)URL;
-- (void)deleteAllFiles;
-
-- (void)suspendDownloadURL:(NSURL *)URL;
-- (void)suspendAllDownloads;
-
-- (void)resumeDownloadURL:(NSURL *)URL;
-- (void)resumeAllDownloads;
-
-- (void)cancelDownloadURL:(NSURL *)URL;
-- (void)cancelAllDownloads;
+/**
+ Mode of waiting downloads queue, default is FIFO.
+ */
+@property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 ````
 
 **If you have any question, submit an issue or contact me.**   
