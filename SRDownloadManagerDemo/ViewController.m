@@ -87,24 +87,6 @@ NSString * const downloadURLString3 = @"http://baobab.wdjcdn.com/145588861927325
     [self.downloadButton3 setTitle:@"Start" forState:UIControlStateNormal];
 }
 
-- (NSString *)titleWithDownloadState:(SRDownloadState)state {
-    
-    switch (state) {
-        case SRDownloadStateWaiting:
-            return @"Waiting";
-        case SRDownloadStateRunning:
-            return @"Pause";
-        case SRDownloadStateSuspended:
-            return @"Resume";
-        case SRDownloadStateCanceled:
-            return @"Start";
-        case SRDownloadStateCompleted:
-            return @"Finish";
-        case SRDownloadStateFailed:
-            return @"Start";
-    }
-}
-
 #pragma mark - Actions
 
 - (IBAction)deleteAllFiles:(UIBarButtonItem *)sender {
@@ -188,6 +170,24 @@ NSString * const downloadURLString3 = @"http://baobab.wdjcdn.com/145588861927325
         [[SRDownloadManager sharedManager] resumeDownloadOfURL:URL];
     } else if ([button.currentTitle isEqualToString:@"Finish"]) {
         NSLog(@"File has been downloaded! File path: %@", [[SRDownloadManager sharedManager] fileFullPathOfURL:URL]);
+    }
+}
+
+- (NSString *)titleWithDownloadState:(SRDownloadState)state {
+    
+    switch (state) {
+        case SRDownloadStateWaiting:
+            return @"Waiting";
+        case SRDownloadStateRunning:
+            return @"Pause";
+        case SRDownloadStateSuspended:
+            return @"Resume";
+        case SRDownloadStateCanceled:
+            return @"Start";
+        case SRDownloadStateCompleted:
+            return @"Finish";
+        case SRDownloadStateFailed:
+            return @"Start";
     }
 }
 
