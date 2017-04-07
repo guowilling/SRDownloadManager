@@ -24,6 +24,10 @@
 
 ## Installation
 
+### CocoaPods
+> Add **pod 'SRDownloadManager'** to the Podfile, then run **pod install** in the terminal.
+
+### Manual
 > Drag the **SRDownloadManager** folder to the project.
 
 ## Usage
