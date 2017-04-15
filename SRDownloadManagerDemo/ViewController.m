@@ -62,7 +62,7 @@ NSString * const downloadURLString3 = @"http://baobab.wdjcdn.com/145588861927325
 //                                                           stringByAppendingPathComponent:@"CustomDownloadDirectory"];
     
     // Uncomment the following line to customize the Maximum concurrent downloads
-//    [SRDownloadManager sharedManager].maxConcurrentDownloadCount = 1;
+    [SRDownloadManager sharedManager].maxConcurrentDownloadCount = 1;
     
     // Uncomment the following line to customize the queue for waiting downloads.
 //    [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueFILO;

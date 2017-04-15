@@ -13,28 +13,9 @@
 		68E1AE131E24808400404611 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE111E24808400404611 /* Main.storyboard */; };
 		68E1AE151E24808400404611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE141E24808400404611 /* Assets.xcassets */; };
 		68E1AE181E24808400404611 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE161E24808400404611 /* LaunchScreen.storyboard */; };
-		68E1AE231E24808500404611 /* SRDownloadManagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE221E24808500404611 /* SRDownloadManagerDemoTests.m */; };
-		68E1AE2E1E24808500404611 /* SRDownloadManagerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE2D1E24808500404611 /* SRDownloadManagerDemoUITests.m */; };
 		68E1AE3E1E2480A800404611 /* SRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE3D1E2480A800404611 /* SRDownloadManager.m */; };
 		68E1AE411E2480B500404611 /* SRDownloadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE401E2480B500404611 /* SRDownloadModel.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		68E1AE1F1E24808500404611 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 68E1ADFD1E24808400404611 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 68E1AE041E24808400404611;
-			remoteInfo = SRDownloadManagerDemo;
-		};
-		68E1AE2A1E24808500404611 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 68E1ADFD1E24808400404611 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 68E1AE041E24808400404611;
-			remoteInfo = SRDownloadManagerDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRDownloadManagerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,12 +28,6 @@
 		68E1AE141E24808400404611 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68E1AE171E24808400404611 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68E1AE191E24808400404611 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		68E1AE1E1E24808500404611 /* SRDownloadManagerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SRDownloadManagerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		68E1AE221E24808500404611 /* SRDownloadManagerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManagerDemoTests.m; sourceTree = "<group>"; };
-		68E1AE241E24808500404611 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		68E1AE291E24808500404611 /* SRDownloadManagerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SRDownloadManagerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		68E1AE2D1E24808500404611 /* SRDownloadManagerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManagerDemoUITests.m; sourceTree = "<group>"; };
-		68E1AE2F1E24808500404611 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68E1AE3C1E2480A800404611 /* SRDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDownloadManager.h; sourceTree = "<group>"; };
 		68E1AE3D1E2480A800404611 /* SRDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManager.m; sourceTree = "<group>"; };
 		68E1AE3F1E2480B500404611 /* SRDownloadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDownloadModel.h; sourceTree = "<group>"; };
@@ -67,30 +42,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		68E1AE1B1E24808500404611 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68E1AE261E24808500404611 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		68E1ADFC1E24808400404611 = {
 			isa = PBXGroup;
 			children = (
-				68E1AE3B1E24809B00404611 /* SRDownloadManager */,
+				68E1AE3B1E24809B00404611 /* SRFilesDownload */,
 				68E1AE071E24808400404611 /* SRDownloadManagerDemo */,
-				68E1AE211E24808500404611 /* SRDownloadManagerDemoTests */,
-				68E1AE2C1E24808500404611 /* SRDownloadManagerDemoUITests */,
 				68E1AE061E24808400404611 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,8 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */,
-				68E1AE1E1E24808500404611 /* SRDownloadManagerDemoTests.xctest */,
-				68E1AE291E24808500404611 /* SRDownloadManagerDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,25 +86,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		68E1AE211E24808500404611 /* SRDownloadManagerDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				68E1AE221E24808500404611 /* SRDownloadManagerDemoTests.m */,
-				68E1AE241E24808500404611 /* Info.plist */,
-			);
-			path = SRDownloadManagerDemoTests;
-			sourceTree = "<group>";
-		};
-		68E1AE2C1E24808500404611 /* SRDownloadManagerDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				68E1AE2D1E24808500404611 /* SRDownloadManagerDemoUITests.m */,
-				68E1AE2F1E24808500404611 /* Info.plist */,
-			);
-			path = SRDownloadManagerDemoUITests;
-			sourceTree = "<group>";
-		};
-		68E1AE3B1E24809B00404611 /* SRDownloadManager */ = {
+		68E1AE3B1E24809B00404611 /* SRFilesDownload */ = {
 			isa = PBXGroup;
 			children = (
 				68E1AE3C1E2480A800404611 /* SRDownloadManager.h */,
@@ -155,6 +94,7 @@
 				68E1AE3F1E2480B500404611 /* SRDownloadModel.h */,
 				68E1AE401E2480B500404611 /* SRDownloadModel.m */,
 			);
+			name = SRFilesDownload;
 			path = SRDownloadManager;
 			sourceTree = "<group>";
 		};
@@ -178,42 +118,6 @@
 			productReference = 68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		68E1AE1D1E24808500404611 /* SRDownloadManagerDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 68E1AE351E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoTests" */;
-			buildPhases = (
-				68E1AE1A1E24808500404611 /* Sources */,
-				68E1AE1B1E24808500404611 /* Frameworks */,
-				68E1AE1C1E24808500404611 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				68E1AE201E24808500404611 /* PBXTargetDependency */,
-			);
-			name = SRDownloadManagerDemoTests;
-			productName = SRDownloadManagerDemoTests;
-			productReference = 68E1AE1E1E24808500404611 /* SRDownloadManagerDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		68E1AE281E24808500404611 /* SRDownloadManagerDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 68E1AE381E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoUITests" */;
-			buildPhases = (
-				68E1AE251E24808500404611 /* Sources */,
-				68E1AE261E24808500404611 /* Frameworks */,
-				68E1AE271E24808500404611 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				68E1AE2B1E24808500404611 /* PBXTargetDependency */,
-			);
-			name = SRDownloadManagerDemoUITests;
-			productName = SRDownloadManagerDemoUITests;
-			productReference = 68E1AE291E24808500404611 /* SRDownloadManagerDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -227,16 +131,6 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = Y4FK8UXDXW;
 						ProvisioningStyle = Manual;
-					};
-					68E1AE1D1E24808500404611 = {
-						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 68E1AE041E24808400404611;
-					};
-					68E1AE281E24808500404611 = {
-						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 68E1AE041E24808400404611;
 					};
 				};
 			};
@@ -254,8 +148,6 @@
 			projectRoot = "";
 			targets = (
 				68E1AE041E24808400404611 /* SRDownloadManagerDemo */,
-				68E1AE1D1E24808500404611 /* SRDownloadManagerDemoTests */,
-				68E1AE281E24808500404611 /* SRDownloadManagerDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -268,20 +160,6 @@
 				68E1AE181E24808400404611 /* LaunchScreen.storyboard in Resources */,
 				68E1AE151E24808400404611 /* Assets.xcassets in Resources */,
 				68E1AE131E24808400404611 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68E1AE1C1E24808500404611 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68E1AE271E24808500404611 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,36 +178,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		68E1AE1A1E24808500404611 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				68E1AE231E24808500404611 /* SRDownloadManagerDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68E1AE251E24808500404611 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				68E1AE2E1E24808500404611 /* SRDownloadManagerDemoUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		68E1AE201E24808500404611 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 68E1AE041E24808400404611 /* SRDownloadManagerDemo */;
-			targetProxy = 68E1AE1F1E24808500404611 /* PBXContainerItemProxy */;
-		};
-		68E1AE2B1E24808500404611 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 68E1AE041E24808400404611 /* SRDownloadManagerDemo */;
-			targetProxy = 68E1AE2A1E24808500404611 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		68E1AE111E24808400404611 /* Main.storyboard */ = {
@@ -471,52 +320,6 @@
 			};
 			name = Release;
 		};
-		68E1AE361E24808500404611 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = SRDownloadManagerDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SRDownloadManagerDemo.app/SRDownloadManagerDemo";
-			};
-			name = Debug;
-		};
-		68E1AE371E24808500404611 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = SRDownloadManagerDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SRDownloadManagerDemo.app/SRDownloadManagerDemo";
-			};
-			name = Release;
-		};
-		68E1AE391E24808500404611 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = SRDownloadManagerDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = SRDownloadManagerDemo;
-			};
-			name = Debug;
-		};
-		68E1AE3A1E24808500404611 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = SRDownloadManagerDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = SRDownloadManagerDemo;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -534,24 +337,6 @@
 			buildConfigurations = (
 				68E1AE331E24808500404611 /* Debug */,
 				68E1AE341E24808500404611 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		68E1AE351E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				68E1AE361E24808500404611 /* Debug */,
-				68E1AE371E24808500404611 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		68E1AE381E24808500404611 /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				68E1AE391E24808500404611 /* Debug */,
-				68E1AE3A1E24808500404611 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

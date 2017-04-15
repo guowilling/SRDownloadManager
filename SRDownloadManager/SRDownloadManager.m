@@ -118,6 +118,9 @@
         return;
     }
     
+    // bytes=x-y  x byte ~ y byte
+    // bytes=x-   x byte ~ end
+    // bytes=-y   head ~ y byte
     NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:URL];
     [requestM setValue:[NSString stringWithFormat:@"bytes=%lld-", (long long int)[self hasDownloadedLength:URL]] forHTTPHeaderField:@"Range"];
     NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithRequest:requestM];

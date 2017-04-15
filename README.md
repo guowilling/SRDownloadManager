@@ -91,5 +91,4 @@
 ````
 
 **If you have any question, submit an issue or contact me.**   
-**If this repo helps you, please give it a star.**  
 **Have Fun.**
