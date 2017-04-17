@@ -65,7 +65,7 @@ NSString * const downloadURLString3 = @"http://baobab.wdjcdn.com/145588861927325
     [SRDownloadManager sharedManager].maxConcurrentDownloadCount = 1;
     
     // Uncomment the following line to customize the queue for waiting downloads.
-//    [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueFILO;
+    [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueFILO;
     
     CGFloat progress1 = [[SRDownloadManager sharedManager] fileHasDownloadedProgressOfURL:kDownloadURL1];
     CGFloat progress2 = [[SRDownloadManager sharedManager] fileHasDownloadedProgressOfURL:kDownloadURL2];

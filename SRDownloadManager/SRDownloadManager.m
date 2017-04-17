@@ -173,7 +173,7 @@
     
     [downloadModel openOutputStream];
     
-    NSInteger thisTotalLength = response.expectedContentLength; // [response.allHeaderFields[@"Content-Length"] integerValue]
+    NSInteger thisTotalLength = response.expectedContentLength; // Equal to [response.allHeaderFields[@"Content-Length"] integerValue]
     NSInteger totalLength = thisTotalLength + [self hasDownloadedLength:downloadModel.URL];
     downloadModel.totalLength = totalLength;
     NSMutableDictionary *filesTotalLength = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath] ?: [NSMutableDictionary dictionary];
