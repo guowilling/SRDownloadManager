@@ -48,7 +48,7 @@
 		68E1ADFC1E24808400404611 = {
 			isa = PBXGroup;
 			children = (
-				68E1AE3B1E24809B00404611 /* SRFilesDownload */,
+				68E1AE3B1E24809B00404611 /* SRDownloadManager */,
 				68E1AE071E24808400404611 /* SRDownloadManagerDemo */,
 				68E1AE061E24808400404611 /* Products */,
 			);
@@ -86,7 +86,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		68E1AE3B1E24809B00404611 /* SRFilesDownload */ = {
+		68E1AE3B1E24809B00404611 /* SRDownloadManager */ = {
 			isa = PBXGroup;
 			children = (
 				68E1AE3C1E2480A800404611 /* SRDownloadManager.h */,
@@ -94,7 +94,6 @@
 				68E1AE3F1E2480B500404611 /* SRDownloadModel.h */,
 				68E1AE401E2480B500404611 /* SRDownloadModel.m */,
 			);
-			name = SRFilesDownload;
 			path = SRDownloadManager;
 			sourceTree = "<group>";
 		};
