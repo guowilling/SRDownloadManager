@@ -10,21 +10,21 @@
 #define SRDownloadDirectory self.downloadedFilesDirectory ?: [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
                                                                stringByAppendingPathComponent:NSStringFromClass([self class])]
 
-#define SRFileName(URL) [URL lastPathComponent]
+#define SRFileName(URL) [URL lastPathComponent] // Use URL's last path component as the file's name.
 
 #define SRFilePath(URL) [SRDownloadDirectory stringByAppendingPathComponent:SRFileName(URL)]
 
-#define SRFilesTotalLengthPlistPath [SRDownloadDirectory stringByAppendingPathComponent:@"FilesTotalLength.plist"]
+#define SRFilesTotalLengthPlistPath [SRDownloadDirectory stringByAppendingPathComponent:@"SRFilesTotalLength.plist"]
 
 @interface SRDownloadManager() <NSURLSessionDelegate, NSURLSessionDataDelegate>
 
 @property (nonatomic, strong) NSURLSession *urlSession;
 
-@property (nonatomic, strong) NSMutableDictionary *downloadModelsDic;
+@property (nonatomic, strong) NSMutableDictionary *downloadModelsDic; // Mutable dictionary which includes downloading and waiting models.
 
-@property (nonatomic, strong) NSMutableArray *downloadingModels;
+@property (nonatomic, strong) NSMutableArray *downloadingModels; // Models which are downloading.
 
-@property (nonatomic, strong) NSMutableArray *waitingModels;
+@property (nonatomic, strong) NSMutableArray *waitingModels; // Models which are waiting to download.
 
 @end
 
@@ -103,7 +103,7 @@
         return;
     }
     
-    if ([self isDownloadCompletedOfURL:URL]) {
+    if ([self isDownloadCompletedOfURL:URL]) { // If this URL has been downloaded.
         if (state) {
             state(SRDownloadStateCompleted);
         }
@@ -114,13 +114,13 @@
     }
     
     SRDownloadModel *downloadModel = self.downloadModelsDic[SRFileName(URL)];
-    if (downloadModel) {
+    if (downloadModel) { // If the download model of this URL has been added in downloadModelsDic.
         return;
     }
     
-    // bytes=x-y  x byte ~ y byte
-    // bytes=x-   x byte ~ end
-    // bytes=-y   head ~ y byte
+    // @"bytes=x-y" ==  x byte ~ y byte
+    // @"bytes=x-"  ==  x byte ~ end
+    // @"bytes=-y"  ==  head ~ y byte
     NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:URL];
     [requestM setValue:[NSString stringWithFormat:@"bytes=%lld-", (long long int)[self hasDownloadedLength:URL]] forHTTPHeaderField:@"Range"];
     NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithRequest:requestM];
@@ -173,7 +173,7 @@
     
     [downloadModel openOutputStream];
     
-    NSInteger thisTotalLength = response.expectedContentLength; // Equal to [response.allHeaderFields[@"Content-Length"] integerValue]
+    NSInteger thisTotalLength = response.expectedContentLength; // Equals to [response.allHeaderFields[@"Content-Length"] integerValue]
     NSInteger totalLength = thisTotalLength + [self hasDownloadedLength:downloadModel.URL];
     downloadModel.totalLength = totalLength;
     NSMutableDictionary *filesTotalLength = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath] ?: [NSMutableDictionary dictionary];
@@ -204,7 +204,7 @@
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
     
-    if (error && error.code == -999) { // cancelled
+    if (error && error.code == -999) { // Cancelled!
         return;
     }
     
@@ -214,6 +214,7 @@
     }
     
     [downloadModel closeOutputStream];
+    
     [self.downloadModelsDic removeObjectForKey:task.taskDescription];
     [self.downloadingModels removeObject:downloadModel];
     

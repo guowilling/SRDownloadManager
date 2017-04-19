@@ -9,9 +9,9 @@
 #import "ViewController.h"
 #import "SRDownloadManager.h"
 
-NSString * const downloadURLString1 = @"http://baobab.wdjcdn.com/14564977406580.mp4";
-NSString * const downloadURLString2 = @"http://baobab.wdjcdn.com/1442142801331138639111.mp4";
-NSString * const downloadURLString3 = @"http://baobab.wdjcdn.com/1455888619273255747085_x264.mp4";
+NSString * const downloadURLString1 = @"http://yxfile.idealsee.com/9f6f64aca98f90b91d260555d3b41b97_mp4.mp4";
+NSString * const downloadURLString2 = @"http://yxfile.idealsee.com/31f9a479a9c2189bb3ee6e5c581d2026_mp4.mp4";
+NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd384cb37f0377b52840d_mp4.mp4";
 
 #define kDownloadURL1 [NSURL URLWithString:downloadURLString1]
 #define kDownloadURL2 [NSURL URLWithString:downloadURLString2]

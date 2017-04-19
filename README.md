@@ -9,15 +9,6 @@
 * Support customize the directory where the downloaded files are saved.
 * Support set maximum concurrent downloads and waiting downloads queue mode.
 
-***
-
-* 提供下载状态回调, 下载进度回调, 下载完成回调.
-* 支持多任务同时下载.
-* 支持断点下载, 即使退出重启 App.
-* 支持通过 URL 删除指定文件和清除所有已下载的文件.
-* 支持自定义保存下载文件的目录.
-* 支持设置最大的并发下载数和等待下载队列的模式.
-
 ## Show
 
 ![image](./show1.png) ![image](./show2.png)
@@ -81,7 +72,7 @@
 
 /**
  Count of max concurrent downloads, default is -1 which means no limit.
- */
+ */  
 @property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
 
 /**
@@ -90,8 +81,12 @@
 @property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 ````
 
-> **If you have any question, submit an issue or contact me.**   
-> **QQ: 1990991510**   
-> **Email: guowilling@qq.com**   
-> **If this repo helps you, please give it a star.**   
-> **Have Fun.**
+## More
+
+**If you have any questions, submit an issue or contact me.** 
+ 
+> [guowilling](https://github.com/guowilling)  
+> QQ: 1990991510  
+> Email: guowilling90@gmail.com
+
+**Have Fun.**
