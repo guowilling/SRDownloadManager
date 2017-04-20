@@ -92,7 +92,7 @@
     return _waitingModels;
 }
 
-#pragma mark - Download Actions
+#pragma mark - Download
 
 - (void)downloadFileOfURL:(NSURL *)URL
                     state:(void(^)(SRDownloadState state))state
@@ -300,6 +300,8 @@
 
 #pragma mark - Public Methods
 
+#pragma mark - Files
+
 - (BOOL)isDownloadCompletedOfURL:(NSURL *)URL {
     
     NSInteger totalLength = [self totalLength:URL];
@@ -376,7 +378,7 @@
     }
 }
 
-#pragma mark - Download Actions
+#pragma mark - Downloads
 
 - (void)suspendDownloadOfURL:(NSURL *)URL {
     

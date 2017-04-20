@@ -62,7 +62,7 @@
 - (void)cancelAllDownloads;
 ````
 
-## Custom
+## Custom Settings
 
 ````objc
 /**
