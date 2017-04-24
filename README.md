@@ -6,8 +6,8 @@ File download manager based on NSURLSession, support breakpoint download, multit
 
 * Provide download status, progress, completion callback.
 * Support multitasking download at the same time, breakpoint download even exit the App.
-* Support to customize the directory where the downloaded files are saved.
 * Support to set maximum concurrent downloads and waiting for download queue mode.
+* Support to customize the directory where the downloaded files are saved.
 * Support to delete the specified file by URL and clear all files that have been downloaded.
 
 ## Screenshots
