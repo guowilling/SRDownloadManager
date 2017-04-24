@@ -62,7 +62,7 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 //                                                           stringByAppendingPathComponent:@"CustomDownloadDirectory"];
     
     // Uncomment the following line to customize the Maximum concurrent downloads
-    [SRDownloadManager sharedManager].maxConcurrentDownloadCount = 1;
+    [SRDownloadManager sharedManager].maxConcurrentDownloadCount = 2;
     
     // Uncomment the following line to customize the queue for waiting downloads.
     [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueFILO;

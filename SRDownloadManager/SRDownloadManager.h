@@ -4,6 +4,9 @@
 //  Created by 郭伟林 on 17/1/10.
 //  Copyright © 2017年 SR. All rights reserved.
 //
+//  GitHub: https://github.com/guowilling/SRDownloadManager
+//  If you have any questions, submit an issue or email me. <guowilling90@gmail.com>
+//
 
 #import <Foundation/Foundation.h>
 #import "SRDownloadModel.h"
@@ -16,29 +19,29 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
 @interface SRDownloadManager : NSObject
 
 /**
- Directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
+ The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
  */
 @property (nonatomic, copy) NSString *downloadedFilesDirectory;
 
 /**
- Count of max concurrent downloads, default is -1 which means no limit.
+ The count of max concurrent downloads, default is -1 which means no limit.
  */
 @property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
 
 /**
- Mode of waiting downloads queue, default is FIFO.
+ The mode of waiting for download queue, default is FIFO.
  */
 @property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 
 + (instancetype)sharedManager;
 
 /**
- Download a file and provide state、progress、completion callback.
+ Download a file with download state, progress, completion callback block.
 
  @param URL        The URL of the file which want to download.
- @param state      Callback block when the download state changed.
- @param progress   Callback block when the download progress changed.
- @param completion Callback block when the download completion.
+ @param state      The callback block when the download state changed.
+ @param progress   The callback block when the download progress changed.
+ @param completion The callback block when the download completion.
  */
 - (void)downloadFileOfURL:(NSURL *)URL
                     state:(void (^)(SRDownloadState state))state
@@ -46,15 +49,6 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
                completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
 
 - (BOOL)isDownloadCompletedOfURL:(NSURL *)URL;
-
-#pragma mark - Files
-
-- (NSString *)fileFullPathOfURL:(NSURL *)URL;
-
-- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
-
-- (void)deleteFileOfURL:(NSURL *)URL;
-- (void)deleteAllFiles;
 
 #pragma mark - Downloads
 
@@ -66,5 +60,14 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
 
 - (void)cancelDownloadOfURL:(NSURL *)URL;
 - (void)cancelAllDownloads;
+
+#pragma mark - Files
+
+- (NSString *)fileFullPathOfURL:(NSURL *)URL;
+
+- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
+
+- (void)deleteFileOfURL:(NSURL *)URL;
+- (void)deleteAllFiles;
 
 @end

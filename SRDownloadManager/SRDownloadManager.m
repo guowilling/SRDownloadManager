@@ -4,13 +4,16 @@
 //  Created by 郭伟林 on 17/1/10.
 //  Copyright © 2017年 SR. All rights reserved.
 //
+//  GitHub: https://github.com/guowilling/SRDownloadManager
+//  If you have any questions, submit an issue or email me. <guowilling90@gmail.com>
+//
 
 #import "SRDownloadManager.h"
 
 #define SRDownloadDirectory self.downloadedFilesDirectory ?: [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
                                                                stringByAppendingPathComponent:NSStringFromClass([self class])]
 
-#define SRFileName(URL) [URL lastPathComponent] // Use URL's last path component as the file's name.
+#define SRFileName(URL) [URL lastPathComponent] // use URL's last path component as the file's name
 
 #define SRFilePath(URL) [SRDownloadDirectory stringByAppendingPathComponent:SRFileName(URL)]
 
@@ -20,27 +23,17 @@
 
 @property (nonatomic, strong) NSURLSession *urlSession;
 
-@property (nonatomic, strong) NSMutableDictionary *downloadModelsDic; // Mutable dictionary which includes downloading and waiting models.
+@property (nonatomic, strong) NSMutableDictionary *downloadModelsDic; // mutable dictionary which includes downloading and waiting models
 
-@property (nonatomic, strong) NSMutableArray *downloadingModels; // Models which are downloading.
+@property (nonatomic, strong) NSMutableArray *downloadingModels; // models which are downloading
 
-@property (nonatomic, strong) NSMutableArray *waitingModels; // Models which are waiting to download.
+@property (nonatomic, strong) NSMutableArray *waitingModels; // models which are waiting to download
 
 @end
 
 @implementation SRDownloadManager
 
-+ (instancetype)sharedManager {
-
-    static SRDownloadManager *downloadManager;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        downloadManager = [[self alloc] init];
-        downloadManager.maxConcurrentDownloadCount = -1;
-        downloadManager.waitingQueueMode = SRWaitingQueueFIFO;
-    });
-    return downloadManager;
-}
+#pragma mark - Lazy Load
 
 - (NSURLSession *)urlSession {
     
@@ -51,22 +44,6 @@
     }
     return _urlSession;
 }
-
-- (instancetype)init {
-    
-    if (self = [super init]) {
-        NSString *downloadDirectory = SRDownloadDirectory;
-        BOOL isDirectory = NO;
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        BOOL isExists = [fileManager fileExistsAtPath:downloadDirectory isDirectory:&isDirectory];
-        if (!isExists || !isDirectory) {
-            [fileManager createDirectoryAtPath:downloadDirectory withIntermediateDirectories:YES attributes:nil error:nil];
-        }
-    }
-    return self;
-}
-
-#pragma mark - Lazy Load
 
 - (NSMutableDictionary *)downloadModelsDic {
     
@@ -92,7 +69,33 @@
     return _waitingModels;
 }
 
-#pragma mark - Download
+#pragma mark - Main Methods
+
++ (instancetype)sharedManager {
+
+    static SRDownloadManager *downloadManager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        downloadManager = [[self alloc] init];
+        downloadManager.maxConcurrentDownloadCount = -1;
+        downloadManager.waitingQueueMode = SRWaitingQueueFIFO;
+    });
+    return downloadManager;
+}
+
+- (instancetype)init {
+    
+    if (self = [super init]) {
+        NSString *downloadDirectory = SRDownloadDirectory;
+        BOOL isDirectory = NO;
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL isExists = [fileManager fileExistsAtPath:downloadDirectory isDirectory:&isDirectory];
+        if (!isExists || !isDirectory) {
+            [fileManager createDirectoryAtPath:downloadDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+    }
+    return self;
+}
 
 - (void)downloadFileOfURL:(NSURL *)URL
                     state:(void(^)(SRDownloadState state))state
@@ -103,7 +106,7 @@
         return;
     }
     
-    if ([self isDownloadCompletedOfURL:URL]) { // If this URL has been downloaded.
+    if ([self isDownloadCompletedOfURL:URL]) { // if this URL has been downloaded
         if (state) {
             state(SRDownloadStateCompleted);
         }
@@ -114,15 +117,16 @@
     }
     
     SRDownloadModel *downloadModel = self.downloadModelsDic[SRFileName(URL)];
-    if (downloadModel) { // If the download model of this URL has been added in downloadModelsDic.
+    if (downloadModel) { // if the download model of this URL has been added in downloadModelsDic
         return;
     }
     
-    // @"bytes=x-y" ==  x byte ~ y byte
-    // @"bytes=x-"  ==  x byte ~ end
-    // @"bytes=-y"  ==  head ~ y byte
+    // Range
+    // bytes=x-y ==  x byte ~ y byte
+    // bytes=x-  ==  x byte ~ end
+    // bytes=-y  ==  head ~ y byte
     NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:URL];
-    [requestM setValue:[NSString stringWithFormat:@"bytes=%lld-", (long long int)[self hasDownloadedLength:URL]] forHTTPHeaderField:@"Range"];
+    [requestM setValue:[NSString stringWithFormat:@"bytes=%ld-", [self hasDownloadedLength:URL]] forHTTPHeaderField:@"Range"];
     NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithRequest:requestM];
     dataTask.taskDescription = SRFileName(URL);
     
@@ -151,20 +155,10 @@
     });
 }
 
-- (BOOL)canResumeDownload {
-    
-    if (self.maxConcurrentDownloadCount == -1) {
-        return YES;
-    }
-    if (self.downloadingModels.count >= self.maxConcurrentDownloadCount) {
-        return NO;
-    }
-    return YES;
-}
 
 #pragma mark - NSURLSessionDataDelegate
 
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSHTTPURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(nonnull void (^)(NSURLSessionResponseDisposition))completionHandler {
     
     SRDownloadModel *downloadModel = self.downloadModelsDic[dataTask.taskDescription];
     if (!downloadModel) {
@@ -173,8 +167,9 @@
     
     [downloadModel openOutputStream];
     
-    NSInteger thisTotalLength = response.expectedContentLength; // Equals to [response.allHeaderFields[@"Content-Length"] integerValue]
-    NSInteger totalLength = thisTotalLength + [self hasDownloadedLength:downloadModel.URL];
+    // response.expectedContentLength == [HTTPResponse.allHeaderFields[@"Content-Length"] integerValue]
+    // response.expectedContentLength + [self hasDownloadedLength:downloadModel.URL] == [[HTTPResponse.allHeaderFields[@"Content-Range"] componentsSeparatedByString:@"/"].lastObject integerValue]
+    NSInteger totalLength = response.expectedContentLength + [self hasDownloadedLength:downloadModel.URL];
     downloadModel.totalLength = totalLength;
     NSMutableDictionary *filesTotalLength = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath] ?: [NSMutableDictionary dictionary];
     filesTotalLength[SRFileName(downloadModel.URL)] = @(totalLength);
@@ -189,13 +184,16 @@
     if (!downloadModel) {
         return;
     }
-    
+
     [downloadModel.outputStream write:data.bytes maxLength:data.length];
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         if (downloadModel.progress) {
             NSUInteger receivedSize = [self hasDownloadedLength:downloadModel.URL];
             NSUInteger expectedSize = downloadModel.totalLength;
+            if (expectedSize == 0) {
+                return;
+            }
             CGFloat progress = 1.0 * receivedSize / expectedSize;
             downloadModel.progress(receivedSize, expectedSize, progress);
         }
@@ -204,7 +202,7 @@
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
     
-    if (error && error.code == -999) { // Cancelled!
+    if (error && error.code == -999) { // cancel task
         return;
     }
     
@@ -241,6 +239,17 @@
 
 #pragma mark - Assist Methods
 
+- (BOOL)canResumeDownload {
+    
+    if (self.maxConcurrentDownloadCount == -1) {
+        return YES;
+    }
+    if (self.downloadingModels.count >= self.maxConcurrentDownloadCount) {
+        return NO;
+    }
+    return YES;
+}
+
 - (NSInteger)totalLength:(NSURL *)URL {
     
     NSDictionary *filesTotalLenth = [NSDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
@@ -264,9 +273,10 @@
 
 - (void)resumeNextDowloadModel {
     
-    if (self.maxConcurrentDownloadCount == -1) {
+    if (self.maxConcurrentDownloadCount == -1) { // no limit so no waiting for download models
         return;
     }
+    
     if (self.waitingModels.count == 0) {
         return;
     }
@@ -300,8 +310,6 @@
 
 #pragma mark - Public Methods
 
-#pragma mark - Files
-
 - (BOOL)isDownloadCompletedOfURL:(NSURL *)URL {
     
     NSInteger totalLength = [self totalLength:URL];
@@ -313,63 +321,13 @@
     return NO;
 }
 
-- (NSString *)fileFullPathOfURL:(NSURL *)URL {
-    
-    return SRFilePath(URL);
-}
-
-- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL {
-    
-    if ([self isDownloadCompletedOfURL:URL]) {
-        return 1.0;
-    }
-    if ([self totalLength:URL] == 0) {
-        return 0.0;
-    }
-    return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
-}
-
-- (void)deleteFileOfURL:(NSURL *)URL {
-    
-    [self cancelDownloadOfURL:URL];
-    
-    NSMutableDictionary *filesTotalLenth = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
-    [filesTotalLenth removeObjectForKey:SRFileName(URL)];
-    [filesTotalLenth writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *filePath = [self fileFullPathOfURL:URL];
-    if (![fileManager fileExistsAtPath:filePath]) {
-        return;
-    }
-    if ([fileManager removeItemAtPath:filePath error:nil]) {
-        return;
-    }
-    NSLog(@"removeItemAtPath Failed: %@", filePath);
-}
-
-- (void)deleteAllFiles {
-    
-    [self cancelAllDownloads];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
-    for (NSString *fileName in fileNames) {
-        NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:fileName];
-        if ([fileManager removeItemAtPath:filePath error:nil]) {
-            continue;
-        }
-        NSLog(@"removeItemAtPath Failed: %@", filePath);
-    }
-}
-
 - (void)setDownloadedFilesDirectory:(NSString *)downloadedFilesDirectory {
     
     _downloadedFilesDirectory = downloadedFilesDirectory;
-    
     if (!downloadedFilesDirectory) {
         return;
     }
+    
     BOOL isDirectory = NO;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isExists = [fileManager fileExistsAtPath:downloadedFilesDirectory isDirectory:&isDirectory];
@@ -491,11 +449,13 @@
     
     [downloadModel closeOutputStream];
     [downloadModel.dataTask cancel];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         if (downloadModel.state) {
             downloadModel.state(SRDownloadStateCanceled);
         }
     });
+    
     if ([self.waitingModels containsObject:downloadModel]) {
         [self.waitingModels removeObject:downloadModel];
     } else {
@@ -511,6 +471,7 @@
     if (self.downloadModelsDic.count == 0) {
         return;
     }
+    
     NSArray *downloadModels = self.downloadModelsDic.allValues;
     for (SRDownloadModel *downloadModel in downloadModels) {
         [downloadModel closeOutputStream];
@@ -521,9 +482,62 @@
             }
         });
     }
+    
     [self.waitingModels removeAllObjects];
     [self.downloadingModels removeAllObjects];
     [self.downloadModelsDic removeAllObjects];
+}
+
+#pragma mark - Files
+
+- (NSString *)fileFullPathOfURL:(NSURL *)URL {
+    
+    return SRFilePath(URL);
+}
+
+- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL {
+    
+    if ([self isDownloadCompletedOfURL:URL]) {
+        return 1.0;
+    }
+    if ([self totalLength:URL] == 0) {
+        return 0.0;
+    }
+    return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
+}
+
+- (void)deleteFileOfURL:(NSURL *)URL {
+    
+    [self cancelDownloadOfURL:URL];
+    
+    NSMutableDictionary *filesTotalLenth = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
+    [filesTotalLenth removeObjectForKey:SRFileName(URL)];
+    [filesTotalLenth writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [self fileFullPathOfURL:URL];
+    if (![fileManager fileExistsAtPath:filePath]) {
+        return;
+    }
+    if ([fileManager removeItemAtPath:filePath error:nil]) {
+        return;
+    }
+    NSLog(@"removeItemAtPath Failed: %@", filePath);
+}
+
+- (void)deleteAllFiles {
+    
+    [self cancelAllDownloads];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
+    for (NSString *fileName in fileNames) {
+        NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:fileName];
+        if ([fileManager removeItemAtPath:filePath error:nil]) {
+            continue;
+        }
+        NSLog(@"removeItemAtPath Failed: %@", filePath);
+    }
 }
 
 @end

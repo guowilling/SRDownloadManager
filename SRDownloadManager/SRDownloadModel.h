@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
 
 @property (nonatomic, strong) NSURLSessionDataTask *dataTask;
 
-@property (nonatomic, strong) NSOutputStream *outputStream; // For write datas to file.
+@property (nonatomic, strong) NSOutputStream *outputStream; // for write datas to file
 
 @property (nonatomic, strong) NSURL *URL;
 

@@ -1,17 +1,18 @@
 # SRDownloadManager
 
+File download manager based on NSURLSession, support breakpoint download, multitasking download, waiting for download queue etc.
+
 ## Features
 
-* Provide download status callback, download progress callback, download complete callback.
-* Support multi-task at the same time to download.
-* Support breakpoint download even exit the App.
+* Provide download status, progress, completion callback.
+* Multitask download at the same time, breakpoint download even exit the App.
 * Support to delete the specified file by URL and clear all files that have been downloaded.
-* Support customize the directory where the downloaded files are saved.
-* Support set maximum concurrent downloads and waiting downloads queue mode.
+* Support to customize the directory where the downloaded files are saved.
+* Support to set maximum concurrent downloads and waiting for download queue mode.
 
-## Show
+## Screenshots
 
-![image](./show1.png) ![image](./show2.png)
+![image](./screenshot1.png) ![image](./screenshot2.png)
 
 ## Installation
 
@@ -21,23 +22,19 @@
 ### Manual
 > Drag the **SRDownloadManager** folder to the project.
 
-## Usage
-
-````objc
-[[SRDownloadManager sharedManager] downloadFile:fileURL state:^(SRDownloadState state) {
-    // Called when download state changed.
-} progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
-    // Called when download receive data every time.
-} completion:^(BOOL isSuccess, NSString *filePath, NSError *error) {
-    // Called when download finished with success or error.
-}];
-````
-
 ## APIs
 
 ````objc
 + (instancetype)sharedManager;
 
+/**
+ Download a file with download state, progress, completion callback block.
+
+ @param URL        The URL of the file which want to download.
+ @param state      The callback block when the download state changed.
+ @param progress   The callback block when the download progress changed.
+ @param completion The callback block when the download completion.
+ */
 - (void)downloadFileOfURL:(NSURL *)URL
                     state:(void (^)(SRDownloadState state))state
                  progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
@@ -45,12 +42,7 @@
 
 - (BOOL)isDownloadCompletedOfURL:(NSURL *)URL;
 
-- (NSString *)fileFullPathOfURL:(NSURL *)URL;
-
-- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
-
-- (void)deleteFileOfURL:(NSURL *)URL;
-- (void)deleteAllFiles;
+#pragma mark - Downloads
 
 - (void)suspendDownloadOfURL:(NSURL *)URL;
 - (void)suspendAllDownloads;
@@ -60,33 +52,48 @@
 
 - (void)cancelDownloadOfURL:(NSURL *)URL;
 - (void)cancelAllDownloads;
+
+#pragma mark - Files
+
+- (NSString *)fileFullPathOfURL:(NSURL *)URL;
+
+- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
+
+- (void)deleteFileOfURL:(NSURL *)URL;
+- (void)deleteAllFiles;
+````
+
+## Usage
+
+````objc
+[[SRDownloadManager sharedManager] downloadFileOfURL:URL state:^(SRDownloadState state) {
+    // called when the download state changed
+} progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
+    // called when the download progress changed
+} completion:^(BOOL success, NSString *filePath, NSError *error) {
+    // called when the download completion
+}];
 ````
 
 ## Custom Settings
 
 ````objc
 /**
- Directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
+ The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
  */
 @property (nonatomic, copy) NSString *downloadedFilesDirectory;
 
 /**
- Count of max concurrent downloads, default is -1 which means no limit.
- */  
+ The count of max concurrent downloads, default is -1 which means no limit.
+ */
 @property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
 
 /**
- Mode of waiting downloads queue, default is FIFO.
+ The mode of waiting for download queue, default is FIFO.
  */
 @property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 ````
 
 ## More
 
-**If you have any questions, submit an issue or contact me.** 
- 
-> [guowilling](https://github.com/guowilling)  
-> QQ: 1990991510  
-> Email: guowilling90@gmail.com
-
-**Have Fun.**
+**If you have any questions, submit an issue or email me. <guowilling90@gmail.com>**
