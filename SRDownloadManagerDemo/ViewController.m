@@ -43,6 +43,11 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 
 @implementation ViewController
 
+- (BOOL)prefersStatusBarHidden {
+    
+    return YES;
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];

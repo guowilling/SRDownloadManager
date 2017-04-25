@@ -4,11 +4,11 @@ File download manager based on NSURLSession, support breakpoint download, multit
 
 ## Features
 
-* Provide download status, progress, completion callback.
-* Support multitasking download at the same time, breakpoint download even exit the App.
-* Support to set maximum concurrent downloads and waiting for download queue mode.
-* Support to customize the directory where the downloaded files are saved.
-* Support to delete the specified file by URL and clear all files that have been downloaded.
+* [x] Provide download status, progress, completion callback.
+* [x] Support multitasking download at the same time, breakpoint download even exit the App.
+* [x] Support to set maximum concurrent downloads and waiting for download queue mode.
+* [x] Support to customize the directory where the downloaded files are saved.
+* [x] Support to delete the specified file by URL and clear all files that have been downloaded.
 
 ## Screenshots
 
@@ -22,9 +22,11 @@ File download manager based on NSURLSession, support breakpoint download, multit
 ### Manual
 > Drag the **SRDownloadManager** folder to the project.
 
-## Usage
+## APIs
 
 ````objc
++ (instancetype)sharedManager;
+
 /**
  Download a file with download state, progress, completion callback block.
 
@@ -37,7 +39,35 @@ File download manager based on NSURLSession, support breakpoint download, multit
                     state:(void (^)(SRDownloadState state))state
                  progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
                completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
+
+- (BOOL)isDownloadCompletedOfURL:(NSURL *)URL;
 ````
+
+````objc
+#pragma mark - Downloads
+
+- (void)suspendDownloadOfURL:(NSURL *)URL;
+- (void)suspendAllDownloads;
+
+- (void)resumeDownloadOfURL:(NSURL *)URL;
+- (void)resumeAllDownloads;
+
+- (void)cancelDownloadOfURL:(NSURL *)URL;
+- (void)cancelAllDownloads;
+````
+
+````objc
+#pragma mark - Files
+
+- (NSString *)fileFullPathOfURL:(NSURL *)URL;
+
+- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
+
+- (void)deleteFileOfURL:(NSURL *)URL;
+- (void)deleteAllFiles;
+````
+
+## Usage
 
 ````objc
 [[SRDownloadManager sharedManager] downloadFileOfURL:URL state:^(SRDownloadState state) {
@@ -49,4 +79,21 @@ File download manager based on NSURLSession, support breakpoint download, multit
 }];
 ````
 
-See the demo for more contents.  
+## Custom
+
+````objc
+/**
+ The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
+ */
+@property (nonatomic, copy) NSString *downloadedFilesDirectory;
+
+/**
+ The count of max concurrent downloads, default is -1 which means no limit.
+ */
+@property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
+
+/**
+ The mode of waiting for download queue, default is FIFO.
+ */
+@property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
+````
