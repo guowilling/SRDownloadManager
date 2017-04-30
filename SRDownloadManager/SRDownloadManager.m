@@ -21,11 +21,11 @@
 
 @property (nonatomic, strong) NSURLSession *urlSession;
 
-@property (nonatomic, strong) NSMutableDictionary *downloadModelsDic; // mutable dictionary which includes downloading and waiting models
+@property (nonatomic, strong) NSMutableDictionary *downloadModelsDic; // a dictionary contains downloading and waiting models
 
-@property (nonatomic, strong) NSMutableArray *downloadingModels; // models which are downloading
+@property (nonatomic, strong) NSMutableArray *downloadingModels; // a array contains models which are downloading now
 
-@property (nonatomic, strong) NSMutableArray *waitingModels; // models which are waiting to download
+@property (nonatomic, strong) NSMutableArray *waitingModels; // a array contains models which are waiting for download
 
 @end
 
@@ -76,7 +76,7 @@
     dispatch_once(&onceToken, ^{
         downloadManager = [[self alloc] init];
         downloadManager.maxConcurrentDownloadCount = -1;
-        downloadManager.waitingQueueMode = SRWaitingQueueFIFO;
+        downloadManager.waitingDownloadQueueMode = SRWaitingDownloadQueueModeFIFO;
     });
     return downloadManager;
 }
@@ -124,7 +124,7 @@
     // bytes=x-  ==  x byte ~ end
     // bytes=-y  ==  head ~ y byte
     NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:URL];
-    [requestM setValue:[NSString stringWithFormat:@"bytes=%ld-", [self hasDownloadedLength:URL]] forHTTPHeaderField:@"Range"];
+    [requestM setValue:[NSString stringWithFormat:@"bytes=%ld-", (long)[self hasDownloadedLength:URL]] forHTTPHeaderField:@"Range"];
     NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithRequest:requestM];
     dataTask.taskDescription = SRFileName(URL);
     
@@ -153,7 +153,6 @@
     });
 }
 
-
 #pragma mark - NSURLSessionDataDelegate
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(nonnull void (^)(NSURLSessionResponseDisposition))completionHandler {
@@ -167,7 +166,7 @@
     
     // response.expectedContentLength == [HTTPResponse.allHeaderFields[@"Content-Length"] integerValue]
     // response.expectedContentLength + [self hasDownloadedLength:downloadModel.URL] == [[HTTPResponse.allHeaderFields[@"Content-Range"] componentsSeparatedByString:@"/"].lastObject integerValue]
-    NSInteger totalLength = response.expectedContentLength + [self hasDownloadedLength:downloadModel.URL];
+    NSInteger totalLength = (long)response.expectedContentLength + [self hasDownloadedLength:downloadModel.URL];
     downloadModel.totalLength = totalLength;
     NSMutableDictionary *filesTotalLength = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath] ?: [NSMutableDictionary dictionary];
     filesTotalLength[SRFileName(downloadModel.URL)] = @(totalLength);
@@ -280,11 +279,11 @@
     }
     
     SRDownloadModel *downloadModel;
-    switch (self.waitingQueueMode) {
-        case SRWaitingQueueFIFO:
+    switch (self.waitingDownloadQueueMode) {
+        case SRWaitingDownloadQueueModeFIFO:
             downloadModel = self.waitingModels.firstObject;
             break;
-        case SRWaitingQueueFILO:
+        case SRWaitingDownloadQueueModeFILO:
             downloadModel = self.waitingModels.lastObject;
             break;
     }
@@ -520,7 +519,7 @@
     if ([fileManager removeItemAtPath:filePath error:nil]) {
         return;
     }
-    NSLog(@"removeItemAtPath Failed: %@", filePath);
+    NSLog(@"removeItemAtPath failed: %@", filePath);
 }
 
 - (void)deleteAllFiles {
@@ -534,7 +533,7 @@
         if ([fileManager removeItemAtPath:filePath error:nil]) {
             continue;
         }
-        NSLog(@"removeItemAtPath Failed: %@", filePath);
+        NSLog(@"removeItemAtPath failed: %@", filePath);
     }
 }
 

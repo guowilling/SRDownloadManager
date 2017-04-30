@@ -12,9 +12,9 @@
 		68E1AE101E24808400404611 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE0F1E24808400404611 /* ViewController.m */; };
 		68E1AE131E24808400404611 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE111E24808400404611 /* Main.storyboard */; };
 		68E1AE151E24808400404611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE141E24808400404611 /* Assets.xcassets */; };
-		68E1AE181E24808400404611 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE161E24808400404611 /* LaunchScreen.storyboard */; };
 		68E1AE3E1E2480A800404611 /* SRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE3D1E2480A800404611 /* SRDownloadManager.m */; };
 		68E1AE411E2480B500404611 /* SRDownloadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE401E2480B500404611 /* SRDownloadModel.m */; };
+		6EBF581A1EB1162C00B2B986 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EBF58191EB1162C00B2B986 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,12 +26,12 @@
 		68E1AE0F1E24808400404611 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		68E1AE121E24808400404611 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68E1AE141E24808400404611 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		68E1AE171E24808400404611 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68E1AE191E24808400404611 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68E1AE3C1E2480A800404611 /* SRDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDownloadManager.h; sourceTree = "<group>"; };
 		68E1AE3D1E2480A800404611 /* SRDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManager.m; sourceTree = "<group>"; };
 		68E1AE3F1E2480B500404611 /* SRDownloadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDownloadModel.h; sourceTree = "<group>"; };
 		68E1AE401E2480B500404611 /* SRDownloadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRDownloadModel.m; sourceTree = "<group>"; };
+		6EBF58191EB1162C00B2B986 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +79,7 @@
 				68E1AE091E24808400404611 /* main.m */,
 				68E1AE0B1E24808400404611 /* AppDelegate.h */,
 				68E1AE0C1E24808400404611 /* AppDelegate.m */,
-				68E1AE161E24808400404611 /* LaunchScreen.storyboard */,
+				6EBF58191EB1162C00B2B986 /* LaunchScreen.storyboard */,
 				68E1AE141E24808400404611 /* Assets.xcassets */,
 				68E1AE191E24808400404611 /* Info.plist */,
 			);
@@ -156,7 +156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68E1AE181E24808400404611 /* LaunchScreen.storyboard in Resources */,
+				6EBF581A1EB1162C00B2B986 /* LaunchScreen.storyboard in Resources */,
 				68E1AE151E24808400404611 /* Assets.xcassets in Resources */,
 				68E1AE131E24808400404611 /* Main.storyboard in Resources */,
 			);
@@ -186,14 +186,6 @@
 				68E1AE121E24808400404611 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		68E1AE161E24808400404611 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				68E1AE171E24808400404611 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

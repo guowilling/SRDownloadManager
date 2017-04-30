@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "SRDownloadModel.h"
 
-typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
-    SRWaitingQueueFIFO,
-    SRWaitingQueueFILO
+typedef NS_ENUM(NSInteger, SRWaitingDownloadQueueMode) {
+    SRWaitingDownloadQueueModeFIFO,
+    SRWaitingDownloadQueueModeFILO
 };
 
 @interface SRDownloadManager : NSObject
@@ -29,17 +29,17 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
 /**
  The mode of waiting for download queue, default is FIFO.
  */
-@property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
+@property (nonatomic, assign) SRWaitingDownloadQueueMode waitingDownloadQueueMode;
 
 + (instancetype)sharedManager;
 
 /**
- Download a file with download state, progress, completion callback block.
+ Starts a download action with URL and download state, progress, completion callback block.
 
- @param URL        The URL of the file which want to download.
- @param state      The callback block when the download state changed.
- @param progress   The callback block when the download progress changed.
- @param completion The callback block when the download completion.
+ @param URL        The URL of the file which to be downloaded.
+ @param state      A block object to be executed when the download state changed.
+ @param progress   A block object to be executed when the download progress changed.
+ @param completion A block object to be executed when the download completion.
  */
 - (void)downloadFileOfURL:(NSURL *)URL
                     state:(void (^)(SRDownloadState state))state

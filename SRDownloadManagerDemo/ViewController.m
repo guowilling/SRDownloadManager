@@ -66,11 +66,9 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 //    [SRDownloadManager sharedManager].downloadDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
 //                                                           stringByAppendingPathComponent:@"CustomDownloadDirectory"];
     
-    // Uncomment the following line to customize the Maximum concurrent downloads
     [SRDownloadManager sharedManager].maxConcurrentDownloadCount = 2;
     
-    // Uncomment the following line to customize the queue for waiting downloads.
-    [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueFILO;
+    [SRDownloadManager sharedManager].waitingDownloadQueueMode = SRWaitingDownloadQueueModeFILO;
     
     CGFloat progress1 = [[SRDownloadManager sharedManager] fileHasDownloadedProgressOfURL:kDownloadURL1];
     CGFloat progress2 = [[SRDownloadManager sharedManager] fileHasDownloadedProgressOfURL:kDownloadURL2];
@@ -152,8 +150,7 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 - (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
     
     if ([button.currentTitle isEqualToString:@"Start"]) {
-        [[SRDownloadManager sharedManager] downloadFileOfURL:URL
-                                                       state:^(SRDownloadState state) {
+        [[SRDownloadManager sharedManager] downloadFileOfURL:URL state:^(SRDownloadState state) {
                                                            [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
                                                        } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
                                                            currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
