@@ -20,9 +20,9 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
 
 @interface SRDownloadModel : NSObject
 
-@property (nonatomic, strong) NSURLSessionDataTask *dataTask;
+@property (nonatomic, strong) NSOutputStream *outputStream; // write datas to the file
 
-@property (nonatomic, strong) NSOutputStream *outputStream; // for write datas to file
+@property (nonatomic, strong) NSURLSessionDataTask *dataTask;
 
 @property (nonatomic, strong) NSURL *URL;
 

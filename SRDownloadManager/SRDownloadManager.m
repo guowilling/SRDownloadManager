@@ -8,8 +8,8 @@
 
 #import "SRDownloadManager.h"
 
-#define SRDownloadDirectory self.downloadedFilesDirectory ?: [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
-                                                               stringByAppendingPathComponent:NSStringFromClass([self class])]
+#define SRDownloadDirectory self.saveFilesDirectory ?: [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
+                                                         stringByAppendingPathComponent:NSStringFromClass([self class])]
 
 #define SRFileName(URL) [URL lastPathComponent] // use URL's last path component as the file's name
 
@@ -75,8 +75,8 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         downloadManager = [[self alloc] init];
-        downloadManager.maxConcurrentDownloadCount = -1;
-        downloadManager.waitingDownloadQueueMode = SRWaitingDownloadQueueModeFIFO;
+        downloadManager.maxConcurrentCount = -1;
+        downloadManager.waitingQueueMode = SRWaitingQueueModeFIFO;
     });
     return downloadManager;
 }
@@ -95,10 +95,10 @@
     return self;
 }
 
-- (void)downloadFileOfURL:(NSURL *)URL
-                    state:(void(^)(SRDownloadState state))state
-                 progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-               completion:(void(^)(BOOL success, NSString *filePath, NSError *error))completion
+- (void)downloadFileWithURL:(NSURL *)URL
+                      state:(void(^)(SRDownloadState state))state
+                   progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+                 completion:(void(^)(BOOL success, NSString *filePath, NSError *error))completion
 {
     if (!URL) {
         return;
@@ -238,10 +238,10 @@
 
 - (BOOL)canResumeDownload {
     
-    if (self.maxConcurrentDownloadCount == -1) {
+    if (self.maxConcurrentCount == -1) {
         return YES;
     }
-    if (self.downloadingModels.count >= self.maxConcurrentDownloadCount) {
+    if (self.downloadingModels.count >= self.maxConcurrentCount) {
         return NO;
     }
     return YES;
@@ -270,7 +270,7 @@
 
 - (void)resumeNextDowloadModel {
     
-    if (self.maxConcurrentDownloadCount == -1) { // no limit so no waiting for download models
+    if (self.maxConcurrentCount == -1) { // no limit so no waiting for download models
         return;
     }
     
@@ -279,11 +279,11 @@
     }
     
     SRDownloadModel *downloadModel;
-    switch (self.waitingDownloadQueueMode) {
-        case SRWaitingDownloadQueueModeFIFO:
+    switch (self.waitingQueueMode) {
+        case SRWaitingQueueModeFIFO:
             downloadModel = self.waitingModels.firstObject;
             break;
-        case SRWaitingDownloadQueueModeFILO:
+        case SRWaitingQueueModeFILO:
             downloadModel = self.waitingModels.lastObject;
             break;
     }
@@ -318,18 +318,18 @@
     return NO;
 }
 
-- (void)setDownloadedFilesDirectory:(NSString *)downloadedFilesDirectory {
+- (void)setSaveFilesDirectory:(NSString *)saveFilesDirectory {
     
-    _downloadedFilesDirectory = downloadedFilesDirectory;
-    if (!downloadedFilesDirectory) {
+    _saveFilesDirectory = saveFilesDirectory;
+    
+    if (!saveFilesDirectory) {
         return;
     }
-    
     BOOL isDirectory = NO;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL isExists = [fileManager fileExistsAtPath:downloadedFilesDirectory isDirectory:&isDirectory];
+    BOOL isExists = [fileManager fileExistsAtPath:saveFilesDirectory isDirectory:&isDirectory];
     if (!isExists || !isDirectory) {
-        [fileManager createDirectoryAtPath:downloadedFilesDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+        [fileManager createDirectoryAtPath:saveFilesDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     }
 }
 
@@ -516,10 +516,7 @@
     if (![fileManager fileExistsAtPath:filePath]) {
         return;
     }
-    if ([fileManager removeItemAtPath:filePath error:nil]) {
-        return;
-    }
-    NSLog(@"removeItemAtPath failed: %@", filePath);
+    [fileManager removeItemAtPath:filePath error:nil];
 }
 
 - (void)deleteAllFiles {
@@ -530,10 +527,7 @@
     NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
     for (NSString *fileName in fileNames) {
         NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:fileName];
-        if ([fileManager removeItemAtPath:filePath error:nil]) {
-            continue;
-        }
-        NSLog(@"removeItemAtPath failed: %@", filePath);
+        [fileManager removeItemAtPath:filePath error:nil];
     }
 }
 

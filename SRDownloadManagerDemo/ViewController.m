@@ -52,6 +52,10 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
     
     [super viewDidLoad];
     
+    [SRDownloadManager sharedManager].saveFilesDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"CustomDownloadDirectory"];
+    [SRDownloadManager sharedManager].maxConcurrentCount = 2;
+    [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueModeFILO;
+    
     if ([[SRDownloadManager sharedManager] isDownloadCompletedOfURL:kDownloadURL1]) {
         NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPathOfURL:kDownloadURL1]);
     }
@@ -61,14 +65,6 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
     if ([[SRDownloadManager sharedManager] isDownloadCompletedOfURL:kDownloadURL3]) {
         NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPathOfURL:kDownloadURL3]);
     }
-    
-    // Uncomment the following line to customize the directory where the downloaded files are saved.
-//    [SRDownloadManager sharedManager].downloadDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
-//                                                           stringByAppendingPathComponent:@"CustomDownloadDirectory"];
-    
-    [SRDownloadManager sharedManager].maxConcurrentDownloadCount = 2;
-    
-    [SRDownloadManager sharedManager].waitingDownloadQueueMode = SRWaitingDownloadQueueModeFILO;
     
     CGFloat progress1 = [[SRDownloadManager sharedManager] fileHasDownloadedProgressOfURL:kDownloadURL1];
     CGFloat progress2 = [[SRDownloadManager sharedManager] fileHasDownloadedProgressOfURL:kDownloadURL2];
@@ -150,20 +146,20 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 - (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
     
     if ([button.currentTitle isEqualToString:@"Start"]) {
-        [[SRDownloadManager sharedManager] downloadFileOfURL:URL state:^(SRDownloadState state) {
-                                                           [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
-                                                       } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
-                                                           currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
-                                                           totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
-                                                           progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
-                                                           progressView.progress = progress;
-                                                       } completion:^(BOOL success, NSString *filePath, NSError *error) {
-                                                           if (success) {
-                                                               NSLog(@"FilePath: %@", filePath);
-                                                           } else {
-                                                               NSLog(@"Error: %@", error);
-                                                           }
-                                                       }];
+        [[SRDownloadManager sharedManager] downloadFileWithURL:URL state:^(SRDownloadState state) {
+            [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
+        } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
+            currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
+            totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
+            progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
+            progressView.progress = progress;
+        } completion:^(BOOL success, NSString *filePath, NSError *error) {
+            if (success) {
+                NSLog(@"FilePath: %@", filePath);
+            } else {
+                NSLog(@"Error: %@", error);
+            }
+        }];
     } else if ([button.currentTitle isEqualToString:@"Waiting"]) {
         [[SRDownloadManager sharedManager] cancelDownloadOfURL:URL];
     } else if ([button.currentTitle isEqualToString:@"Pause"]) {
@@ -171,7 +167,7 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
     } else if ([button.currentTitle isEqualToString:@"Resume"]) {
         [[SRDownloadManager sharedManager] resumeDownloadOfURL:URL];
     } else if ([button.currentTitle isEqualToString:@"Finish"]) {
-        NSLog(@"File has been downloaded! File path: %@", [[SRDownloadManager sharedManager] fileFullPathOfURL:URL]);
+        NSLog(@"File has been downloaded! It's path is: %@", [[SRDownloadManager sharedManager] fileFullPathOfURL:URL]);
     }
 }
 

@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "SRDownloadModel.h"
 
-typedef NS_ENUM(NSInteger, SRWaitingDownloadQueueMode) {
-    SRWaitingDownloadQueueModeFIFO,
-    SRWaitingDownloadQueueModeFILO
+typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
+    SRWaitingQueueModeFIFO,
+    SRWaitingQueueModeFILO
 };
 
 @interface SRDownloadManager : NSObject
@@ -19,32 +19,32 @@ typedef NS_ENUM(NSInteger, SRWaitingDownloadQueueMode) {
 /**
  The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
  */
-@property (nonatomic, copy) NSString *downloadedFilesDirectory;
+@property (nonatomic, copy) NSString *saveFilesDirectory;
 
 /**
  The count of max concurrent downloads, default is -1 which means no limit.
  */
-@property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
+@property (nonatomic, assign) NSInteger maxConcurrentCount;
 
 /**
  The mode of waiting for download queue, default is FIFO.
  */
-@property (nonatomic, assign) SRWaitingDownloadQueueMode waitingDownloadQueueMode;
+@property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 
 + (instancetype)sharedManager;
 
 /**
- Starts a download action with URL and download state, progress, completion callback block.
+ Starts a file download action with URL, download state, download progress and download completion block.
 
  @param URL        The URL of the file which to be downloaded.
  @param state      A block object to be executed when the download state changed.
  @param progress   A block object to be executed when the download progress changed.
  @param completion A block object to be executed when the download completion.
  */
-- (void)downloadFileOfURL:(NSURL *)URL
-                    state:(void (^)(SRDownloadState state))state
-                 progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-               completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
+- (void)downloadFileWithURL:(NSURL *)URL
+                      state:(void (^)(SRDownloadState state))state
+                   progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+                 completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
 
 - (BOOL)isDownloadCompletedOfURL:(NSURL *)URL;
 

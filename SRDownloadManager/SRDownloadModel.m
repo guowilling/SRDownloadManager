@@ -12,19 +12,21 @@
 
 - (void)openOutputStream {
     
-    if (_outputStream) {
-        [_outputStream open];
+    if (!_outputStream) {
+        return;
     }
+    [_outputStream open];
 }
 
 - (void)closeOutputStream {
     
-    if (_outputStream) {
-        if (_outputStream.streamStatus > NSStreamStatusNotOpen && _outputStream.streamStatus < NSStreamStatusClosed) {
-            [_outputStream close];
-        }
-        _outputStream = nil;
+    if (!_outputStream) {
+        return;
     }
+    if (_outputStream.streamStatus > NSStreamStatusNotOpen && _outputStream.streamStatus < NSStreamStatusClosed) {
+        [_outputStream close];
+    }
+    _outputStream = nil;
 }
 
 @end
