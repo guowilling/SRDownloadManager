@@ -9,10 +9,6 @@ SRDownloadManager is a file download manager based on NSURLSession. Provide down
 * [x] Support to set maximum concurrent downloads and waiting for download queue mode.
 * [x] Support to delete the specified file by URL and clear all files that have been downloaded.
 
-## Screenshots
-
-![image](./screenshots1.png) ![image](./screenshots2.png)
-
 ## Installation
 
 **CocoaPods**
@@ -48,7 +44,7 @@ SRDownloadManager is a file download manager based on NSURLSession. Provide down
 }];
 ````
 
-##Custom
+## Custom
 
 ````objc
 /**
