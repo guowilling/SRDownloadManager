@@ -1,6 +1,4 @@
-# SRDownloadManager
-
-SRDownloadManager is a file download manager based on NSURLSession. Provide download status callback, download progress callback and download completion callback.
+**SRDownloadManager** is a file download manager based on NSURLSession. Provide download status callback, download progress callback and download completion callback.
 
 ## Features
 
