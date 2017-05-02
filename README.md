@@ -32,20 +32,39 @@ SRDownloadManager is a file download manager based on NSURLSession. Provide down
  @param progress   A block object to be executed when the download progress changed.
  @param completion A block object to be executed when the download completion.
  */
-- (void)downloadFileWithURL:(NSURL *)URL
-                      state:(void (^)(SRDownloadState state))state
-                   progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-                 completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
+- (void)downloadURL:(NSURL *)URL
+              state:(void (^)(SRDownloadState state))state
+           progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+         completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
 ````
 
 ````objc
-[[SRDownloadManager sharedManager] downloadFileWithURL:URL state:^(SRDownloadState state) {
+[[SRDownloadManager sharedManager] downloadURL:URL state:^(SRDownloadState state) {
     // Called when the download state changed.
 } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
     // Called when the download progress changed.
 } completion:^(BOOL success, NSString *filePath, NSError *error) {
     // Called when the download completion.
 }];
+````
+
+##Custom
+
+````objc
+/**
+ The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
+ */
+@property (nonatomic, copy) NSString *saveFilesDirectory;
+
+/**
+ The count of max concurrent downloads, default is -1 which means no limit.
+ */
+@property (nonatomic, assign) NSInteger maxConcurrentCount;
+
+/**
+ The mode of waiting for download queue, default is FIFO.
+ */
+@property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 ````
 
 ## More

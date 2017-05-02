@@ -41,10 +41,10 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
  @param progress   A block object to be executed when the download progress changed.
  @param completion A block object to be executed when the download completion.
  */
-- (void)downloadFileWithURL:(NSURL *)URL
-                      state:(void (^)(SRDownloadState state))state
-                   progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-                 completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
+- (void)downloadURL:(NSURL *)URL
+              state:(void (^)(SRDownloadState state))state
+           progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+         completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
 
 - (BOOL)isDownloadCompletedOfURL:(NSURL *)URL;
 

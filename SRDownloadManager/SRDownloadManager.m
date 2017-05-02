@@ -95,10 +95,10 @@
     return self;
 }
 
-- (void)downloadFileWithURL:(NSURL *)URL
-                      state:(void(^)(SRDownloadState state))state
-                   progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-                 completion:(void(^)(BOOL success, NSString *filePath, NSError *error))completion
+- (void)downloadURL:(NSURL *)URL
+              state:(void(^)(SRDownloadState state))state
+           progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+         completion:(void(^)(BOOL success, NSString *filePath, NSError *error))completion
 {
     if (!URL) {
         return;
