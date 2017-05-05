@@ -14,8 +14,19 @@
 		68E1AE151E24808400404611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AE141E24808400404611 /* Assets.xcassets */; };
 		68E1AE3E1E2480A800404611 /* SRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE3D1E2480A800404611 /* SRDownloadManager.m */; };
 		68E1AE411E2480B500404611 /* SRDownloadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE401E2480B500404611 /* SRDownloadModel.m */; };
+		6E93ECD81EBBA07D00C3239A /* SRDownloadManagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E93ECD71EBBA07D00C3239A /* SRDownloadManagerDemoTests.m */; };
 		6EBF581A1EB1162C00B2B986 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EBF58191EB1162C00B2B986 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E93ECDA1EBBA07D00C3239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68E1ADFD1E24808400404611 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68E1AE041E24808400404611;
+			remoteInfo = SRDownloadManagerDemo;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRDownloadManagerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,11 +42,21 @@
 		68E1AE3D1E2480A800404611 /* SRDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManager.m; sourceTree = "<group>"; };
 		68E1AE3F1E2480B500404611 /* SRDownloadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDownloadModel.h; sourceTree = "<group>"; };
 		68E1AE401E2480B500404611 /* SRDownloadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRDownloadModel.m; sourceTree = "<group>"; };
+		6E93ECD51EBBA07D00C3239A /* SRDownloadManagerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SRDownloadManagerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E93ECD71EBBA07D00C3239A /* SRDownloadManagerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRDownloadManagerDemoTests.m; sourceTree = "<group>"; };
+		6E93ECD91EBBA07D00C3239A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EBF58191EB1162C00B2B986 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		68E1AE021E24808400404611 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E93ECD21EBBA07D00C3239A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -48,8 +69,8 @@
 		68E1ADFC1E24808400404611 = {
 			isa = PBXGroup;
 			children = (
-				68E1AE3B1E24809B00404611 /* SRDownloadManager */,
 				68E1AE071E24808400404611 /* SRDownloadManagerDemo */,
+				6E93ECD61EBBA07D00C3239A /* SRDownloadManagerDemoTests */,
 				68E1AE061E24808400404611 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */,
+				6E93ECD51EBBA07D00C3239A /* SRDownloadManagerDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,6 +87,7 @@
 		68E1AE071E24808400404611 /* SRDownloadManagerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				68E1AE3B1E24809B00404611 /* SRDownloadManager */,
 				68E1AE0E1E24808400404611 /* ViewController.h */,
 				68E1AE0F1E24808400404611 /* ViewController.m */,
 				68E1AE111E24808400404611 /* Main.storyboard */,
@@ -94,7 +117,17 @@
 				68E1AE3F1E2480B500404611 /* SRDownloadModel.h */,
 				68E1AE401E2480B500404611 /* SRDownloadModel.m */,
 			);
-			path = SRDownloadManager;
+			name = SRDownloadManager;
+			path = ../../SRDownloadManager;
+			sourceTree = "<group>";
+		};
+		6E93ECD61EBBA07D00C3239A /* SRDownloadManagerDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E93ECD71EBBA07D00C3239A /* SRDownloadManagerDemoTests.m */,
+				6E93ECD91EBBA07D00C3239A /* Info.plist */,
+			);
+			path = SRDownloadManagerDemoTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,6 +150,24 @@
 			productReference = 68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6E93ECD41EBBA07D00C3239A /* SRDownloadManagerDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E93ECDE1EBBA07D00C3239A /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoTests" */;
+			buildPhases = (
+				6E93ECD11EBBA07D00C3239A /* Sources */,
+				6E93ECD21EBBA07D00C3239A /* Frameworks */,
+				6E93ECD31EBBA07D00C3239A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E93ECDB1EBBA07D00C3239A /* PBXTargetDependency */,
+			);
+			name = SRDownloadManagerDemoTests;
+			productName = SRDownloadManagerDemoTests;
+			productReference = 6E93ECD51EBBA07D00C3239A /* SRDownloadManagerDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -130,6 +181,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = Y4FK8UXDXW;
 						ProvisioningStyle = Manual;
+					};
+					6E93ECD41EBBA07D00C3239A = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 68E1AE041E24808400404611;
 					};
 				};
 			};
@@ -147,6 +203,7 @@
 			projectRoot = "";
 			targets = (
 				68E1AE041E24808400404611 /* SRDownloadManagerDemo */,
+				6E93ECD41EBBA07D00C3239A /* SRDownloadManagerDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -159,6 +216,13 @@
 				6EBF581A1EB1162C00B2B986 /* LaunchScreen.storyboard in Resources */,
 				68E1AE151E24808400404611 /* Assets.xcassets in Resources */,
 				68E1AE131E24808400404611 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E93ECD31EBBA07D00C3239A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +241,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E93ECD11EBBA07D00C3239A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E93ECD81EBBA07D00C3239A /* SRDownloadManagerDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6E93ECDB1EBBA07D00C3239A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68E1AE041E24808400404611 /* SRDownloadManagerDemo */;
+			targetProxy = 6E93ECDA1EBBA07D00C3239A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		68E1AE111E24808400404611 /* Main.storyboard */ = {
@@ -311,6 +391,34 @@
 			};
 			name = Release;
 		};
+		6E93ECDC1EBBA07D00C3239A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SRDownloadManagerDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SRDownloadManagerDemo.app/SRDownloadManagerDemo";
+			};
+			name = Debug;
+		};
+		6E93ECDD1EBBA07D00C3239A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SRDownloadManagerDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRDownloadManagerDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SRDownloadManagerDemo.app/SRDownloadManagerDemo";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -331,6 +439,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6E93ECDE1EBBA07D00C3239A /* Build configuration list for PBXNativeTarget "SRDownloadManagerDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E93ECDC1EBBA07D00C3239A /* Debug */,
+				6E93ECDD1EBBA07D00C3239A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

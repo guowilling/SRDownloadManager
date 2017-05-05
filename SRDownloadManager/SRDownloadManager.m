@@ -503,20 +503,25 @@
     return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
 }
 
-- (void)deleteFileOfURL:(NSURL *)URL {
-    
-    [self cancelDownloadOfURL:URL];
+- (void)deleteFile:(NSString *)fileName {
     
     NSMutableDictionary *filesTotalLenth = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
-    [filesTotalLenth removeObjectForKey:SRFileName(URL)];
+    [filesTotalLenth removeObjectForKey:fileName];
     [filesTotalLenth writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *filePath = [self fileFullPathOfURL:URL];
+    NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:fileName];
     if (![fileManager fileExistsAtPath:filePath]) {
         return;
     }
     [fileManager removeItemAtPath:filePath error:nil];
+}
+
+- (void)deleteFileOfURL:(NSURL *)URL {
+    
+    [self cancelDownloadOfURL:URL];
+    
+    [self deleteFile:SRFileName(URL)];
 }
 
 - (void)deleteAllFiles {
