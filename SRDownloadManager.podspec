@@ -1,9 +1,9 @@
 
 Pod::Spec.new do |s|
 s.name         = "SRDownloadManager"
-s.version      = "1.0.0"
-s.summary      = "Files download manager based on NSURLSession, support breakpoint download, multitasking download etc."
-s.description  = "Provide download status callback, download progress callback, download complete callback; Support multi-task at the same time to download; Support breakpoint download even exit the App; Support to delete the specified file by URL and clear all files that have been downloaded; Support customize the directory where the downloaded files are saved; Support set maximum concurrent downloads and waiting downloads queue mode."
+s.version      = "1.5.0"
+s.summary      = "File download manager based on NSURLSession. Multitasking download and breakpoint download."
+s.description  = "A file download manager based on NSURLSession. Provide multitasking download at the same time and breakpoint download even exit the App funtion. Provide download status callback, download progress callback and download completion callback."
 s.homepage     = "https://github.com/guowilling/SRDownloadManager"
 s.license      = "MIT"
 s.author       = { "guowilling" => "guowilling90@gmail.com" }

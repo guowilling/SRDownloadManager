@@ -1,10 +1,9 @@
 # SRDownloadManager
 
-A file download manager based on NSURLSession. Provide download status callback, download progress callback and download completion callback.
+A file download manager based on NSURLSession. Provide multitasking download at the same time and breakpoint download even exit the App funtion. Provide download status callback, download progress callback and download completion callback.
 
 ## Features
 
-* [x] Support multitasking download at the same time and breakpoint download even exit the App.
 * [x] Support to customize the directory where the downloaded files are saved.
 * [x] Support to set maximum concurrent downloads and waiting for download queue mode.
 * [x] Support to delete the specified file by URL or name and clear all files that have been downloaded.

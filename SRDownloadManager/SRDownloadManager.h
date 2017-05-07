@@ -2,7 +2,7 @@
 //  SRDownloadManager.h
 //  SRDownloadManager
 //
-//  Created by 郭伟林 on 17/1/10.
+//  Created by https://github.com/guowilling on 17/1/10.
 //  Copyright © 2017年 SR. All rights reserved.
 //
 
