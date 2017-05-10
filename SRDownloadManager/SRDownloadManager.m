@@ -503,6 +503,21 @@
     return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
 }
 
+- (NSUInteger)getSize {
+    
+    NSUInteger size = 0;
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *path = SRDownloadDirectory;
+    NSDirectoryEnumerator *fileEnumerator = [fileManager enumeratorAtPath:path];
+    for (NSString *fileName in fileEnumerator) {
+        NSString *filePath = [path stringByAppendingPathComponent:fileName];
+        NSDictionary<NSString *, id> *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+        size += [attrs fileSize];
+    }
+    return size;
+}
+
 - (void)deleteFile:(NSString *)fileName {
     
     NSMutableDictionary *filesTotalLenth = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];

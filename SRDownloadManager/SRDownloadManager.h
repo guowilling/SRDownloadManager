@@ -65,6 +65,8 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
 
 - (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
 
+- (NSUInteger)getSize;
+
 - (void)deleteFile:(NSString *)fileName;
 - (void)deleteFileOfURL:(NSURL *)URL;
 - (void)deleteAllFiles;
