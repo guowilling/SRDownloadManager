@@ -52,6 +52,8 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
     
     [super viewDidLoad];
     
+    NSLog(@"%@", NSHomeDirectory());
+    
     [SRDownloadManager sharedManager].saveFilesDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"CustomDownloadDirectory"];
     [SRDownloadManager sharedManager].maxConcurrentCount = 2;
     [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueModeFILO;
@@ -146,7 +148,7 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 - (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
     
     if ([button.currentTitle isEqualToString:@"Start"]) {
-        [[SRDownloadManager sharedManager] downloadURL:URL state:^(SRDownloadState state) {
+        [[SRDownloadManager sharedManager] downloadURL:URL destPath:nil state:^(SRDownloadState state) {
             [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
         } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
             currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];

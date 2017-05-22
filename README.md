@@ -1,12 +1,15 @@
 # SRDownloadManager
 
-A file download manager based on NSURLSession. Provide multitasking download at the same time and breakpoint download even exit the App funtion. Provide download status callback, download progress callback and download completion callback.
+Powerful and easy-to-use file download manager based on NSURLSession. Provide download status, progress and completion callback block.
+
+![image](./screenshots.png)
 
 ## Features
 
-* [x] Support to customize the directory where the downloaded files are saved.
+* [x] Support breakpoint download even exit the App and multitasking download at the same time.
+* [x] Support to customize the directory to save files or specify the path to save file.
 * [x] Support to set maximum concurrent downloads and waiting for download queue mode.
-* [x] Support to delete the specified file by URL or name and clear all files that have been downloaded.
+* [x] Support to delete file by URL or name and clear all files that have been downloaded.
 
 ## Installation
 
@@ -16,25 +19,31 @@ A file download manager based on NSURLSession. Provide multitasking download at 
 **Manual**
 > Drag the **SRDownloadManager** folder to the project.
 
-## Usage
+## APIs
 
 ````objc
++ (instancetype)sharedManager;
+
 /**
  Starts a file download action with URL, download state, download progress and download completion block.
-
+ 
  @param URL        The URL of the file which to be downloaded.
+ @param destPath   The path to save the file after the download is completed, if pass nil file will be saved in default path.
  @param state      A block object to be executed when the download state changed.
  @param progress   A block object to be executed when the download progress changed.
  @param completion A block object to be executed when the download completion.
  */
 - (void)downloadURL:(NSURL *)URL
+           destPath:(NSString *)destPath
               state:(void (^)(SRDownloadState state))state
            progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
          completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
 ````
 
+## Usage
+
 ````objc
-[[SRDownloadManager sharedManager] downloadURL:URL state:^(SRDownloadState state) {
+[[SRDownloadManager sharedManager] downloadURL:URL destPath:nil state:^(SRDownloadState state) {
     // Called when the download state changed.
 } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
     // Called when the download progress changed.
@@ -62,7 +71,6 @@ A file download manager based on NSURLSession. Provide multitasking download at 
 @property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 ````
 
-## More
+## Contacts
 
-For more contens please see the demo.  
-Submit an issue or email me if you have any questions.
+Submit an issue or email me if you have any questions. <guowilling90@gmail.com>

@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
 
 @property (nonatomic, assign) NSInteger totalLength;
 
+@property (nonatomic, copy) NSString *destPath;
+
 @property (nonatomic, copy) void (^state)(SRDownloadState state);
 
 @property (nonatomic, copy) void (^progress)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress);

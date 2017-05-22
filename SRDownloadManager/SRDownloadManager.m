@@ -9,7 +9,7 @@
 #import "SRDownloadManager.h"
 
 #define SRDownloadDirectory self.saveFilesDirectory ?: [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] \
-                                                         stringByAppendingPathComponent:NSStringFromClass([self class])]
+stringByAppendingPathComponent:NSStringFromClass([self class])]
 
 #define SRFileName(URL) [URL lastPathComponent] // use URL's last path component as the file's name
 
@@ -70,7 +70,7 @@
 #pragma mark - Main Methods
 
 + (instancetype)sharedManager {
-
+    
     static SRDownloadManager *downloadManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -96,9 +96,10 @@
 }
 
 - (void)downloadURL:(NSURL *)URL
-              state:(void(^)(SRDownloadState state))state
-           progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-         completion:(void(^)(BOOL success, NSString *filePath, NSError *error))completion
+           destPath:(NSString *)destPath
+              state:(void (^)(SRDownloadState state))state
+           progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+         completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion
 {
     if (!URL) {
         return;
@@ -132,6 +133,7 @@
     downloadModel.dataTask = dataTask;
     downloadModel.outputStream = [NSOutputStream outputStreamToFileAtPath:[self fileFullPathOfURL:URL] append:YES];
     downloadModel.URL = URL;
+    downloadModel.destPath = destPath;
     downloadModel.state = state;
     downloadModel.progress = progress;
     downloadModel.completion = completion;
@@ -181,9 +183,9 @@
     if (!downloadModel) {
         return;
     }
-
+    
     [downloadModel.outputStream write:data.bytes maxLength:data.length];
-
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         if (downloadModel.progress) {
             NSUInteger receivedSize = [self hasDownloadedLength:downloadModel.URL];
@@ -215,11 +217,19 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([self isDownloadCompletedOfURL:downloadModel.URL]) {
+            NSString *destPath = downloadModel.destPath;
+            NSString *fullPath = [self fileFullPathOfURL:downloadModel.URL];
+            if (destPath) {
+                NSError *error;
+                if (![[NSFileManager defaultManager] moveItemAtPath:fullPath toPath:destPath error:&error]) {
+                    NSLog(@"moveItemAtPath error: %@", error);
+                }
+            }
             if (downloadModel.state) {
                 downloadModel.state(SRDownloadStateCompleted);
             }
             if (downloadModel.completion) {
-                downloadModel.completion(YES, [self fileFullPathOfURL:downloadModel.URL], error);
+                downloadModel.completion(YES, destPath ?: fullPath, error);
             }
         } else {
             if (downloadModel.state) {
