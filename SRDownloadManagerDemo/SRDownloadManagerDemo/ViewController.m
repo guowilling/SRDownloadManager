@@ -39,6 +39,8 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 @property (weak, nonatomic) IBOutlet UILabel *currentSizeLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *currentSizeLabel3;
 
+@property (weak, nonatomic) IBOutlet UILabel *allSizeLabel;
+
 @end
 
 @implementation ViewController
@@ -237,6 +239,12 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 - (IBAction)cancelAllDownloads:(UIBarButtonItem *)sender {
     
     [[SRDownloadManager sharedManager] cancelAllDownloads];
+}
+
+- (IBAction)getSizeButtonAction:(UIButton *)sender {
+    
+    NSUInteger size = [[SRDownloadManager sharedManager] getSize];
+    _allSizeLabel.text = [NSString stringWithFormat:@"%.1fMB",size*1.0/1024/1024];
 }
 
 @end
