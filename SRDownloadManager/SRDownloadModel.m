@@ -11,7 +11,6 @@
 @implementation SRDownloadModel
 
 - (void)openOutputStream {
-    
     if (!_outputStream) {
         return;
     }
@@ -19,7 +18,6 @@
 }
 
 - (void)closeOutputStream {
-    
     if (!_outputStream) {
         return;
     }

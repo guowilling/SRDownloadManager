@@ -44,12 +44,10 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 @implementation ViewController
 
 - (BOOL)prefersStatusBarHidden {
-    
     return YES;
 }
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     
     NSLog(@"%@", NSHomeDirectory());
@@ -90,33 +88,7 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 
 #pragma mark - Actions
 
-- (IBAction)deleteAllFiles:(UIBarButtonItem *)sender {
-    
-    [[SRDownloadManager sharedManager] deleteAllFiles];
-    
-    self.progressView1.progress = 0.0;
-    self.progressView2.progress = 0.0;
-    self.progressView3.progress = 0.0;
-    
-    self.currentSizeLabel1.text = @"0";
-    self.currentSizeLabel2.text = @"0";
-    self.currentSizeLabel3.text = @"0";
-    
-    self.totalSizeLabel1.text = @"0";
-    self.totalSizeLabel2.text = @"0";
-    self.totalSizeLabel3.text = @"0";
-    
-    self.progressLabel1.text = @"0%";
-    self.progressLabel2.text = @"0%";
-    self.progressLabel3.text = @"0%";
-    
-    [self.downloadButton1 setTitle:@"Start" forState:UIControlStateNormal];
-    [self.downloadButton2 setTitle:@"Start" forState:UIControlStateNormal];
-    [self.downloadButton3 setTitle:@"Start" forState:UIControlStateNormal];
-}
-
 - (IBAction)downloadFile1:(UIButton *)sender {
-    
     [self download:kDownloadURL1
     totalSizeLabel:self.totalSizeLabel1
   currentSizeLabel:self.currentSizeLabel1
@@ -126,7 +98,6 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 }
 
 - (IBAction)downloadFile2:(UIButton *)sender {
-    
     [self download:kDownloadURL2
     totalSizeLabel:self.totalSizeLabel2
   currentSizeLabel:self.currentSizeLabel2
@@ -136,7 +107,6 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 }
 
 - (IBAction)downloadFile3:(UIButton *)sender {
-    
     [self download:kDownloadURL3
     totalSizeLabel:self.totalSizeLabel3
   currentSizeLabel:self.currentSizeLabel3
@@ -146,7 +116,6 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 }
 
 - (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
-    
     if ([button.currentTitle isEqualToString:@"Start"]) {
         [[SRDownloadManager sharedManager] downloadURL:URL destPath:nil state:^(SRDownloadState state) {
             [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
@@ -174,7 +143,6 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 }
 
 - (NSString *)titleWithDownloadState:(SRDownloadState)state {
-    
     switch (state) {
         case SRDownloadStateWaiting:
             return @"Waiting";
@@ -192,7 +160,6 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 }
 
 - (IBAction)deleteFile1:(UIButton *)sender {
-    
     [[SRDownloadManager sharedManager] deleteFileOfURL:kDownloadURL1];
     
     self.progressView1.progress = 0.0;
@@ -203,7 +170,6 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 }
 
 - (IBAction)deleteFile2:(UIButton *)sender {
-    
     [[SRDownloadManager sharedManager] deleteFileOfURL:kDownloadURL2];
     
     self.progressView2.progress = 0.0;
@@ -214,7 +180,6 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 }
 
 - (IBAction)deleteFile3:(UIButton *)sender {
-    
     [[SRDownloadManager sharedManager] deleteFileOfURL:kDownloadURL3];
     
     self.progressView3.progress = 0.0;
@@ -224,19 +189,40 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
     [self.downloadButton3 setTitle:@"Start" forState:UIControlStateNormal];
 }
 
-- (IBAction)suspendAllDownloads:(UIButton *)sender {
+- (IBAction)cancelAllDownloads:(UIBarButtonItem *)sender {
+    [[SRDownloadManager sharedManager] cancelAllDownloads];
+}
+
+- (IBAction)deleteAllFiles:(UIBarButtonItem *)sender {
+    [[SRDownloadManager sharedManager] deleteAllFiles];
     
+    self.progressView1.progress = 0.0;
+    self.progressView2.progress = 0.0;
+    self.progressView3.progress = 0.0;
+    
+    self.currentSizeLabel1.text = @"0";
+    self.currentSizeLabel2.text = @"0";
+    self.currentSizeLabel3.text = @"0";
+    
+    self.totalSizeLabel1.text = @"0";
+    self.totalSizeLabel2.text = @"0";
+    self.totalSizeLabel3.text = @"0";
+    
+    self.progressLabel1.text = @"0%";
+    self.progressLabel2.text = @"0%";
+    self.progressLabel3.text = @"0%";
+    
+    [self.downloadButton1 setTitle:@"Start" forState:UIControlStateNormal];
+    [self.downloadButton2 setTitle:@"Start" forState:UIControlStateNormal];
+    [self.downloadButton3 setTitle:@"Start" forState:UIControlStateNormal];
+}
+
+- (IBAction)suspendAllDownloads:(UIButton *)sender {
     [[SRDownloadManager sharedManager] suspendAllDownloads];
 }
 
 - (IBAction)resumeAllDownloads:(UIButton *)sender {
-    
     [[SRDownloadManager sharedManager] resumeAllDownloads];
-}
-
-- (IBAction)cancelAllDownloads:(UIBarButtonItem *)sender {
-    
-    [[SRDownloadManager sharedManager] cancelAllDownloads];
 }
 
 @end
