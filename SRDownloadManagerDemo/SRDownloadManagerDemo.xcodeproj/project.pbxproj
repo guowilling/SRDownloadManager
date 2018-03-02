@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		688FC7EC20496520002C79B3 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7C520496520002C79B3 /* MASCompositeConstraint.m */; };
+		688FC7ED20496520002C79B3 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7C820496520002C79B3 /* MASConstraint.m */; };
+		688FC7EE20496520002C79B3 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7CA20496520002C79B3 /* MASConstraintMaker.m */; };
+		688FC7EF20496520002C79B3 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7CC20496520002C79B3 /* MASLayoutConstraint.m */; };
+		688FC7F020496520002C79B3 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7D020496520002C79B3 /* MASViewAttribute.m */; };
+		688FC7F120496520002C79B3 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7D220496520002C79B3 /* MASViewConstraint.m */; };
+		688FC7F220496520002C79B3 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7D420496520002C79B3 /* NSArray+MASAdditions.m */; };
+		688FC7F320496520002C79B3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7D720496520002C79B3 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		688FC7F420496520002C79B3 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7D920496520002C79B3 /* View+MASAdditions.m */; };
+		688FC7F520496520002C79B3 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7DC20496520002C79B3 /* ViewController+MASAdditions.m */; };
+		688FC7F620496520002C79B3 /* SRBrightnessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7DE20496520002C79B3 /* SRBrightnessView.m */; };
+		688FC7F720496520002C79B3 /* SRPlayerLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7E020496520002C79B3 /* SRPlayerLayerView.m */; };
+		688FC7F820496520002C79B3 /* SRVideoBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7E220496520002C79B3 /* SRVideoBottomBar.m */; };
+		688FC7F920496520002C79B3 /* SRVideoDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7E420496520002C79B3 /* SRVideoDownloader.m */; };
+		688FC7FA20496520002C79B3 /* SRVideoPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 688FC7E520496520002C79B3 /* SRVideoPlayer.bundle */; };
+		688FC7FB20496520002C79B3 /* SRVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7E720496520002C79B3 /* SRVideoPlayer.m */; };
+		688FC7FC20496520002C79B3 /* SRVideoProgressTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7E920496520002C79B3 /* SRVideoProgressTip.m */; };
+		688FC7FD20496520002C79B3 /* SRVideoTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 688FC7EB20496520002C79B3 /* SRVideoTopBar.m */; };
 		68E1AE0A1E24808400404611 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE091E24808400404611 /* main.m */; };
 		68E1AE0D1E24808400404611 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE0C1E24808400404611 /* AppDelegate.m */; };
 		68E1AE101E24808400404611 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AE0F1E24808400404611 /* ViewController.m */; };
@@ -18,6 +36,46 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		688FC7C420496520002C79B3 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
+		688FC7C520496520002C79B3 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
+		688FC7C620496520002C79B3 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
+		688FC7C720496520002C79B3 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
+		688FC7C820496520002C79B3 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
+		688FC7C920496520002C79B3 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
+		688FC7CA20496520002C79B3 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
+		688FC7CB20496520002C79B3 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
+		688FC7CC20496520002C79B3 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
+		688FC7CD20496520002C79B3 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
+		688FC7CE20496520002C79B3 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
+		688FC7CF20496520002C79B3 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
+		688FC7D020496520002C79B3 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		688FC7D120496520002C79B3 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
+		688FC7D220496520002C79B3 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
+		688FC7D320496520002C79B3 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		688FC7D420496520002C79B3 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		688FC7D520496520002C79B3 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		688FC7D620496520002C79B3 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		688FC7D720496520002C79B3 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		688FC7D820496520002C79B3 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
+		688FC7D920496520002C79B3 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
+		688FC7DA20496520002C79B3 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		688FC7DB20496520002C79B3 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		688FC7DC20496520002C79B3 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		688FC7DD20496520002C79B3 /* SRBrightnessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRBrightnessView.h; sourceTree = "<group>"; };
+		688FC7DE20496520002C79B3 /* SRBrightnessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRBrightnessView.m; sourceTree = "<group>"; };
+		688FC7DF20496520002C79B3 /* SRPlayerLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRPlayerLayerView.h; sourceTree = "<group>"; };
+		688FC7E020496520002C79B3 /* SRPlayerLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRPlayerLayerView.m; sourceTree = "<group>"; };
+		688FC7E120496520002C79B3 /* SRVideoBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRVideoBottomBar.h; sourceTree = "<group>"; };
+		688FC7E220496520002C79B3 /* SRVideoBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRVideoBottomBar.m; sourceTree = "<group>"; };
+		688FC7E320496520002C79B3 /* SRVideoDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRVideoDownloader.h; sourceTree = "<group>"; };
+		688FC7E420496520002C79B3 /* SRVideoDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRVideoDownloader.m; sourceTree = "<group>"; };
+		688FC7E520496520002C79B3 /* SRVideoPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SRVideoPlayer.bundle; sourceTree = "<group>"; };
+		688FC7E620496520002C79B3 /* SRVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRVideoPlayer.h; sourceTree = "<group>"; };
+		688FC7E720496520002C79B3 /* SRVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRVideoPlayer.m; sourceTree = "<group>"; };
+		688FC7E820496520002C79B3 /* SRVideoProgressTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRVideoProgressTip.h; sourceTree = "<group>"; };
+		688FC7E920496520002C79B3 /* SRVideoProgressTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRVideoProgressTip.m; sourceTree = "<group>"; };
+		688FC7EA20496520002C79B3 /* SRVideoTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRVideoTopBar.h; sourceTree = "<group>"; };
+		688FC7EB20496520002C79B3 /* SRVideoTopBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRVideoTopBar.m; sourceTree = "<group>"; };
 		68E1AE051E24808400404611 /* SRDownloadManagerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRDownloadManagerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68E1AE091E24808400404611 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		68E1AE0B1E24808400404611 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -45,6 +103,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		688FC7C220496520002C79B3 /* SRVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				688FC7C320496520002C79B3 /* Masonry */,
+				688FC7DD20496520002C79B3 /* SRBrightnessView.h */,
+				688FC7DE20496520002C79B3 /* SRBrightnessView.m */,
+				688FC7DF20496520002C79B3 /* SRPlayerLayerView.h */,
+				688FC7E020496520002C79B3 /* SRPlayerLayerView.m */,
+				688FC7E120496520002C79B3 /* SRVideoBottomBar.h */,
+				688FC7E220496520002C79B3 /* SRVideoBottomBar.m */,
+				688FC7E320496520002C79B3 /* SRVideoDownloader.h */,
+				688FC7E420496520002C79B3 /* SRVideoDownloader.m */,
+				688FC7E520496520002C79B3 /* SRVideoPlayer.bundle */,
+				688FC7E620496520002C79B3 /* SRVideoPlayer.h */,
+				688FC7E720496520002C79B3 /* SRVideoPlayer.m */,
+				688FC7E820496520002C79B3 /* SRVideoProgressTip.h */,
+				688FC7E920496520002C79B3 /* SRVideoProgressTip.m */,
+				688FC7EA20496520002C79B3 /* SRVideoTopBar.h */,
+				688FC7EB20496520002C79B3 /* SRVideoTopBar.m */,
+			);
+			path = SRVideoPlayer;
+			sourceTree = "<group>";
+		};
+		688FC7C320496520002C79B3 /* Masonry */ = {
+			isa = PBXGroup;
+			children = (
+				688FC7C420496520002C79B3 /* MASCompositeConstraint.h */,
+				688FC7C520496520002C79B3 /* MASCompositeConstraint.m */,
+				688FC7C620496520002C79B3 /* MASConstraint+Private.h */,
+				688FC7C720496520002C79B3 /* MASConstraint.h */,
+				688FC7C820496520002C79B3 /* MASConstraint.m */,
+				688FC7C920496520002C79B3 /* MASConstraintMaker.h */,
+				688FC7CA20496520002C79B3 /* MASConstraintMaker.m */,
+				688FC7CB20496520002C79B3 /* MASLayoutConstraint.h */,
+				688FC7CC20496520002C79B3 /* MASLayoutConstraint.m */,
+				688FC7CD20496520002C79B3 /* Masonry.h */,
+				688FC7CE20496520002C79B3 /* MASUtilities.h */,
+				688FC7CF20496520002C79B3 /* MASViewAttribute.h */,
+				688FC7D020496520002C79B3 /* MASViewAttribute.m */,
+				688FC7D120496520002C79B3 /* MASViewConstraint.h */,
+				688FC7D220496520002C79B3 /* MASViewConstraint.m */,
+				688FC7D320496520002C79B3 /* NSArray+MASAdditions.h */,
+				688FC7D420496520002C79B3 /* NSArray+MASAdditions.m */,
+				688FC7D520496520002C79B3 /* NSArray+MASShorthandAdditions.h */,
+				688FC7D620496520002C79B3 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				688FC7D720496520002C79B3 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				688FC7D820496520002C79B3 /* View+MASAdditions.h */,
+				688FC7D920496520002C79B3 /* View+MASAdditions.m */,
+				688FC7DA20496520002C79B3 /* View+MASShorthandAdditions.h */,
+				688FC7DB20496520002C79B3 /* ViewController+MASAdditions.h */,
+				688FC7DC20496520002C79B3 /* ViewController+MASAdditions.m */,
+			);
+			path = Masonry;
+			sourceTree = "<group>";
+		};
 		68E1ADFC1E24808400404611 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +189,7 @@
 		68E1AE081E24808400404611 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				688FC7C220496520002C79B3 /* SRVideoPlayer */,
 				68E1AE091E24808400404611 /* main.m */,
 				68E1AE0B1E24808400404611 /* AppDelegate.h */,
 				68E1AE0C1E24808400404611 /* AppDelegate.m */,
@@ -158,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EBF581A1EB1162C00B2B986 /* LaunchScreen.storyboard in Resources */,
+				688FC7FA20496520002C79B3 /* SRVideoPlayer.bundle in Resources */,
 				68E1AE151E24808400404611 /* Assets.xcassets in Resources */,
 				68E1AE131E24808400404611 /* Main.storyboard in Resources */,
 			);
@@ -170,10 +285,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				688FC7F320496520002C79B3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				688FC7F820496520002C79B3 /* SRVideoBottomBar.m in Sources */,
 				68E1AE101E24808400404611 /* ViewController.m in Sources */,
+				688FC7F120496520002C79B3 /* MASViewConstraint.m in Sources */,
 				68E1AE0D1E24808400404611 /* AppDelegate.m in Sources */,
 				68E1AE411E2480B500404611 /* SRDownloadModel.m in Sources */,
+				688FC7F920496520002C79B3 /* SRVideoDownloader.m in Sources */,
+				688FC7FB20496520002C79B3 /* SRVideoPlayer.m in Sources */,
 				68E1AE3E1E2480A800404611 /* SRDownloadManager.m in Sources */,
+				688FC7F620496520002C79B3 /* SRBrightnessView.m in Sources */,
+				688FC7F420496520002C79B3 /* View+MASAdditions.m in Sources */,
+				688FC7EC20496520002C79B3 /* MASCompositeConstraint.m in Sources */,
+				688FC7F020496520002C79B3 /* MASViewAttribute.m in Sources */,
+				688FC7EE20496520002C79B3 /* MASConstraintMaker.m in Sources */,
+				688FC7F220496520002C79B3 /* NSArray+MASAdditions.m in Sources */,
+				688FC7F520496520002C79B3 /* ViewController+MASAdditions.m in Sources */,
+				688FC7FD20496520002C79B3 /* SRVideoTopBar.m in Sources */,
+				688FC7F720496520002C79B3 /* SRPlayerLayerView.m in Sources */,
+				688FC7ED20496520002C79B3 /* MASConstraint.m in Sources */,
+				688FC7FC20496520002C79B3 /* SRVideoProgressTip.m in Sources */,
+				688FC7EF20496520002C79B3 /* MASLayoutConstraint.m in Sources */,
 				68E1AE0A1E24808400404611 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

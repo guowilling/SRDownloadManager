@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "SRDownloadManager.h"
+#import "SRVideoPlayer.h"
 
 NSString * const downloadURLString1 = @"http://yxfile.idealsee.com/9f6f64aca98f90b91d260555d3b41b97_mp4.mp4";
 NSString * const downloadURLString2 = @"http://yxfile.idealsee.com/31f9a479a9c2189bb3ee6e5c581d2026_mp4.mp4";
@@ -38,6 +39,8 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
 @property (weak, nonatomic) IBOutlet UILabel *currentSizeLabel1;
 @property (weak, nonatomic) IBOutlet UILabel *currentSizeLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *currentSizeLabel3;
+
+@property (nonatomic, strong) SRVideoPlayer *videoPlayer;
 
 @end
 
@@ -138,7 +141,18 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
     } else if ([button.currentTitle isEqualToString:@"Resume"]) {
         [[SRDownloadManager sharedManager] resumeDownloadOfURL:URL];
     } else if ([button.currentTitle isEqualToString:@"Finish"]) {
-        NSLog(@"File has been downloaded! It's path is: %@", [[SRDownloadManager sharedManager] fileFullPathOfURL:URL]);
+        NSString *fileFullPath = [[SRDownloadManager sharedManager] fileFullPathOfURL:URL];
+        NSLog(@"File has been downloaded! It's path is: %@", fileFullPath);
+        
+        UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width)];
+        playerView.center = self.view.center;
+        [self.view addSubview:playerView];
+        _videoPlayer = [SRVideoPlayer playerWithVideoURL:[[NSURL alloc] initFileURLWithPath:fileFullPath]
+                                              playerView:playerView
+                                         playerSuperView:playerView.superview];
+        _videoPlayer.videoName = @"Here Is The Video Name";
+        _videoPlayer.playerEndAction = SRVideoPlayerEndActionLoop;
+        [_videoPlayer play];
     }
 }
 

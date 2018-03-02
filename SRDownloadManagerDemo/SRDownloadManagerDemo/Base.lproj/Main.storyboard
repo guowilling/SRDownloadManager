@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wZD-jN-skQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wZD-jN-skQ">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -126,7 +125,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exu-jB-PwM">
-                                <rect key="frame" x="50" y="656" width="82" height="30"/>
+                                <rect key="frame" x="50" y="606" width="82" height="30"/>
                                 <state key="normal" title="Suspend All">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -135,7 +134,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kv1-oV-RSU">
-                                <rect key="frame" x="288" y="656" width="76" height="30"/>
+                                <rect key="frame" x="288" y="606" width="76" height="30"/>
                                 <state key="normal" title="Resume All">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -215,7 +214,7 @@
                             <constraint firstItem="ljj-zj-xYo" firstAttribute="leading" secondItem="Y3d-FM-yIE" secondAttribute="trailing" constant="10" id="Mtf-Ko-wEA"/>
                             <constraint firstItem="MBt-MJ-NHI" firstAttribute="centerY" secondItem="kC0-Fn-HxU" secondAttribute="centerY" id="OJ3-tY-zaE"/>
                             <constraint firstItem="2HQ-fe-yfg" firstAttribute="trailing" secondItem="ljj-zj-xYo" secondAttribute="trailing" id="Q8M-MW-2Eu"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="exu-jB-PwM" secondAttribute="bottom" constant="50" id="San-2i-eSV"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="exu-jB-PwM" secondAttribute="bottom" constant="100" id="San-2i-eSV"/>
                             <constraint firstItem="exu-jB-PwM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="Umx-hd-7Tl"/>
                             <constraint firstItem="KfW-aC-BmE" firstAttribute="top" secondItem="MBt-MJ-NHI" secondAttribute="bottom" constant="10" id="VZC-vY-Bdt"/>
                             <constraint firstItem="C3u-wn-xEn" firstAttribute="centerY" secondItem="2HQ-fe-yfg" secondAttribute="centerY" id="XzX-Kn-OVJ"/>
@@ -283,7 +282,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZD-jN-skQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPv-KJ-WXb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
