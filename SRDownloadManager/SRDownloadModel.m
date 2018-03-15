@@ -21,7 +21,7 @@
     if (!_outputStream) {
         return;
     }
-    if (_outputStream.streamStatus > NSStreamStatusNotOpen && _outputStream.streamStatus < NSStreamStatusClosed) {
+    if (NSStreamStatusNotOpen < _outputStream.streamStatus && _outputStream.streamStatus < NSStreamStatusClosed) {
         [_outputStream close];
     }
     _outputStream = nil;

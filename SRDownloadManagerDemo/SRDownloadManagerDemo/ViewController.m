@@ -118,7 +118,13 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
             button:sender];
 }
 
-- (void)download:(NSURL *)URL totalSizeLabel:(UILabel *)totalSizeLabel currentSizeLabel:(UILabel *)currentSizeLabel progressLabel:(UILabel *)progressLabel progressView:(UIProgressView *)progressView button:(UIButton *)button {
+- (void)download:(NSURL *)URL
+  totalSizeLabel:(UILabel *)totalSizeLabel
+currentSizeLabel:(UILabel *)currentSizeLabel
+   progressLabel:(UILabel *)progressLabel
+    progressView:(UIProgressView *)progressView
+          button:(UIButton *)button
+{
     if ([button.currentTitle isEqualToString:@"Start"]) {
         [[SRDownloadManager sharedManager] downloadURL:URL destPath:nil state:^(SRDownloadState state) {
             [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];

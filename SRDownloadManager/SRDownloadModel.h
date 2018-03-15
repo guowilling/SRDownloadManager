@@ -18,9 +18,15 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
     SRDownloadStateFailed
 };
 
+typedef void (^SRStateBlock)(SRDownloadState state);
+
+typedef void (^SRProgressBlock)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress);
+
+typedef void (^SRCompletionBlock)(BOOL success, NSString *filePath, NSError *error);
+
 @interface SRDownloadModel : NSObject
 
-@property (nonatomic, strong) NSOutputStream *outputStream; // write datas to the file
+@property (nonatomic, strong) NSOutputStream *outputStream;
 
 @property (nonatomic, strong) NSURLSessionDataTask *dataTask;
 
@@ -30,11 +36,11 @@ typedef NS_ENUM(NSInteger, SRDownloadState) {
 
 @property (nonatomic, copy) NSString *destPath;
 
-@property (nonatomic, copy) void (^state)(SRDownloadState state);
+@property (nonatomic, copy) SRStateBlock state;
 
-@property (nonatomic, copy) void (^progress)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress);
+@property (nonatomic, copy) SRProgressBlock progress;
 
-@property (nonatomic, copy) void (^completion)(BOOL isSuccess, NSString *filePath, NSError *error);
+@property (nonatomic, copy) SRCompletionBlock completion;
 
 - (void)openOutputStream;
 
