@@ -27,6 +27,8 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 
 @property (nonatomic, strong) NSMutableArray *waitingModels; // a array contains models which are waiting for download
 
+@property (nonatomic, strong) NSMutableDictionary *filesTotalLengthPlist;
+
 @end
 
 @implementation SRDownloadManager
@@ -61,6 +63,16 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
         _waitingModels = [NSMutableArray array];
     }
     return _waitingModels;
+}
+
+- (NSMutableDictionary *)filesTotalLengthPlist {
+    if (!_filesTotalLengthPlist) {
+        _filesTotalLengthPlist = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
+        if (!_filesTotalLengthPlist) {
+            _filesTotalLengthPlist = [NSMutableDictionary dictionary];
+        }
+    }
+    return _filesTotalLengthPlist;
 }
 
 #pragma mark - Main Methods
@@ -157,10 +169,8 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     // response.expectedContentLength + [self hasDownloadedLength:downloadModel.URL] == [[HTTPResponse.allHeaderFields[@"Content-Range"] componentsSeparatedByString:@"/"].lastObject integerValue]
     NSInteger totalLength = response.expectedContentLength + [self hasDownloadedLength:downloadModel.URL];
     downloadModel.totalLength = totalLength;
-    
-    NSMutableDictionary *filesTotalLengthPlist = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath] ?: [NSMutableDictionary dictionary];
-    filesTotalLengthPlist[SRFileName(downloadModel.URL)] = @(totalLength);
-    [filesTotalLengthPlist writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
+    self.filesTotalLengthPlist[SRFileName(downloadModel.URL)] = @(totalLength);
+    [self.filesTotalLengthPlist writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
     
     completionHandler(NSURLSessionResponseAllow);
 }
@@ -205,8 +215,8 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
             }
         } else {
             if ([self isDownloadCompletedOfURL:downloadModel.URL]) {
-                NSString *destPath = downloadModel.destPath;
                 NSString *fullPath = [self fileFullPathOfURL:downloadModel.URL];
+                NSString *destPath = downloadModel.destPath;
                 if (destPath) {
                     [[NSFileManager defaultManager] moveItemAtPath:fullPath toPath:destPath error:nil];
                 }
@@ -244,14 +254,13 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 }
 
 - (NSInteger)totalLength:(NSURL *)URL {
-    NSDictionary *filesTotalLenth = [NSDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
-    if (!filesTotalLenth) {
+    if (self.filesTotalLengthPlist.count == 0) {
         return 0;
     }
-    if (!filesTotalLenth[SRFileName(URL)]) {
+    if (!self.filesTotalLengthPlist[SRFileName(URL)]) {
         return 0;
     }
-    return [filesTotalLenth[SRFileName(URL)] integerValue];
+    return [self.filesTotalLengthPlist[SRFileName(URL)] integerValue];
 }
 
 - (NSInteger)hasDownloadedLength:(NSURL *)URL {
@@ -308,7 +317,7 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 
 - (void)setSaveFilesDirectory:(NSString *)saveFilesDirectory {
     _saveFilesDirectory = saveFilesDirectory;
-
+    
     if (!saveFilesDirectory) {
         return;
     }
@@ -463,9 +472,8 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 - (void)deleteFileOfURL:(NSURL *)URL {
     [self cancelDownloadOfURL:URL];
     
-    NSMutableDictionary *filesTotalLenth = [NSMutableDictionary dictionaryWithContentsOfFile:SRFilesTotalLengthPlistPath];
-    [filesTotalLenth removeObjectForKey:SRFileName(URL)];
-    [filesTotalLenth writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
+    [self.filesTotalLengthPlist removeObjectForKey:SRFileName(URL)];
+    [self.filesTotalLengthPlist writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:SRFileName(URL)];
