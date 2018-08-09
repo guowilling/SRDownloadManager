@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wZD-jN-skQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wZD-jN-skQ">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kC0-Fn-HxU">
-                                <rect key="frame" x="10" y="256" width="60" height="25"/>
+                                <rect key="frame" x="10" y="256" width="75" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="RiI-6M-o4Y"/>
-                                    <constraint firstAttribute="width" constant="60" id="t7d-Ys-PBS"/>
+                                    <constraint firstAttribute="width" constant="75" id="t7d-Ys-PBS"/>
                                 </constraints>
                                 <state key="normal" title="Start"/>
                                 <state key="selected" title="暂停">
@@ -37,10 +37,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYZ-XL-8Pj">
-                                <rect key="frame" x="10" y="356" width="60" height="25"/>
+                                <rect key="frame" x="10" y="356" width="75" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="sFS-c5-oru"/>
-                                    <constraint firstAttribute="width" constant="60" id="wxT-R9-pld"/>
+                                    <constraint firstAttribute="width" constant="75" id="wxT-R9-pld"/>
                                 </constraints>
                                 <state key="normal" title="Start"/>
                                 <state key="selected" title="暂停">
@@ -51,7 +51,7 @@
                                 </connections>
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MBt-MJ-NHI">
-                                <rect key="frame" x="80" y="267" width="219" height="2"/>
+                                <rect key="frame" x="95" y="267" width="204" height="2"/>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ptw-5h-bof">
                                 <rect key="frame" x="309" y="258" width="40" height="20"/>
@@ -76,19 +76,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ze4-DS-WXd">
-                                <rect key="frame" x="185" y="236" width="10" height="21"/>
+                                <rect key="frame" x="192.66666666666666" y="236" width="10" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfW-aC-BmE">
-                                <rect key="frame" x="185" y="279" width="10" height="21"/>
+                                <rect key="frame" x="192.66666666666666" y="279" width="10" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ADQ-Nc-VAF">
-                                <rect key="frame" x="80" y="367" width="219" height="2"/>
+                                <rect key="frame" x="95" y="367" width="204" height="2"/>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3d-FM-yIE">
                                 <rect key="frame" x="309" y="358" width="40" height="20"/>
@@ -113,13 +113,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLI-7b-U1j">
-                                <rect key="frame" x="185" y="379" width="10" height="21"/>
+                                <rect key="frame" x="192.66666666666666" y="379" width="10" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CV7-Cj-4F9">
-                                <rect key="frame" x="185" y="336" width="10" height="21"/>
+                                <rect key="frame" x="192.66666666666666" y="336" width="10" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -143,9 +143,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ez2-f0-gNM">
-                                <rect key="frame" x="10" y="455.66666666666669" width="60" height="25"/>
+                                <rect key="frame" x="10" y="455.66666666666669" width="75" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Qil-YB-4xQ"/>
+                                    <constraint firstAttribute="width" constant="75" id="Qil-YB-4xQ"/>
                                     <constraint firstAttribute="height" constant="25" id="pg5-UR-ESX"/>
                                 </constraints>
                                 <state key="normal" title="Start"/>
@@ -157,7 +157,7 @@
                                 </connections>
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="87X-yF-6fi">
-                                <rect key="frame" x="80" y="467.33333333333331" width="219" height="2"/>
+                                <rect key="frame" x="95" y="467.33333333333331" width="204" height="2"/>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="245" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3u-wn-xEn">
                                 <rect key="frame" x="309" y="458.33333333333331" width="40" height="20"/>
@@ -182,13 +182,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ip-1m-MGc">
-                                <rect key="frame" x="184" y="479.33333333333331" width="10" height="21"/>
+                                <rect key="frame" x="191.66666666666666" y="479.33333333333331" width="10" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5q-yt-0dq">
-                                <rect key="frame" x="184" y="436.33333333333331" width="10" height="21"/>
+                                <rect key="frame" x="191.66666666666666" y="436.33333333333331" width="10" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

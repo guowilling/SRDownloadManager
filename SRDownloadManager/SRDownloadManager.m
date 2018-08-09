@@ -77,19 +77,32 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 
 #pragma mark - Main Methods
 
+- (instancetype)init {
+    [NSException raise:@"SingletonPattern"
+                format:@"Cannot instantiate singleton using init method, must be use sharedManager."];
+    return nil;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    [NSException raise:@"SingletonPattern"
+                format:@"Cannot copy singleton using copy method, must be use sharedManager."];
+    return nil;
+}
+
 + (instancetype)sharedManager {
     static SRDownloadManager *downloadManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        downloadManager = [[self alloc] init];
-        downloadManager.maxConcurrentCount = -1;
-        downloadManager.waitingQueueMode = SRWaitingQueueModeFIFO;
+        downloadManager = [[self alloc] initManager];
     });
     return downloadManager;
 }
 
-- (instancetype)init {
+- (instancetype)initManager {
     if (self = [super init]) {
+        _maxConcurrentCount = -1;
+        _waitingQueueMode = SRWaitingQueueModeFIFO;
+        
         NSString *downloadDirectory = SRDownloadDirectory;
         BOOL isDirectory = NO;
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -242,7 +255,6 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 
 #pragma mark - Assist Methods
 
-/// check if the current downloading tasks is larger than the max concurrent downloads
 - (BOOL)canResumeDownload {
     if (self.maxConcurrentCount == -1) {
         return YES;
@@ -307,12 +319,13 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 
 - (BOOL)isDownloadCompletedOfURL:(NSURL *)URL {
     NSInteger totalLength = [self totalLength:URL];
-    if (totalLength != 0) {
-        if (totalLength == [self hasDownloadedLength:URL]) {
-            return YES;
-        }
+    if (totalLength == 0) {
+        return NO;
     }
-    return NO;
+    if ([self hasDownloadedLength:URL] != totalLength) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)setSaveFilesDirectory:(NSString *)saveFilesDirectory {
@@ -332,6 +345,10 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 #pragma mark - Downloads
 
 - (void)suspendDownloadOfURL:(NSURL *)URL {
+    [self suspendDownloadOfURL:URL resumeNext:YES];
+}
+
+- (void)suspendDownloadOfURL:(NSURL *)URL resumeNext:(BOOL)flag {
     SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (!downloadModel) {
         return;
@@ -347,31 +364,18 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
         [self.downloadingModels removeObject:downloadModel];
     }
     
-    [self resumeNextDowloadModel];
+    if (flag) {
+        [self resumeNextDowloadModel];
+    }
 }
 
-- (void)suspendAllDownloads {
+- (void)suspendDownloadsAll {
     if (self.downloadModels.count == 0) {
         return;
     }
-    if (self.waitingModels.count > 0) {
-        for (NSInteger i = 0; i < self.waitingModels.count; i++) {
-            SRDownloadModel *downloadModel = self.waitingModels[i];
-            if (downloadModel.state) {
-                downloadModel.state(SRDownloadStateSuspended);
-            }
-        }
-        [self.waitingModels removeAllObjects];
-    }
-    if (self.downloadingModels.count > 0) {
-        for (NSInteger i = 0; i < self.downloadingModels.count; i++) {
-            SRDownloadModel *downloadModel = self.downloadingModels[i];
-            [downloadModel.dataTask suspend];
-            if (downloadModel.state) {
-                downloadModel.state(SRDownloadStateSuspended);
-            }
-        }
-        [self.downloadingModels removeAllObjects];
+    NSArray *downloadModels = self.downloadModels.allValues;
+    for (SRDownloadModel *downloadModel in downloadModels) {
+        [self suspendDownloadOfURL:downloadModel.URL resumeNext:NO];
     }
 }
 
@@ -394,34 +398,28 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     }
 }
 
-- (void)resumeAllDownloads {
+- (void)resumeDownloadsAll {
     if (self.downloadModels.count == 0) {
         return;
     }
     NSArray *downloadModels = self.downloadModels.allValues;
     for (SRDownloadModel *downloadModel in downloadModels) {
-        SRDownloadState downloadState;
-        if ([self canResumeDownload]) {
-            [self.downloadingModels addObject:downloadModel];
-            [downloadModel.dataTask resume];
-            downloadState = SRDownloadStateRunning;
-        } else {
-            [self.waitingModels addObject:downloadModel];
-            downloadState = SRDownloadStateWaiting;
-        }
-        if (downloadModel.state) {
-            downloadModel.state(downloadState);
-        }
+        [self resumeDownloadOfURL:downloadModel.URL];
     }
 }
 
 - (void)cancelDownloadOfURL:(NSURL *)URL {
+    [self cancelDownloadOfURL:URL resumeNext:YES];
+}
+
+- (void)cancelDownloadOfURL:(NSURL *)URL resumeNext:(BOOL)flag {
     SRDownloadModel *downloadModel = self.downloadModels[SRFileName(URL)];
     if (!downloadModel) {
         return;
     }
     [downloadModel closeOutputStream];
     [downloadModel.dataTask cancel];
+    
     if (downloadModel.state) {
         downloadModel.state(SRDownloadStateCanceled);
     }
@@ -433,43 +431,24 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     }
     [self.downloadModels removeObjectForKey:SRFileName(URL)];
     
-    [self resumeNextDowloadModel];
+    if (flag) {
+        [self resumeNextDowloadModel];
+    }
 }
-
-- (void)cancelAllDownloads {
+    
+- (void)cancelDownloadsAll {
     if (self.downloadModels.count == 0) {
         return;
     }
     NSArray *downloadModels = self.downloadModels.allValues;
     for (SRDownloadModel *downloadModel in downloadModels) {
-        [downloadModel closeOutputStream];
-        [downloadModel.dataTask cancel];
-        if (downloadModel.state) {
-            downloadModel.state(SRDownloadStateCanceled);
-        }
+        [self cancelDownloadOfURL:downloadModel.URL resumeNext:NO];
     }
-    [self.waitingModels removeAllObjects];
-    [self.downloadingModels removeAllObjects];
-    [self.downloadModels removeAllObjects];
 }
 
 #pragma mark - Files
 
-- (NSString *)fileFullPathOfURL:(NSURL *)URL {
-    return SRFilePath(URL);
-}
-
-- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL {
-    if ([self isDownloadCompletedOfURL:URL]) {
-        return 1.0;
-    }
-    if ([self totalLength:URL] == 0) {
-        return 0.0;
-    }
-    return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
-}
-
-- (void)deleteFileOfURL:(NSURL *)URL {
+- (void)deleteDownloadedFileOfURL:(NSURL *)URL {
     [self cancelDownloadOfURL:URL];
     
     [self.filesTotalLengthPlist removeObjectForKey:SRFileName(URL)];
@@ -482,8 +461,8 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     }
 }
 
-- (void)deleteAllFiles {
-    [self cancelAllDownloads];
+- (void)deleteDownloadedFilesAll {
+    [self cancelDownloadsAll];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
@@ -491,6 +470,20 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
         NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:fileName];
         [fileManager removeItemAtPath:filePath error:nil];
     }
+}
+
+- (NSString *)fileFullPathOfURL:(NSURL *)URL {
+    return SRFilePath(URL);
+}
+
+- (CGFloat)hasDownloadedProgressOfURL:(NSURL *)URL {
+    if ([self isDownloadCompletedOfURL:URL]) {
+        return 1.0;
+    }
+    if ([self totalLength:URL] == 0) {
+        return 0.0;
+    }
+    return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
 }
 
 @end

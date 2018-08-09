@@ -53,21 +53,21 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
 #pragma mark - Downloads
 
 - (void)suspendDownloadOfURL:(NSURL *)URL;
-- (void)suspendAllDownloads;
+- (void)suspendDownloadsAll;
 
 - (void)resumeDownloadOfURL:(NSURL *)URL;
-- (void)resumeAllDownloads;
+- (void)resumeDownloadsAll;
 
 - (void)cancelDownloadOfURL:(NSURL *)URL;
-- (void)cancelAllDownloads;
+- (void)cancelDownloadsAll;
 
 #pragma mark - Files
 
+- (void)deleteDownloadedFileOfURL:(NSURL *)URL;
+- (void)deleteDownloadedFilesAll;
+
 - (NSString *)fileFullPathOfURL:(NSURL *)URL;
 
-- (CGFloat)fileHasDownloadedProgressOfURL:(NSURL *)URL;
-
-- (void)deleteFileOfURL:(NSURL *)URL;
-- (void)deleteAllFiles;
+- (CGFloat)hasDownloadedProgressOfURL:(NSURL *)URL;
 
 @end
