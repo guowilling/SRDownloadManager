@@ -11,15 +11,15 @@
 
 typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
     SRWaitingQueueModeFIFO,
-    SRWaitingQueueModeFILO
+    SRWaitingQueueModeLIFO
 };
 
 @interface SRDownloadManager : NSObject
 
 /**
- The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
+ The directory where downloaded files are cached, default is .../Library/Caches/SRDownloadManager if not setted.
  */
-@property (nonatomic, copy) NSString *saveFilesDirectory;
+@property (nonatomic, copy) NSString *cacheFilesDirectory;
 
 /**
  The count of max concurrent downloads, default is -1 which means no limit.
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
 @property (nonatomic, assign) NSInteger maxConcurrentCount;
 
 /**
- The mode of waiting for download queue, default is FIFO.
+ The mode of waiting download queue, default is FIFO.
  */
 @property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 
@@ -42,32 +42,66 @@ typedef NS_ENUM(NSInteger, SRWaitingQueueMode) {
  @param progress   A block object to be executed when the download progress changed.
  @param completion A block object to be executed when the download completion.
  */
-- (void)downloadURL:(NSURL *)URL
-           destPath:(NSString *)destPath
-              state:(void (^)(SRDownloadState state))state
-           progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-         completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
+- (void)download:(NSURL *)URL
+        destPath:(NSString *)destPath
+           state:(void (^)(SRDownloadState state))state
+        progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+      completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
 
 - (BOOL)isDownloadCompletedOfURL:(NSURL *)URL;
 
 #pragma mark - Downloads
 
+/**
+ Suspend the download of the URL.
+ */
 - (void)suspendDownloadOfURL:(NSURL *)URL;
-- (void)suspendDownloadsAll;
 
+/**
+ Suspend all downloads include which are downloading and waiting.
+ */
+- (void)suspendDownloads;
+
+/**
+ Resume the download of the URL.
+ */
 - (void)resumeDownloadOfURL:(NSURL *)URL;
-- (void)resumeDownloadsAll;
 
+/**
+ Resume all downloads.
+ */
+- (void)resumeDownloads;
+
+/**
+ Cancle the download of the URL.
+ */
 - (void)cancelDownloadOfURL:(NSURL *)URL;
-- (void)cancelDownloadsAll;
+
+/**
+ Cancle all downloads include which are downloading and waiting.
+ */
+- (void)cancelDownloads;
 
 #pragma mark - Files
 
-- (void)deleteDownloadedFileOfURL:(NSURL *)URL;
-- (void)deleteDownloadedFilesAll;
-
+/**
+ The full path of the file corresponding to the URL cached in the sandbox.
+ */
 - (NSString *)fileFullPathOfURL:(NSURL *)URL;
 
+/**
+ The progress of the file corresponding to the URL has been downloaded.
+ */
 - (CGFloat)hasDownloadedProgressOfURL:(NSURL *)URL;
+
+/**
+ Delete the file of the URL in the current cache files directory.
+ */
+- (void)deleteFileOfURL:(NSURL *)URL;
+
+/**
+ Delete all files in the current cache files directory.
+ */
+- (void)deleteFiles;
 
 @end

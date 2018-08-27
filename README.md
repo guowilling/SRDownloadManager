@@ -22,8 +22,6 @@ Powerful and easy-to-use file download manager based on NSURLSession. Provide do
 ## APIs
 
 ````objc
-+ (instancetype)sharedManager;
-
 /**
  Starts a file download action with URL, download state, download progress and download completion block.
  
@@ -33,17 +31,17 @@ Powerful and easy-to-use file download manager based on NSURLSession. Provide do
  @param progress   A block object to be executed when the download progress changed.
  @param completion A block object to be executed when the download completion.
  */
-- (void)downloadURL:(NSURL *)URL
-           destPath:(NSString *)destPath
-              state:(void (^)(SRDownloadState state))state
-           progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-         completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
+- (void)download:(NSURL *)URL
+        destPath:(NSString *)destPath
+           state:(void (^)(SRDownloadState state))state
+        progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+      completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion;
 ````
 
 ## Usage
 
 ````objc
-[[SRDownloadManager sharedManager] downloadURL:URL destPath:nil state:^(SRDownloadState state) {
+[[SRDownloadManager sharedManager] download:URL destPath:nil state:^(SRDownloadState state) {
     // Called when the download state changed.
 } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
     // Called when the download progress changed.
@@ -56,9 +54,9 @@ Powerful and easy-to-use file download manager based on NSURLSession. Provide do
 
 ````objc
 /**
- The directory where the downloaded files are saved, default is .../Library/Caches/SRDownloadManager if not setted.
+ The directory where downloaded files are cached, default is .../Library/Caches/SRDownloadManager if not setted.
  */
-@property (nonatomic, copy) NSString *saveFilesDirectory;
+@property (nonatomic, copy) NSString *cacheFilesDirectory;
 
 /**
  The count of max concurrent downloads, default is -1 which means no limit.
@@ -66,7 +64,7 @@ Powerful and easy-to-use file download manager based on NSURLSession. Provide do
 @property (nonatomic, assign) NSInteger maxConcurrentCount;
 
 /**
- The mode of waiting for download queue, default is FIFO.
+ The mode of waiting download queue, default is FIFO.
  */
 @property (nonatomic, assign) SRWaitingQueueMode waitingQueueMode;
 ````

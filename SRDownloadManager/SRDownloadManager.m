@@ -8,7 +8,7 @@
 
 #import "SRDownloadManager.h"
 
-#define SRDownloadDirectory self.saveFilesDirectory ?: [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject \
+#define SRDownloadDirectory self.cacheFilesDirectory ?: [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject \
 stringByAppendingPathComponent:NSStringFromClass([self class])]
 
 #define SRFileName(URL) [URL lastPathComponent] // use URL's last path component as the file's name
@@ -114,11 +114,11 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     return self;
 }
 
-- (void)downloadURL:(NSURL *)URL
-           destPath:(NSString *)destPath
-              state:(void (^)(SRDownloadState state))state
-           progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
-         completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion
+- (void)download:(NSURL *)URL
+        destPath:(NSString *)destPath
+           state:(void (^)(SRDownloadState state))state
+        progress:(void (^)(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress))progress
+      completion:(void (^)(BOOL success, NSString *filePath, NSError *error))completion
 {
     NSAssert(URL != nil, @"URL can not be nil, please pass the resource's URL which you want to download");
     if ([self isDownloadCompletedOfURL:URL]) { // if this URL has been downloaded
@@ -287,7 +287,7 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     if (self.maxConcurrentCount == -1) { // no limit so no waiting for download models
         return;
     }
-    if (self.waitingModels.count == 0) {
+    if (self.waitingModels.count == 0) { // no waiting for download models
         return;
     }
     SRDownloadModel *downloadModel;
@@ -295,7 +295,7 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
         case SRWaitingQueueModeFIFO:
             downloadModel = self.waitingModels.firstObject;
             break;
-        case SRWaitingQueueModeFILO:
+        case SRWaitingQueueModeLIFO:
             downloadModel = self.waitingModels.lastObject;
             break;
     }
@@ -328,17 +328,17 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     return YES;
 }
 
-- (void)setSaveFilesDirectory:(NSString *)saveFilesDirectory {
-    _saveFilesDirectory = saveFilesDirectory;
+- (void)setCacheFilesDirectory:(NSString *)cacheFilesDirectory {
+    _cacheFilesDirectory = cacheFilesDirectory;
     
-    if (!saveFilesDirectory) {
+    if (!cacheFilesDirectory) {
         return;
     }
     BOOL isDirectory = NO;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL isExists = [fileManager fileExistsAtPath:saveFilesDirectory isDirectory:&isDirectory];
+    BOOL isExists = [fileManager fileExistsAtPath:cacheFilesDirectory isDirectory:&isDirectory];
     if (!isExists || !isDirectory) {
-        [fileManager createDirectoryAtPath:saveFilesDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+        [fileManager createDirectoryAtPath:cacheFilesDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     }
 }
 
@@ -369,7 +369,7 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     }
 }
 
-- (void)suspendDownloadsAll {
+- (void)suspendDownloads {
     if (self.downloadModels.count == 0) {
         return;
     }
@@ -398,7 +398,7 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     }
 }
 
-- (void)resumeDownloadsAll {
+- (void)resumeDownloads {
     if (self.downloadModels.count == 0) {
         return;
     }
@@ -436,7 +436,7 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
     }
 }
     
-- (void)cancelDownloadsAll {
+- (void)cancelDownloads {
     if (self.downloadModels.count == 0) {
         return;
     }
@@ -447,30 +447,6 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
 }
 
 #pragma mark - Files
-
-- (void)deleteDownloadedFileOfURL:(NSURL *)URL {
-    [self cancelDownloadOfURL:URL];
-    
-    [self.filesTotalLengthPlist removeObjectForKey:SRFileName(URL)];
-    [self.filesTotalLengthPlist writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:SRFileName(URL)];
-    if ([fileManager fileExistsAtPath:filePath]) {
-        [fileManager removeItemAtPath:filePath error:nil];
-    }
-}
-
-- (void)deleteDownloadedFilesAll {
-    [self cancelDownloadsAll];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
-    for (NSString *fileName in fileNames) {
-        NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:fileName];
-        [fileManager removeItemAtPath:filePath error:nil];
-    }
-}
 
 - (NSString *)fileFullPathOfURL:(NSURL *)URL {
     return SRFilePath(URL);
@@ -484,6 +460,30 @@ stringByAppendingPathComponent:NSStringFromClass([self class])]
         return 0.0;
     }
     return 1.0 * [self hasDownloadedLength:URL] / [self totalLength:URL];
+}
+
+- (void)deleteFileOfURL:(NSURL *)URL {
+    [self cancelDownloadOfURL:URL];
+    
+    [self.filesTotalLengthPlist removeObjectForKey:SRFileName(URL)];
+    [self.filesTotalLengthPlist writeToFile:SRFilesTotalLengthPlistPath atomically:YES];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:SRFileName(URL)];
+    if ([fileManager fileExistsAtPath:filePath]) {
+        [fileManager removeItemAtPath:filePath error:nil];
+    }
+}
+
+- (void)deleteFiles {
+    [self cancelDownloads];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:SRDownloadDirectory error:nil];
+    for (NSString *fileName in fileNames) {
+        NSString *filePath = [SRDownloadDirectory stringByAppendingPathComponent:fileName];
+        [fileManager removeItemAtPath:filePath error:nil];
+    }
 }
 
 @end

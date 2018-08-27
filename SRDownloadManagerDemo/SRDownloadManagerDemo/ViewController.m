@@ -55,9 +55,9 @@ NSString * const downloadURLString3 = @"http://yxfile.idealsee.com/d3c0d29eb68dd
     
     NSLog(@"%@", NSHomeDirectory());
     
-    [SRDownloadManager sharedManager].saveFilesDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"CustomDownloadDirectory"];
+    [SRDownloadManager sharedManager].cacheFilesDirectory = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"CustomDownloadDirectory"];
     [SRDownloadManager sharedManager].maxConcurrentCount = 2;
-    [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueModeFILO;
+    [SRDownloadManager sharedManager].waitingQueueMode = SRWaitingQueueModeLIFO;
     
     if ([[SRDownloadManager sharedManager] isDownloadCompletedOfURL:kDownloadURL1]) {
         NSLog(@"%@", [[SRDownloadManager sharedManager] fileFullPathOfURL:kDownloadURL1]);
@@ -126,11 +126,11 @@ currentSizeLabel:(UILabel *)currentSizeLabel
           button:(UIButton *)button
 {
     if ([button.currentTitle isEqualToString:@"Start"]) {
-        [[SRDownloadManager sharedManager] downloadURL:URL destPath:nil state:^(SRDownloadState state) {
+        [[SRDownloadManager sharedManager] download:URL destPath:nil state:^(SRDownloadState state) {
             [button setTitle:[self titleWithDownloadState:state] forState:UIControlStateNormal];
         } progress:^(NSInteger receivedSize, NSInteger expectedSize, CGFloat progress) {
-            currentSizeLabel.text = [NSString stringWithFormat:@"%zdMB", receivedSize / 1024 / 1024];
-            totalSizeLabel.text = [NSString stringWithFormat:@"%zdMB", expectedSize / 1024 / 1024];
+            currentSizeLabel.text = [NSString stringWithFormat:@"%dMB", (int)receivedSize / 1024 / 1024];
+            totalSizeLabel.text = [NSString stringWithFormat:@"%dMB", (int)expectedSize / 1024 / 1024];
             progressLabel.text = [NSString stringWithFormat:@"%.f%%", progress * 100];
             progressView.progress = progress;
         } completion:^(BOOL success, NSString *filePath, NSError *error) {
@@ -180,7 +180,7 @@ currentSizeLabel:(UILabel *)currentSizeLabel
 }
 
 - (IBAction)deleteFile1:(UIButton *)sender {
-    [[SRDownloadManager sharedManager] deleteDownloadedFileOfURL:kDownloadURL1];
+    [[SRDownloadManager sharedManager] deleteFileOfURL:kDownloadURL1];
     
     self.progressView1.progress = 0.0;
     self.currentSizeLabel1.text = @"0";
@@ -190,7 +190,7 @@ currentSizeLabel:(UILabel *)currentSizeLabel
 }
 
 - (IBAction)deleteFile2:(UIButton *)sender {
-    [[SRDownloadManager sharedManager] deleteDownloadedFileOfURL:kDownloadURL2];
+    [[SRDownloadManager sharedManager] deleteFileOfURL:kDownloadURL2];
     
     self.progressView2.progress = 0.0;
     self.currentSizeLabel2.text = @"0";
@@ -200,7 +200,7 @@ currentSizeLabel:(UILabel *)currentSizeLabel
 }
 
 - (IBAction)deleteFile3:(UIButton *)sender {
-    [[SRDownloadManager sharedManager] deleteDownloadedFileOfURL:kDownloadURL3];
+    [[SRDownloadManager sharedManager] deleteFileOfURL:kDownloadURL3];
     
     self.progressView3.progress = 0.0;
     self.currentSizeLabel3.text = @"0";
@@ -210,11 +210,11 @@ currentSizeLabel:(UILabel *)currentSizeLabel
 }
 
 - (IBAction)cancelAllDownloads:(UIBarButtonItem *)sender {
-    [[SRDownloadManager sharedManager] cancelDownloadsAll];
+    [[SRDownloadManager sharedManager] cancelDownloads];
 }
 
 - (IBAction)deleteAllFiles:(UIBarButtonItem *)sender {
-    [[SRDownloadManager sharedManager] deleteDownloadedFilesAll];
+    [[SRDownloadManager sharedManager] deleteFiles];
     
     self.progressView1.progress = 0.0;
     self.progressView2.progress = 0.0;
@@ -238,11 +238,11 @@ currentSizeLabel:(UILabel *)currentSizeLabel
 }
 
 - (IBAction)suspendAllDownloads:(UIButton *)sender {
-    [[SRDownloadManager sharedManager] suspendDownloadsAll];
+    [[SRDownloadManager sharedManager] suspendDownloads];
 }
 
 - (IBAction)resumeAllDownloads:(UIButton *)sender {
-    [[SRDownloadManager sharedManager] resumeDownloadsAll];
+    [[SRDownloadManager sharedManager] resumeDownloads];
 }
 
 @end
